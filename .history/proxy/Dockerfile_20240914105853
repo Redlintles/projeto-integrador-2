@@ -1,0 +1,4 @@
+FROM ngnix:latest
+
+
+COPY ./default.conf /etc/nginx/conf.d

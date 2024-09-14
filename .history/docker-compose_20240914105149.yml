@@ -1,0 +1,59 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: "./frontend"
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - backend
+    networks:
+      - nt1
+
+  backend:
+    build:
+      context: "./backend"
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - db
+
+    networks:
+      - nt1
+
+  db:
+    build:
+      context: "./db"
+      dockerfile: "Dockerfile"
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    networks:
+      - nt1
+
+  proxy:
+    build:
+      context: "./proxy"
+      dockerfile: "Dockerfile"
+
+    ports:
+      - "80:80"
+
+    networks:
+      - nt1
+
+volumes:
+  postgres-data:
+
+networks:
+  nt1:
+    driver: bridge

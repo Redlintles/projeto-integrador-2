@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  frontend:
+
+  backend:
+    context: "./backend"
+    dockerfile: Dockerfile
+
+  db:
+
+networks:
+  nt1:
+    driver: bridge

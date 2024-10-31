@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +22,16 @@ public class CommonUser {
   private Integer pegadaCarbono;
   private Integer medalhas;
   private String endereco;
+
+  @OneToOne
+  @JoinColumn(name = "idPainelDeImpacto")
+  private Integer idPainelDeImpacto;
+  @OneToOne
+  @JoinColumn(name = "UsuarioEmpresa_idCNPJEmpresa")
+  private Integer UsuarioEmpresa_idCNPJEmpresa;
+  @OneToOne
+  @JoinColumn(name = "UsuarioComum_idCPF")
+  private Integer UsuarioComum_idCPF;
 
   public String getNome() {
     return nome;
@@ -83,6 +95,30 @@ public class CommonUser {
 
   public void setCpf(Integer cpf) {
     this.idCPF = cpf;
+  }
+
+  public Integer getIdPainelDeImpacto() {
+    return idPainelDeImpacto;
+  }
+
+  public void setIdPainelDeImpacto(Integer idPainelDeImpacto) {
+    this.idPainelDeImpacto = idPainelDeImpacto;
+  }
+
+  public Integer getUsuarioEmpresa_idCNPJEmpresa() {
+    return UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public void setUsuarioEmpresa_idCNPJEmpresa(Integer UsuarioEmpresa_idCNPJEmpresa) {
+    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public Integer getUsuarioComum_idCPF() {
+    return UsuarioComum_idCPF;
+  }
+
+  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
+    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 
 }

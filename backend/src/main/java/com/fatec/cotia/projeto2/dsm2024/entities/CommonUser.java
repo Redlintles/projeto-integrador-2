@@ -1,11 +1,18 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "common_user")
 public class CommonUser {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer idCPF;
+
   private String nome;
   private String email;
   private String senha;
@@ -68,6 +75,14 @@ public class CommonUser {
 
   public void setEndereco(String endereco) {
     this.endereco = endereco;
+  }
+
+  public Integer getCpf() {
+    return idCPF;
+  }
+
+  public void setCpf(Integer cpf) {
+    this.idCPF = cpf;
   }
 
 }

@@ -18,6 +18,8 @@ services:
       - proxy
     networks:
       - nt1
+    volumes:
+      - ./frontend:/app
 
   backend:
     container_name: backend
@@ -37,6 +39,8 @@ services:
 
     networks:
       - nt1
+    volumes:
+      - ./backend/target:/app
 
   db:
     container_name: db

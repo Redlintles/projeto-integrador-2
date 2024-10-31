@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +28,18 @@ public class CompanyUser {
   private Integer medalhas;
   @Column(length = 90, nullable = false)
   private String endereco;
+
+  @OneToOne
+  @JoinColumn(name = "idPainelDeImpacto")
+  private ImpactPanel IdPainelDeImpacto;
+
+  @OneToOne
+  @JoinColumn(name = "UsuarioEmpresa_idCNPJEmpresa")
+  private ImpactPanel UsuarioEmpresa_idCNPJEmpresa;
+
+  @OneToOne
+  @JoinColumn(name = "UsuarioComum_idCPF")
+  private ImpactPanel UsuarioComum_idCPF;
 
   public Integer getIdCNPJEmpresa() {
     return idCNPJEmpresa;
@@ -97,5 +111,29 @@ public class CompanyUser {
 
   public void setEndereco(String endereco) {
     this.endereco = endereco;
+  }
+
+  public ImpactPanel getIdPainelDeImpacto() {
+    return IdPainelDeImpacto;
+  }
+
+  public void setIdPainelDeImpacto(ImpactPanel IdPainelDeImpacto) {
+    this.IdPainelDeImpacto = IdPainelDeImpacto;
+  }
+
+  public ImpactPanel getUsuarioEmpresa_idCNPJEmpresa() {
+    return UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public void setUsuarioEmpresa_idCNPJEmpresa(ImpactPanel UsuarioEmpresa_idCNPJEmpresa) {
+    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public ImpactPanel getUsuarioComum_idCPF() {
+    return UsuarioComum_idCPF;
+  }
+
+  public void setUsuarioComum_idCPF(ImpactPanel UsuarioComum_idCPF) {
+    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 }

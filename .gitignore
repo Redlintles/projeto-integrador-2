@@ -1,3 +1,4 @@
 backend/src/target/
 frontend/src/node_modules
 .history
+**/target

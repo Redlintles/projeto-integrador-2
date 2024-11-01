@@ -20,6 +20,15 @@ public class Suggestion {
   @JoinColumn(name = "cpf")
   private CommonUser usuario_CPF;
 
+  public Suggestion() {
+
+  }
+
+  public Suggestion(Float reducaoCO2Estimado, CommonUser usuario_CPF) {
+    this.reducaoCO2Estimado = reducaoCO2Estimado;
+    this.usuario_CPF = usuario_CPF;
+  }
+
   public Float getReducaoCO2Estimado() {
     return reducaoCO2Estimado;
   }

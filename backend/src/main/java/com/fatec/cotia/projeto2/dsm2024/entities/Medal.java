@@ -27,6 +27,21 @@ public class Medal {
   @JoinColumn(name = "cpf")
   private CommonUser usuario_CPF;
 
+  public Medal() {
+  }
+
+  public Medal(
+      String nome,
+      String descricao,
+      String recompensa,
+      CommonUser usuario_CPF) {
+    this.nome = nome;
+    this.descricao = descricao;
+    this.recompensa = recompensa;
+    this.usuario_CPF = usuario_CPF;
+
+  }
+
   public String getNome() {
     return nome;
   }

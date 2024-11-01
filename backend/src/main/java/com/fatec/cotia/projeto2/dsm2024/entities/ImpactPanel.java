@@ -23,6 +23,16 @@ public class ImpactPanel {
   @Column(length = 90, nullable = false)
   private String impactoColetivo;
 
+  public ImpactPanel() {
+
+  }
+
+  public ImpactPanel(CommonUser Usuario_cpf, String impactoIndividual, String impactoColetivo) {
+    this.Usuario_cpf = Usuario_cpf;
+    this.impactoIndividual = impactoIndividual;
+    this.impactoColetivo = impactoColetivo;
+  }
+
   public String getImpactoColetivo() {
     return impactoColetivo;
   }

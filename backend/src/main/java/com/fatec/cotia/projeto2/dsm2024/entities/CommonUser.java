@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class CommonUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(length = 11, nullable = false)
   private String cpf;
@@ -38,6 +38,31 @@ public class CommonUser {
   @OneToOne
   @JoinColumn(name = "id")
   private ImpactPanel idPainelDeImpacto;
+
+  public CommonUser() {
+  }
+
+  public CommonUser(
+      String cpf,
+      String nome,
+      String email,
+      String senha,
+      Long habitosDiarios,
+      Long pegadaCarbono,
+      Long medalhas,
+      String endereco,
+      ImpactPanel idPainelDeImpacto) {
+    this.cpf = cpf;
+    this.nome = nome;
+    this.email = email;
+    this.senha = senha;
+    this.habitosDiarios = habitosDiarios;
+    this.idPainelDeImpacto = idPainelDeImpacto;
+    this.medalhas = medalhas;
+    this.endereco = endereco;
+    this.pegadaCarbono = pegadaCarbono;
+
+  }
 
   public String getNome() {
     return nome;

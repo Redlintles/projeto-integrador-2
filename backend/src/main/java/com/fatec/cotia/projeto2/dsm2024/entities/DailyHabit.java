@@ -31,6 +31,24 @@ public class DailyHabit {
   @Column(nullable = false)
   private Float calculoPegadaCarbono;
 
+  public DailyHabit() {
+  }
+
+  public DailyHabit(
+      CommonUser Usuario_CPF,
+      Float usoEnergia,
+      String alimentacao,
+      String descarteLixo,
+      Long transporte,
+      Float calculoPegadaCarbono) {
+    this.Usuario_CPF = Usuario_CPF;
+    this.usoEnergia = usoEnergia;
+    this.alimentacao = alimentacao;
+    this.descarteLixo = descarteLixo;
+    this.transporte = transporte;
+    this.calculoPegadaCarbono = calculoPegadaCarbono;
+  }
+
   public Float getUsoEnergia() {
     return usoEnergia;
   }

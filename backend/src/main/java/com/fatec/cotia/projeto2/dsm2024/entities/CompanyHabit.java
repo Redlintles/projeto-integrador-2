@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,10 @@ public class CompanyHabit {
   @Column(length = 45, nullable = false)
   private String transporteColetivo;
   private Float calcularImpactoEmpresa;
+
+  @ManyToOne
+  @JoinColumn(name = "idCNPJEmpresa")
+  private CompanyUser usuarioEmpresa_idCNPJEmpresa;
 
   public Integer getUsuarioEmpresa_idCNPJEmpresa() {
     return UsuarioEmpresa_idCNPJEmpresa;

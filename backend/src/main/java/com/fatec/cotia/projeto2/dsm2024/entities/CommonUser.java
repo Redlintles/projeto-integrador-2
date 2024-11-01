@@ -36,7 +36,7 @@ public class CommonUser {
   private String endereco;
 
   @OneToOne
-  @JoinColumn(name = "idPainelDeImpacto")
+  @JoinColumn(name = "id")
   private ImpactPanel idPainelDeImpacto;
 
   public String getNome() {

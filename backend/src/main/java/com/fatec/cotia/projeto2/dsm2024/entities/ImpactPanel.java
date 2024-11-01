@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class ImpactPanel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long idPainelDeImpacto;
+  private Long id;
   @OneToOne
   @JoinColumn(name = "cpf")
   private CommonUser Usuario_cpf;
@@ -39,20 +39,20 @@ public class ImpactPanel {
     this.impactoIndividual = impactoIndividual;
   }
 
-  public Long getIdPainelDeImpacto() {
-    return idPainelDeImpacto;
-  }
-
-  public void setIdPainelDeImpacto(Long idPainelDeImpacto) {
-    this.idPainelDeImpacto = idPainelDeImpacto;
-  }
-
   public CommonUser getUsuario_cpf() {
     return Usuario_cpf;
   }
 
   public void setUsuario_cpf(CommonUser Usuario_cpf) {
     this.Usuario_cpf = Usuario_cpf;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
 }

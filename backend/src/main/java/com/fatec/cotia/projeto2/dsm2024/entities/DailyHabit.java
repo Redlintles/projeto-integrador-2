@@ -2,6 +2,7 @@ package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -10,9 +11,10 @@ import jakarta.persistence.Table;
 @Table(name = "daily_habit")
 public class DailyHabit {
 
+  @Id
   @ManyToOne
   @JoinColumn(name = "idCPF")
-  private CommonUser UsuarioComum_idCPF;
+  private CommonUser Usuario_idCPF;
   @ManyToOne
   @JoinColumn(name = "cpfFuncionario")
   private CommonUser Funcionarios_cpfFuncionario;
@@ -75,12 +77,12 @@ public class DailyHabit {
     this.Funcionarios_cpfFuncionario = Funcionarios_cpfFuncionario;
   }
 
-  public CommonUser getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
+  public CommonUser getUsuario_idCPF() {
+    return Usuario_idCPF;
   }
 
-  public void setUsuarioComum_idCPF(CommonUser UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
+  public void setUsuario_idCPF(CommonUser Usuario_idCPF) {
+    this.Usuario_idCPF = Usuario_idCPF;
   }
 
 }

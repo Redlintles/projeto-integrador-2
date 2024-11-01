@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class ImpactPanel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer idPainelDeImpacto;
+  private Long idPainelDeImpacto;
   @Column(nullable = false)
   private Long UsuarioComum_idCPF;
   @Column(length = 90, nullable = false)
@@ -44,11 +44,11 @@ public class ImpactPanel {
     this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 
-  public Integer getIdPainelDeImpacto() {
+  public Long getIdPainelDeImpacto() {
     return idPainelDeImpacto;
   }
 
-  public void setIdPainelDeImpacto(Integer idPainelDeImpacto) {
+  public void setIdPainelDeImpacto(Long idPainelDeImpacto) {
     this.idPainelDeImpacto = idPainelDeImpacto;
   }
 

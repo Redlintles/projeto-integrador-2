@@ -14,7 +14,6 @@ public class Suggestion {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Integer idSugestao;
-  private Integer UsuarioComum_idCPF;
   private Float reducaoCO2Estimado;
 
   @ManyToOne()
@@ -29,20 +28,20 @@ public class Suggestion {
     this.idSugestao = idSugestao;
   }
 
-  public Integer getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
-  }
-
-  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
-  }
-
   public Float getReducaoCO2Estimado() {
     return reducaoCO2Estimado;
   }
 
   public void setReducaoCO2Estimado(Float reducaoCO2Estimado) {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
+  }
+
+  public CommonUser getUsuarioComum_idCPF() {
+    return usuarioComum_idCPF;
+  }
+
+  public void setUsuarioComum_idCPF(CommonUser usuarioComum_idCPF) {
+    this.usuarioComum_idCPF = usuarioComum_idCPF;
   }
 
 }

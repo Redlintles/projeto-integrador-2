@@ -15,8 +15,6 @@ public class Medal {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer idMedalha;
-  private Integer UsuarioEmpresa_idCNPJEmpresa;
-  private Integer UsuarioComum_idCPF;
 
   @Column(length = 45, nullable = false)
   private String nome;
@@ -38,22 +36,6 @@ public class Medal {
 
   public void setIdMedalha(Integer idMedalha) {
     this.idMedalha = idMedalha;
-  }
-
-  public Integer getUsuarioEmpresa_idCNPJEmpresa() {
-    return UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setUsuarioEmpresa_idCNPJEmpresa(Integer UsuarioEmpresa_idCNPJEmpresa) {
-    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public Integer getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
-  }
-
-  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 
   public String getNome() {
@@ -78,6 +60,22 @@ public class Medal {
 
   public void setRecompensa(String recompensa) {
     this.recompensa = recompensa;
+  }
+
+  public CompanyUser getUsuarioEmpresa_idCNPJEmpresa() {
+    return usuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public void setUsuarioEmpresa_idCNPJEmpresa(CompanyUser usuarioEmpresa_idCNPJEmpresa) {
+    this.usuarioEmpresa_idCNPJEmpresa = usuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public CommonUser getUsuarioComum_idCPF() {
+    return usuarioComum_idCPF;
+  }
+
+  public void setUsuarioComum_idCPF(CommonUser usuarioComum_idCPF) {
+    this.usuarioComum_idCPF = usuarioComum_idCPF;
   }
 
 }

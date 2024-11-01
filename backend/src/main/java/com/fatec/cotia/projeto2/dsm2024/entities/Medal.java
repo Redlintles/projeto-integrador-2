@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +24,13 @@ public class Medal {
   private String descricao;
   @Column(length = 90, nullable = false)
   private String recompensa;
+
+  @ManyToOne
+  @JoinColumn(name = "idCNPJEmpresa")
+  private CompanyUser usuarioEmpresa_idCNPJEmpresa;
+  @ManyToOne
+  @JoinColumn(name = "idCPF")
+  private CommonUser usuarioComum_idCPF;
 
   public Integer getIdMedalha() {
     return idMedalha;

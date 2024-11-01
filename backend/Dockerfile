@@ -2,8 +2,7 @@ FROM eclipse-temurin:21
 
 WORKDIR /app
 
-COPY ./target/*.jar app.jar
-
+COPY ./target/projeto.2.dsm2024-0.0.1-SNAPSHOT.jar .
 
 COPY ./scripts/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 
@@ -11,5 +10,4 @@ RUN chmod +x /usr/local/bin/wait-for-it.sh
 
 EXPOSE 8080
 
-CMD ["/usr/local/bin/wait-for-it.sh", "db:5432", "--","java","-jar","/app/app.jar"]
-
+CMD ["/usr/local/bin/wait-for-it.sh", "db:5432", "--","java","-jar","/app/projeto.2.dsm2024-0.0.1-SNAPSHOT.jar"]

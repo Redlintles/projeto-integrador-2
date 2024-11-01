@@ -17,7 +17,6 @@ public class ImpactPanel {
   private Long idPainelDeImpacto;
   @OneToOne
   @JoinColumn(name = "UsuarioComum_idCPF")
-  @Column(nullable = false)
   private CommonUser UsuarioComum_idCPF;
   @Column(length = 90, nullable = false)
   private String impactoIndividual;

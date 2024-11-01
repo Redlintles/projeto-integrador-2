@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Medal {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer idMedalha;
+  private Long idMedalha;
 
   @Column(length = 45, nullable = false)
   private String nome;
@@ -24,17 +24,14 @@ public class Medal {
   private String recompensa;
 
   @ManyToOne
-  @JoinColumn(name = "idCNPJEmpresa")
-  private CompanyUser usuarioEmpresa_idCNPJEmpresa;
-  @ManyToOne
   @JoinColumn(name = "idCPF")
   private CommonUser usuarioComum_idCPF;
 
-  public Integer getIdMedalha() {
+  public Long getIdMedalha() {
     return idMedalha;
   }
 
-  public void setIdMedalha(Integer idMedalha) {
+  public void setIdMedalha(Long idMedalha) {
     this.idMedalha = idMedalha;
   }
 
@@ -60,14 +57,6 @@ public class Medal {
 
   public void setRecompensa(String recompensa) {
     this.recompensa = recompensa;
-  }
-
-  public CompanyUser getUsuarioEmpresa_idCNPJEmpresa() {
-    return usuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setUsuarioEmpresa_idCNPJEmpresa(CompanyUser usuarioEmpresa_idCNPJEmpresa) {
-    this.usuarioEmpresa_idCNPJEmpresa = usuarioEmpresa_idCNPJEmpresa;
   }
 
   public CommonUser getUsuarioComum_idCPF() {

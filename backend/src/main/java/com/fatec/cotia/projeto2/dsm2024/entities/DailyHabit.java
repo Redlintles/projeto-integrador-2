@@ -2,32 +2,29 @@ package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "daily_habit")
 public class DailyHabit {
-  @Id
-  @OneToOne
-  @JoinColumn(name = "idCNPJEmpresa")
-  private CompanyUser Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
+
   @ManyToOne
   @JoinColumn(name = "idCPF")
   private CommonUser UsuarioComum_idCPF;
   @ManyToOne
   @JoinColumn(name = "cpfFuncionario")
   private CommonUser Funcionarios_cpfFuncionario;
-
+  @Column(nullable = false)
   private Float usoEnergia;
   @Column(length = 45, nullable = false)
   private String alimentacao;
   @Column(length = 45, nullable = false)
   private String descarteLixo;
-  private Integer transporte;
+  @Column(nullable = false)
+  private Long transporte;
+  @Column(nullable = false)
   private Float calculoPegadaCarbono;
 
   public Float getUsoEnergia() {
@@ -54,11 +51,11 @@ public class DailyHabit {
     this.descarteLixo = descarteLixo;
   }
 
-  public Integer getTransporte() {
+  public Long getTransporte() {
     return transporte;
   }
 
-  public void setTransporte(Integer transporte) {
+  public void setTransporte(Long transporte) {
     this.transporte = transporte;
   }
 
@@ -68,14 +65,6 @@ public class DailyHabit {
 
   public void setCalculoPegadaCarbono(Float calculoPegadaCarbono) {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
-  }
-
-  public CompanyUser getFuncionarios_UsuarioEmpresa_idCNPJEmpresa() {
-    return Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setFuncionarios_UsuarioEmpresa_idCNPJEmpresa(CompanyUser Funcionarios_UsuarioEmpresa_idCNPJEmpresa) {
-    this.Funcionarios_UsuarioEmpresa_idCNPJEmpresa = Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
   }
 
   public CommonUser getFuncionarios_cpfFuncionario() {

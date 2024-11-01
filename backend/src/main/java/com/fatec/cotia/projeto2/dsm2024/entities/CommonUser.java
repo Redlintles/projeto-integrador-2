@@ -1,8 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -12,23 +11,28 @@ import jakarta.persistence.Table;
 @Table(name = "common_user")
 public class CommonUser {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer idCPF;
+  @Column(nullable = false)
+  private Long idCPF;
 
+  @Column(length = 45, nullable = false)
   private String nome;
+  @Column(length = 45, nullable = false)
   private String email;
+  @Column(length = 45, nullable = false)
   private String senha;
-  private Integer habitosDiarios;
-  private Integer pegadaCarbono;
-  private Integer medalhas;
+
+  @Column(nullable = false)
+  private Long habitosDiarios;
+  @Column(nullable = false)
+  private Long pegadaCarbono;
+  @Column(nullable = false)
+  private Long medalhas;
+  @Column(length = 90, nullable = false)
   private String endereco;
 
   @OneToOne
   @JoinColumn(name = "idPainelDeImpacto")
   private Integer idPainelDeImpacto;
-  @OneToOne
-  @JoinColumn(name = "UsuarioEmpresa_idCNPJEmpresa")
-  private Integer UsuarioEmpresa_idCNPJEmpresa;
   @OneToOne
   @JoinColumn(name = "UsuarioComum_idCPF")
   private Integer UsuarioComum_idCPF;
@@ -57,27 +61,27 @@ public class CommonUser {
     this.senha = senha;
   }
 
-  public Integer getHabitosDiarios() {
+  public Long getHabitosDiarios() {
     return habitosDiarios;
   }
 
-  public void setHabitosDiarios(Integer habitosDiarios) {
+  public void setHabitosDiarios(Long habitosDiarios) {
     this.habitosDiarios = habitosDiarios;
   }
 
-  public Integer getPegadaCarbono() {
+  public Long getPegadaCarbono() {
     return pegadaCarbono;
   }
 
-  public void setPegadaCarbono(Integer pegadaCarbono) {
+  public void setPegadaCarbono(Long pegadaCarbono) {
     this.pegadaCarbono = pegadaCarbono;
   }
 
-  public Integer getMedalhas() {
+  public Long getMedalhas() {
     return medalhas;
   }
 
-  public void setMedalhas(Integer medalhas) {
+  public void setMedalhas(Long medalhas) {
     this.medalhas = medalhas;
   }
 
@@ -89,11 +93,11 @@ public class CommonUser {
     this.endereco = endereco;
   }
 
-  public Integer getCpf() {
+  public Long getCpf() {
     return idCPF;
   }
 
-  public void setCpf(Integer cpf) {
+  public void setCpf(Long cpf) {
     this.idCPF = cpf;
   }
 
@@ -103,14 +107,6 @@ public class CommonUser {
 
   public void setIdPainelDeImpacto(Integer idPainelDeImpacto) {
     this.idPainelDeImpacto = idPainelDeImpacto;
-  }
-
-  public Integer getUsuarioEmpresa_idCNPJEmpresa() {
-    return UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setUsuarioEmpresa_idCNPJEmpresa(Integer UsuarioEmpresa_idCNPJEmpresa) {
-    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
   }
 
   public Integer getUsuarioComum_idCPF() {

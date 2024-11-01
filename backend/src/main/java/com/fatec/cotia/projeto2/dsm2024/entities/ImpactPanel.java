@@ -13,8 +13,8 @@ public class ImpactPanel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer idPainelDeImpacto;
-  private Integer UsuarioEmpresa_idCNPJEmpresa;
-  private Integer UsuarioComum_idCPF;
+  @Column(nullable = false)
+  private Long UsuarioComum_idCPF;
   @Column(length = 90, nullable = false)
   private String impactoIndividual;
   @Column(length = 90, nullable = false)
@@ -36,20 +36,12 @@ public class ImpactPanel {
     this.impactoIndividual = impactoIndividual;
   }
 
-  public Integer getUsuarioComum_idCPF() {
+  public Long getUsuarioComum_idCPF() {
     return UsuarioComum_idCPF;
   }
 
-  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
+  public void setUsuarioComum_idCPF(Long UsuarioComum_idCPF) {
     this.UsuarioComum_idCPF = UsuarioComum_idCPF;
-  }
-
-  public Integer getUsuarioEmpresa_idCNPJEmpresa() {
-    return UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setUsuarioEmpresa_idCNPJEmpresa(Integer UsuarioEmpresa_idCNPJEmpresa) {
-    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
   }
 
   public Integer getIdPainelDeImpacto() {

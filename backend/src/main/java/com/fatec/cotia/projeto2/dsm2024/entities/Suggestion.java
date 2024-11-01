@@ -13,18 +13,18 @@ import jakarta.persistence.Table;
 public class Suggestion {
   @Id
   @GeneratedValue(strategy = IDENTITY)
-  private Integer idSugestao;
+  private Long idSugestao;
   private Float reducaoCO2Estimado;
 
   @ManyToOne()
   @JoinColumn(name = "idCPF")
   private CommonUser usuarioComum_idCPF;
 
-  public Integer getIdSugestao() {
+  public Long getIdSugestao() {
     return idSugestao;
   }
 
-  public void setIdSugestao(Integer idSugestao) {
+  public void setIdSugestao(Long idSugestao) {
     this.idSugestao = idSugestao;
   }
 

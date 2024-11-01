@@ -16,8 +16,8 @@ public class ImpactPanel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idPainelDeImpacto;
   @OneToOne
-  @JoinColumn(name = "UsuarioComum_idCPF")
-  private CommonUser UsuarioComum_idCPF;
+  @JoinColumn(name = "cpf")
+  private CommonUser Usuario_cpf;
   @Column(length = 90, nullable = false)
   private String impactoIndividual;
   @Column(length = 90, nullable = false)
@@ -47,12 +47,12 @@ public class ImpactPanel {
     this.idPainelDeImpacto = idPainelDeImpacto;
   }
 
-  public CommonUser getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
+  public CommonUser getUsuario_cpf() {
+    return Usuario_cpf;
   }
 
-  public void setUsuarioComum_idCPF(CommonUser UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
+  public void setUsuario_cpf(CommonUser Usuario_cpf) {
+    this.Usuario_cpf = Usuario_cpf;
   }
 
 }

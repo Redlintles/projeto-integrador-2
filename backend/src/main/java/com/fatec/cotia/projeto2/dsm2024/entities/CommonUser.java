@@ -2,6 +2,8 @@ package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -11,8 +13,11 @@ import jakarta.persistence.Table;
 @Table(name = "common_user")
 public class CommonUser {
   @Id
-  @Column(nullable = false)
-  private Long idCPF;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
+  @Column(length = 11, nullable = false)
+  private String cpf;
 
   @Column(length = 45, nullable = false)
   private String nome;
@@ -90,20 +95,28 @@ public class CommonUser {
     this.endereco = endereco;
   }
 
-  public Long getCpf() {
-    return idCPF;
-  }
-
-  public void setCpf(Long cpf) {
-    this.idCPF = cpf;
-  }
-
   public ImpactPanel getIdPainelDeImpacto() {
     return idPainelDeImpacto;
   }
 
   public void setIdPainelDeImpacto(ImpactPanel idPainelDeImpacto) {
     this.idPainelDeImpacto = idPainelDeImpacto;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getCpf() {
+    return cpf;
+  }
+
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
   }
 
 }

@@ -2,6 +2,8 @@ package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,12 +14,12 @@ import jakarta.persistence.Table;
 public class DailyHabit {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
   @ManyToOne
-  @JoinColumn(name = "idCPF")
-  private CommonUser Usuario_idCPF;
-  @ManyToOne
-  @JoinColumn(name = "cpfFuncionario")
-  private CommonUser Funcionarios_cpfFuncionario;
+  @JoinColumn(name = "cpf")
+  private CommonUser Usuario_CPF;
   @Column(nullable = false)
   private Float usoEnergia;
   @Column(length = 45, nullable = false)
@@ -69,20 +71,20 @@ public class DailyHabit {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
   }
 
-  public CommonUser getFuncionarios_cpfFuncionario() {
-    return Funcionarios_cpfFuncionario;
+  public Long getId() {
+    return id;
   }
 
-  public void setFuncionarios_cpfFuncionario(CommonUser Funcionarios_cpfFuncionario) {
-    this.Funcionarios_cpfFuncionario = Funcionarios_cpfFuncionario;
+  public void setId(Long id) {
+    this.id = id;
   }
 
-  public CommonUser getUsuario_idCPF() {
-    return Usuario_idCPF;
+  public CommonUser getUsuario_CPF() {
+    return Usuario_CPF;
   }
 
-  public void setUsuario_idCPF(CommonUser Usuario_idCPF) {
-    this.Usuario_idCPF = Usuario_idCPF;
+  public void setUsuario_CPF(CommonUser Usuario_CPF) {
+    this.Usuario_CPF = Usuario_CPF;
   }
 
 }

@@ -13,20 +13,12 @@ import jakarta.persistence.Table;
 public class Suggestion {
   @Id
   @GeneratedValue(strategy = IDENTITY)
-  private Long idSugestao;
+  private Long id;
   private Float reducaoCO2Estimado;
 
   @ManyToOne()
-  @JoinColumn(name = "idCPF")
-  private CommonUser usuarioComum_idCPF;
-
-  public Long getIdSugestao() {
-    return idSugestao;
-  }
-
-  public void setIdSugestao(Long idSugestao) {
-    this.idSugestao = idSugestao;
-  }
+  @JoinColumn(name = "cpf")
+  private CommonUser usuario_CPF;
 
   public Float getReducaoCO2Estimado() {
     return reducaoCO2Estimado;
@@ -36,12 +28,20 @@ public class Suggestion {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
   }
 
-  public CommonUser getUsuarioComum_idCPF() {
-    return usuarioComum_idCPF;
+  public CommonUser getUsuario_CPF() {
+    return usuario_CPF;
   }
 
-  public void setUsuarioComum_idCPF(CommonUser usuarioComum_idCPF) {
-    this.usuarioComum_idCPF = usuarioComum_idCPF;
+  public void setUsuario_CPF(CommonUser usuario_CPF) {
+    this.usuario_CPF = usuario_CPF;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
 }

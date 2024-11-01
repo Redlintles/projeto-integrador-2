@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,7 +14,9 @@ public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer cpfFuncionario;
-  private Integer UsuarioEmpresa_idCNPJEmpresa;
+  @ManyToOne
+  @JoinColumn(name = "idCNPJEmpresa")
+  private CompanyUser UsuarioEmpresa_idCNPJEmpresa;
   private String nome;
   private String senha;
   private Integer habitosDiarios;
@@ -25,14 +29,6 @@ public class Employee {
 
   public void setCpfFuncionario(Integer cpfFuncionario) {
     this.cpfFuncionario = cpfFuncionario;
-  }
-
-  public Integer getUsuarioEmpresa_idCNPJEmpresa() {
-    return UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setUsuarioEmpresa_idCNPJEmpresa(Integer UsuarioEmpresa_idCNPJEmpresa) {
-    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
   }
 
   public String getNome() {
@@ -73,5 +69,13 @@ public class Employee {
 
   public void setEndereco(String endereco) {
     this.endereco = endereco;
+  }
+
+  public CompanyUser getUsuarioEmpresa_idCNPJEmpresa() {
+    return UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public void setUsuarioEmpresa_idCNPJEmpresa(CompanyUser UsuarioEmpresa_idCNPJEmpresa) {
+    this.UsuarioEmpresa_idCNPJEmpresa = UsuarioEmpresa_idCNPJEmpresa;
   }
 }

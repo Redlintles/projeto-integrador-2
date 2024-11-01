@@ -32,10 +32,7 @@ public class CommonUser {
 
   @OneToOne
   @JoinColumn(name = "idPainelDeImpacto")
-  private Integer idPainelDeImpacto;
-  @OneToOne
-  @JoinColumn(name = "UsuarioComum_idCPF")
-  private Integer UsuarioComum_idCPF;
+  private ImpactPanel idPainelDeImpacto;
 
   public String getNome() {
     return nome;
@@ -101,20 +98,12 @@ public class CommonUser {
     this.idCPF = cpf;
   }
 
-  public Integer getIdPainelDeImpacto() {
+  public ImpactPanel getIdPainelDeImpacto() {
     return idPainelDeImpacto;
   }
 
-  public void setIdPainelDeImpacto(Integer idPainelDeImpacto) {
+  public void setIdPainelDeImpacto(ImpactPanel idPainelDeImpacto) {
     this.idPainelDeImpacto = idPainelDeImpacto;
-  }
-
-  public Integer getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
-  }
-
-  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 
 }

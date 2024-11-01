@@ -2,19 +2,25 @@ package com.fatec.cotia.projeto2.dsm2024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "daily_habit")
 public class DailyHabit {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
-  private Integer Funcionarios_cpfFuncionario;
-  private Integer UsuarioComum_idCPF;
+  @OneToOne
+  @JoinColumn(name = "idCNPJEmpresa")
+  private CompanyUser Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
+  @ManyToOne
+  @JoinColumn(name = "idCPF")
+  private CommonUser UsuarioComum_idCPF;
+  @ManyToOne
+  @JoinColumn(name = "cpfFuncionario")
+  private CommonUser Funcionarios_cpfFuncionario;
 
   private Float usoEnergia;
   @Column(length = 45, nullable = false)
@@ -23,30 +29,6 @@ public class DailyHabit {
   private String descarteLixo;
   private Integer transporte;
   private Float calculoPegadaCarbono;
-
-  public Integer getFuncionarios_UsuarioEmpresa_idCNPJEmpresa() {
-    return Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public void setFuncionarios_UsuarioEmpresa_idCNPJEmpresa(Integer Funcionarios_UsuarioEmpresa_idCNPJEmpresa) {
-    this.Funcionarios_UsuarioEmpresa_idCNPJEmpresa = Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
-  }
-
-  public Integer getFuncionarios_cpfFuncionario() {
-    return Funcionarios_cpfFuncionario;
-  }
-
-  public void setFuncionarios_cpfFuncionario(Integer Funcionarios_cpfFuncionario) {
-    this.Funcionarios_cpfFuncionario = Funcionarios_cpfFuncionario;
-  }
-
-  public Integer getUsuarioComum_idCPF() {
-    return UsuarioComum_idCPF;
-  }
-
-  public void setUsuarioComum_idCPF(Integer UsuarioComum_idCPF) {
-    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
-  }
 
   public Float getUsoEnergia() {
     return usoEnergia;
@@ -86,6 +68,30 @@ public class DailyHabit {
 
   public void setCalculoPegadaCarbono(Float calculoPegadaCarbono) {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
+  }
+
+  public CompanyUser getFuncionarios_UsuarioEmpresa_idCNPJEmpresa() {
+    return Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public void setFuncionarios_UsuarioEmpresa_idCNPJEmpresa(CompanyUser Funcionarios_UsuarioEmpresa_idCNPJEmpresa) {
+    this.Funcionarios_UsuarioEmpresa_idCNPJEmpresa = Funcionarios_UsuarioEmpresa_idCNPJEmpresa;
+  }
+
+  public CommonUser getFuncionarios_cpfFuncionario() {
+    return Funcionarios_cpfFuncionario;
+  }
+
+  public void setFuncionarios_cpfFuncionario(CommonUser Funcionarios_cpfFuncionario) {
+    this.Funcionarios_cpfFuncionario = Funcionarios_cpfFuncionario;
+  }
+
+  public CommonUser getUsuarioComum_idCPF() {
+    return UsuarioComum_idCPF;
+  }
+
+  public void setUsuarioComum_idCPF(CommonUser UsuarioComum_idCPF) {
+    this.UsuarioComum_idCPF = UsuarioComum_idCPF;
   }
 
 }

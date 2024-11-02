@@ -7,13 +7,13 @@ import jakarta.validation.constraints.Size;
 
 public class CreateMedalDTO {
   @NotNull
-  @Size(min = 45, max = 45)
+  @Size(min = 0, max = 45)
   private String nome;
   @NotNull
-  @Size(min = 45, max = 45)
+  @Size(min = 0, max = 45)
   private String descricao;
   @NotNull
-  @Size(min = 90, max = 90)
+  @Size(min = 0, max = 90)
   private String recompensa;
   @NotNull
   @Size(min = 11, max = 11)

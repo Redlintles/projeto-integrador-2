@@ -1,12 +1,15 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class UpdateDailyHabitDTO {
   @NotNull
   private Long id;
   private Float usoEnergia;
+  @Size(min = 0, max = 45)
   private String alimentacao;
+  @Size(min = 0, max = 45)
   private String descarteLixo;
   private Long transporte;
   private Float calculoPegadaCarbono;

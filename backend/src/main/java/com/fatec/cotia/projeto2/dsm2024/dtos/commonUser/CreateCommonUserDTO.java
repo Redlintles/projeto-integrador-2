@@ -3,7 +3,6 @@ package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public class CreateCommonUserDTO {

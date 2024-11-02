@@ -4,18 +4,24 @@ import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class CreateCommonUserDTO {
   @NotNull
+  @Size(min = 11, max = 11)
   private String cpf;
   @NotNull
+  @Size(min = 0, max = 45)
   private String nome;
   @NotNull
+  @Size(min = 0, max = 45)
   private String senha;
   @Email
   @NotNull
+  @Size(min = 0, max = 45)
   private String email;
   @NotNull
+  @Size(min = 0, max = 90)
   private String endereco;
   @NotNull
   private Long habitosDiarios;

@@ -2,9 +2,17 @@ package com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class CreateImpactPanelDTO {
+  @NotNull
   private CommonUser Usuario_cpf;
+  @Size(min = 0, max = 90)
+  @NotNull
   private String impactoIndividual;
+  @Size(min = 0, max = 90)
+  @NotNull
   private String impactoColetivo;
 
   public CreateImpactPanelDTO() {

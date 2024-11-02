@@ -3,11 +3,13 @@ package com.fatec.cotia.projeto2.dsm2024.dtos.suggestion;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class CreateSuggestionDTO {
   @NotNull
   private Float reducaoCO2Estimado;
   @NotNull
+  @Size(min = 11, max = 11)
   private CommonUser usuario_CPF;
 
   public CreateSuggestionDTO() {

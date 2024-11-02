@@ -2,15 +2,29 @@ package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+
 public class CreateCommonUserDTO {
+  @NotNull
   private String cpf;
+  @NotNull
   private String nome;
+  @NotNull
   private String senha;
+  @Email
+  @NotNull
   private String email;
+  @NotNull
   private String endereco;
+  @NotNull
   private Long habitosDiarios;
+  @NotNull
   private Long medalhas;
+  @NotNull
   private Long pegadaCarbono;
+  @NotNull
   private ImpactPanel idPainelDeImpacto;
 
   public CreateCommonUserDTO() {

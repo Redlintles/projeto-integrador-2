@@ -1,6 +1,9 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
+import jakarta.validation.constraints.NotNull;
+
 public class DeleteCommonUserDTO {
+  @NotNull
   private Long id;
 
   public DeleteCommonUserDTO() {

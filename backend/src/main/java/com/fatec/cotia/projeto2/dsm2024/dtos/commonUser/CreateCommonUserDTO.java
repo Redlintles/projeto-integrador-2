@@ -2,7 +2,7 @@ package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 
-public class CreateCommonUser {
+public class CreateCommonUserDTO {
   private String cpf;
   private String nome;
   private String senha;
@@ -13,10 +13,10 @@ public class CreateCommonUser {
   private Long pegadaCarbono;
   private ImpactPanel idPainelDeImpacto;
 
-  public CreateCommonUser() {
+  public CreateCommonUserDTO() {
   }
 
-  public CreateCommonUser(String cpf,
+  public CreateCommonUserDTO(String cpf,
       String nome,
       String email,
       String senha,

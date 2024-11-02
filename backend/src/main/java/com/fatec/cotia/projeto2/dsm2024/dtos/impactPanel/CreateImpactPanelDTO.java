@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class CreateImpactPanelDTO {
   @NotNull
+  @Size(min = 11, max = 11)
   private CommonUser Usuario_cpf;
   @Size(min = 0, max = 90)
   @NotNull

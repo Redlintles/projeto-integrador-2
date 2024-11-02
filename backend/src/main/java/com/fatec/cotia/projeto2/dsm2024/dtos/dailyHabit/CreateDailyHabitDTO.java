@@ -1,14 +1,21 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit;
 
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class CreateDailyHabitDTO {
+  @NotNull
+  private CommonUser Usuario_CPF;
 
   @NotNull
   private Float usoEnergia;
   @NotNull
+  @Size(min = 0, max = 45)
   private String alimentacao;
   @NotNull
+  @Size(min = 0, max = 45)
   private String descarteLixo;
   @NotNull
   private Long transporte;
@@ -20,7 +27,8 @@ public class CreateDailyHabitDTO {
   }
 
   public CreateDailyHabitDTO(Float usoEnergia, String alimentacao, String descarteLixo, Long transporte,
-      Float calculoPegadaCarbono) {
+      Float calculoPegadaCarbono, CommonUser Usuario_CPF) {
+    this.Usuario_CPF = Usuario_CPF;
     this.usoEnergia = usoEnergia;
     this.alimentacao = alimentacao;
     this.descarteLixo = descarteLixo;
@@ -67,5 +75,13 @@ public class CreateDailyHabitDTO {
 
   public void setCalculoPegadaCarbono(Float calculoPegadaCarbono) {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
+  }
+
+  public CommonUser getUsuario_CPF() {
+    return Usuario_CPF;
+  }
+
+  public void setUsuario_CPF(CommonUser Usuario_CPF) {
+    this.Usuario_CPF = Usuario_CPF;
   }
 }

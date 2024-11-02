@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class CreateDailyHabitDTO {
   @NotNull
+  @Size(min = 11, max = 11)
   private CommonUser Usuario_CPF;
 
   @NotNull

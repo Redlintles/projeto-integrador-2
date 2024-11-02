@@ -1,5 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit;
 
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -13,6 +15,9 @@ public class UpdateDailyHabitDTO {
   private String descarteLixo;
   private Long transporte;
   private Float calculoPegadaCarbono;
+
+  @Size(min = 11, max = 11)
+  private CommonUser Usuario_CPF;
 
   public UpdateDailyHabitDTO() {
   }
@@ -73,6 +78,14 @@ public class UpdateDailyHabitDTO {
 
   public void setCalculoPegadaCarbono(Float calculoPegadaCarbono) {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
+  }
+
+  public CommonUser getUsuario_CPF() {
+    return Usuario_CPF;
+  }
+
+  public void setUsuario_CPF(CommonUser Usuario_CPF) {
+    this.Usuario_CPF = Usuario_CPF;
   }
 
 }

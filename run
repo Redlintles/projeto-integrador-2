@@ -1,0 +1,15 @@
+#!/bin/bash
+
+STOP=""
+cd backend
+
+mvn clean package -DskipTests
+
+cd ..
+
+docker compose up --build -d
+
+echo "Projeto rodando, pressione enter para parar"
+read -p "Pressione enter para parar" $STOP
+
+docker compose down

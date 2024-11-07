@@ -1,7 +1,5 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
-import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -29,8 +27,6 @@ public class CreateCommonUserDTO {
   private Long medalhas;
   @NotNull
   private Long pegadaCarbono;
-  @NotNull
-  private ImpactPanel idPainelDeImpacto;
 
   public CreateCommonUserDTO() {
   }
@@ -42,14 +38,12 @@ public class CreateCommonUserDTO {
       Long habitosDiarios,
       Long pegadaCarbono,
       Long medalhas,
-      String endereco,
-      ImpactPanel idPainelDeImpacto) {
+      String endereco) {
     this.cpf = cpf;
     this.nome = nome;
     this.email = email;
     this.senha = senha;
     this.habitosDiarios = habitosDiarios;
-    this.idPainelDeImpacto = idPainelDeImpacto;
     this.medalhas = medalhas;
     this.endereco = endereco;
     this.pegadaCarbono = pegadaCarbono;
@@ -117,14 +111,6 @@ public class CreateCommonUserDTO {
 
   public void setPegadaCarbono(Long pegadaCarbono) {
     this.pegadaCarbono = pegadaCarbono;
-  }
-
-  public ImpactPanel getIdPainelDeImpacto() {
-    return idPainelDeImpacto;
-  }
-
-  public void setIdPainelDeImpacto(ImpactPanel idPainelDeImpacto) {
-    this.idPainelDeImpacto = idPainelDeImpacto;
   }
 
 }

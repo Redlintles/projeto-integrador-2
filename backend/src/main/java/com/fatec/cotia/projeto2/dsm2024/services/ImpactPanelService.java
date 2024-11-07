@@ -19,7 +19,6 @@ public class ImpactPanelService {
 
     newPanel.setImpactoColetivo(data.getImpactoColetivo());
     newPanel.setImpactoIndividual(data.getImpactoIndividual());
-    newPanel.setUsuario_cpf(data.getUsuario_cpf());
 
     newPanel = this.impactPanelRepository.save(newPanel);
 

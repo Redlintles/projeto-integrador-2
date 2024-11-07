@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,9 +13,6 @@ public class ImpactPanel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @OneToOne
-  @JoinColumn(name = "cpf")
-  private CommonUser Usuario_cpf;
   @Column(length = 90, nullable = false)
   private String impactoIndividual;
   @Column(length = 90, nullable = false)
@@ -27,8 +22,7 @@ public class ImpactPanel {
 
   }
 
-  public ImpactPanel(CommonUser Usuario_cpf, String impactoIndividual, String impactoColetivo) {
-    this.Usuario_cpf = Usuario_cpf;
+  public ImpactPanel(String impactoIndividual, String impactoColetivo) {
     this.impactoIndividual = impactoIndividual;
     this.impactoColetivo = impactoColetivo;
   }
@@ -47,14 +41,6 @@ public class ImpactPanel {
 
   public void setImpactoIndividual(String impactoIndividual) {
     this.impactoIndividual = impactoIndividual;
-  }
-
-  public CommonUser getUsuario_cpf() {
-    return Usuario_cpf;
-  }
-
-  public void setUsuario_cpf(CommonUser Usuario_cpf) {
-    this.Usuario_cpf = Usuario_cpf;
   }
 
   public Long getId() {

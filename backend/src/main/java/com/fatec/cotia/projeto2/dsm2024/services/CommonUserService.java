@@ -32,8 +32,6 @@ public class CommonUserService {
 
     CreateImpactPanelDTO newImpactPanel = new CreateImpactPanelDTO();
 
-    newImpactPanel.setUsuario_cpf(data.getCpf());
-
     newImpactPanel.setImpactoColetivo("Nulo");
     newImpactPanel.setImpactoIndividual("Nulo");
 

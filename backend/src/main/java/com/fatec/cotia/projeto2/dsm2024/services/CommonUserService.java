@@ -1,5 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.services;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.DeleteCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 
@@ -47,6 +49,62 @@ public class CommonUserService {
       this.commonUserRepository.deleteById(data.getId());
       return toDelete;
     }
+  }
+
+  public Optional<HashMap<String, CommonUser>> updateUser(UpdateCommonUserDTO data) {
+    HashMap<String, CommonUser> list = new HashMap<>();
+
+    Optional<CommonUser> old = this.commonUserRepository.findById(data.getId());
+
+    if (old.isEmpty()) {
+      return null;
+    }
+    CommonUser oldUser = old.get();
+    list.put("Old", oldUser);
+
+    if (data.getNome() != null) {
+
+      oldUser.setNome(data.getNome());
+    }
+    if (data.getSenha() != null) {
+
+      oldUser.setSenha(data.getSenha());
+    }
+    if (data.getCpf() != null) {
+
+      oldUser.setCpf(data.getCpf());
+    }
+    if (data.getEmail() != null) {
+
+      oldUser.setEmail(data.getEmail());
+    }
+    if (data.getEndereco() != null) {
+
+      oldUser.setEndereco(data.getEndereco());
+    }
+    if (data.getHabitosDiarios() != null) {
+
+      oldUser.setHabitosDiarios(data.getHabitosDiarios());
+    }
+    if (data.getIdPainelDeImpacto() != null) {
+
+      oldUser.setIdPainelDeImpacto(data.getIdPainelDeImpacto());
+    }
+    if (data.getMedalhas() != null) {
+
+      oldUser.setMedalhas(data.getMedalhas());
+    }
+    if (data.getPegadaCarbono() != null) {
+
+      oldUser.setPegadaCarbono(data.getPegadaCarbono());
+    }
+
+    CommonUser user = this.commonUserRepository.save(oldUser);
+
+    list.put("New", user);
+
+    return Optional.of(list);
+
   }
 
 }

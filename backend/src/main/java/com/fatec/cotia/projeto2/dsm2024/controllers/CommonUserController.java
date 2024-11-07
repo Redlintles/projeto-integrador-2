@@ -17,6 +17,8 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class CommonUserController {
@@ -38,7 +40,7 @@ public class CommonUserController {
   }
 
   @PostMapping("/")
-  public ResponseEntity<CommonUser> createUser(@RequestBody CreateCommonUserDTO data) {
+  public ResponseEntity<CommonUser> createUser(@Valid @RequestBody CreateCommonUserDTO data) {
     Optional<CommonUser> newUser = this.commonUserService.createUser(data);
 
     if (newUser.isPresent()) {

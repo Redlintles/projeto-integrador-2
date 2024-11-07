@@ -10,11 +10,17 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.DeleteCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 
 @Service
 public class CommonUserService {
+
+  @Autowired
+  private ImpactPanelService impactPanelService;
+
   @Autowired
   private CommonUserRepository commonUserRepository;
 
@@ -23,13 +29,27 @@ public class CommonUserService {
   }
 
   public Optional<CommonUser> createUser(CreateCommonUserDTO data) {
+
+    CreateImpactPanelDTO newImpactPanel = new CreateImpactPanelDTO();
+
+    newImpactPanel.setUsuario_cpf(data.getCpf());
+
+    newImpactPanel.setImpactoColetivo("Nulo");
+    newImpactPanel.setImpactoIndividual("Nulo");
+
+    Optional<ImpactPanel> result = this.impactPanelService.createImpactPanel(newImpactPanel);
+
+    if (result.isEmpty()) {
+      return null;
+    }
+
     CommonUser newUser = new CommonUser();
 
     newUser.setCpf(data.getCpf());
     newUser.setEmail(data.getEmail());
     newUser.setEndereco(data.getEndereco());
     newUser.setHabitosDiarios(data.getHabitosDiarios());
-    newUser.setIdPainelDeImpacto(data.getIdPainelDeImpacto());
+    newUser.setIdPainelDeImpacto(result.get());
     newUser.setMedalhas(data.getMedalhas());
     newUser.setNome(data.getNome());
     newUser.setSenha(data.getSenha());

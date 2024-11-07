@@ -13,14 +13,14 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
 
-@RestController()
+@RestController
 @RequestMapping("/user")
 public class CommonUserController {
 
   @Autowired
   private CommonUserService commonUserService;
 
-  @GetMapping("/:id")
+  @GetMapping("/{id}")
   public ResponseEntity<CommonUser> findUser(@PathVariable Long id) {
 
     FindCommonUserDTO userDTO = new FindCommonUserDTO();

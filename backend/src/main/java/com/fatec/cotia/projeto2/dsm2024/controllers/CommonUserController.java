@@ -44,7 +44,7 @@ public class CommonUserController {
     }
   }
 
-  @PostMapping("/")
+  @PostMapping
   public ResponseEntity<CommonUser> createUser(@Valid @RequestBody CreateCommonUserDTO data) {
     Optional<CommonUser> newUser = this.commonUserService.createUser(data);
 
@@ -55,7 +55,7 @@ public class CommonUserController {
     }
   }
 
-  @PatchMapping("/")
+  @PatchMapping
   public ResponseEntity<HashMap<String, CommonUser>> updateUser(@Valid @RequestBody UpdateCommonUserDTO data) {
     Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(data);
 
@@ -66,7 +66,7 @@ public class CommonUserController {
     }
   }
 
-  @DeleteMapping("/")
+  @DeleteMapping
   public ResponseEntity<CommonUser> deleteUser(@Valid @RequestBody DeleteCommonUserDTO data) {
     Optional<CommonUser> result = this.commonUserService.deleteUserById(data);
 

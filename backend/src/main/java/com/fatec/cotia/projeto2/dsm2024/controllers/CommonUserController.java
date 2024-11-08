@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.DeleteCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
@@ -62,5 +64,17 @@ public class CommonUserController {
     } else {
       return ResponseEntity.notFound().build();
     }
+  }
+
+  @DeleteMapping("/")
+  public ResponseEntity<CommonUser> deleteUser(@Valid @RequestBody DeleteCommonUserDTO data) {
+    Optional<CommonUser> result = this.commonUserService.deleteUserById(data);
+
+    if (result.isPresent()) {
+      return ResponseEntity.ok(result.get());
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+
   }
 }

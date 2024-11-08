@@ -104,10 +104,6 @@ public class CommonUserService {
 
       oldUser.setHabitosDiarios(data.getHabitosDiarios());
     }
-    if (data.getIdPainelDeImpacto() != null) {
-
-      oldUser.setIdPainelDeImpacto(data.getIdPainelDeImpacto());
-    }
     if (data.getMedalhas() != null) {
 
       oldUser.setMedalhas(data.getMedalhas());

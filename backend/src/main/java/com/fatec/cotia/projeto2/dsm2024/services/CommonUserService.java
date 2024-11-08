@@ -116,6 +116,8 @@ public class CommonUserService {
 
     CommonUser user = this.commonUserRepository.save(existingUser);
 
+    list.get("Old").setId(id);
+
     list.put("New", user);
 
     return Optional.of(list);

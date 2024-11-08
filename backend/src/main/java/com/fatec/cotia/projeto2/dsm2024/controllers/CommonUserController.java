@@ -60,6 +60,7 @@ public class CommonUserController {
       @Valid @RequestBody UpdateCommonUserDTO data) {
     Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(id, data);
 
+    System.out.println(String.format("\n\n%s\n\n", result.get().get("New").getId()));
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());
     } else {

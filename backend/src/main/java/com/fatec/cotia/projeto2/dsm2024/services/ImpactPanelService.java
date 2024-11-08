@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.DeleteImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.FindImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.UpdateImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
@@ -61,4 +62,14 @@ public class ImpactPanelService {
 
   }
 
+  public Optional<ImpactPanel> deleteById(DeleteImpactPanelDTO data) {
+    Optional<ImpactPanel> toDelete = this.impactPanelRepository.findById(data.getId());
+
+    if (toDelete.isEmpty()) {
+      return null;
+    } else {
+      this.impactPanelRepository.deleteById(data.getId());
+      return toDelete;
+    }
+  }
 }

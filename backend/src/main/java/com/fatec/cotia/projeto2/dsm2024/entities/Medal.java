@@ -1,5 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
+import com.fatec.cotia.projeto2.dsm2024.dtos.medal.CreateMedalDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,20 @@ public class Medal {
     this.recompensa = recompensa;
     this.usuario_CPF = usuario_CPF;
 
+  }
+
+  public Medal(Medal data) {
+    this.nome = data.getNome();
+    this.descricao = data.getDescricao();
+    this.recompensa = data.getRecompensa();
+    this.usuario_CPF = data.getUsuario_CPF();
+  }
+
+  public Medal(CreateMedalDTO data) {
+    this.nome = data.getNome();
+    this.descricao = data.getDescricao();
+    this.recompensa = data.getRecompensa();
+    this.usuario_CPF = data.getUsuario_CPF();
   }
 
   public String getNome() {

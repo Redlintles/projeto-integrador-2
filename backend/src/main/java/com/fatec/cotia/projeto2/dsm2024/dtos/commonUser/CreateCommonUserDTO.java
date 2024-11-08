@@ -1,5 +1,8 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,6 +31,8 @@ public class CreateCommonUserDTO {
   @NotNull
   private Long pegadaCarbono;
 
+  private ImpactPanel painelDeImpacto;
+
   public CreateCommonUserDTO() {
   }
 
@@ -47,6 +52,30 @@ public class CreateCommonUserDTO {
     this.medalhas = medalhas;
     this.endereco = endereco;
     this.pegadaCarbono = pegadaCarbono;
+  }
+
+  public CreateCommonUserDTO(CreateCommonUserDTO data) {
+    this.cpf = data.getCpf();
+    this.medalhas = data.getMedalhas();
+    this.endereco = data.getEndereco();
+    this.email = data.getEmail();
+    this.nome = data.getNome();
+    this.senha = data.getSenha();
+    this.habitosDiarios = data.getHabitosDiarios();
+    this.pegadaCarbono = data.getPegadaCarbono();
+    this.painelDeImpacto = data.getPainelDeImpacto();
+  }
+
+  public CreateCommonUserDTO(CommonUser data) {
+    this.cpf = data.getCpf();
+    this.medalhas = data.getMedalhas();
+    this.endereco = data.getEndereco();
+    this.email = data.getEmail();
+    this.nome = data.getNome();
+    this.senha = data.getSenha();
+    this.habitosDiarios = data.getHabitosDiarios();
+    this.pegadaCarbono = data.getPegadaCarbono();
+    this.painelDeImpacto = data.getIdPainelDeImpacto();
   }
 
   public String getCpf() {
@@ -111,6 +140,14 @@ public class CreateCommonUserDTO {
 
   public void setPegadaCarbono(Long pegadaCarbono) {
     this.pegadaCarbono = pegadaCarbono;
+  }
+
+  public ImpactPanel getPainelDeImpacto() {
+    return painelDeImpacto;
+  }
+
+  public void setPainelDeImpacto(ImpactPanel painelDeImpacto) {
+    this.painelDeImpacto = painelDeImpacto;
   }
 
 }

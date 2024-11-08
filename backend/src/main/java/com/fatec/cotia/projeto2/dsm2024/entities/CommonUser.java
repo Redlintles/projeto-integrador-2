@@ -18,7 +18,7 @@ public class CommonUser {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(length = 11, nullable = false)
+  @Column(length = 11, nullable = false, unique = true)
   private String cpf;
 
   @Column(length = 45, nullable = false)

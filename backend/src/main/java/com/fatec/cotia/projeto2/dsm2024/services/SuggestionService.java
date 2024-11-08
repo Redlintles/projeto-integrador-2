@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.FindSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
 import com.fatec.cotia.projeto2.dsm2024.repositories.SuggestionRepository;
 
@@ -21,6 +22,10 @@ public class SuggestionService {
     Suggestion savedSuggestion = this.suggestionRepository.save(newSuggestion);
 
     return Optional.of(savedSuggestion);
+  }
+
+  public Optional<Suggestion> findSuggestionById(FindSuggestionDTO data) {
+    return this.suggestionRepository.findById(data.getId());
   }
 
 }

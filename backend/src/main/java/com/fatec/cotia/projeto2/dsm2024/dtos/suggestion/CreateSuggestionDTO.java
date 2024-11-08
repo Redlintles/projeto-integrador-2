@@ -11,13 +11,13 @@ public class CreateSuggestionDTO {
   private Float reducaoCO2Estimado;
   @NotNull
   @Size(min = 11, max = 11)
-  private CommonUser usuario_CPF;
+  private String usuario_CPF;
 
   public CreateSuggestionDTO() {
 
   }
 
-  public CreateSuggestionDTO(Float reducaoCO2Estimado, CommonUser usuario_CPF) {
+  public CreateSuggestionDTO(Float reducaoCO2Estimado, String usuario_CPF) {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
     this.usuario_CPF = usuario_CPF;
   }
@@ -29,7 +29,7 @@ public class CreateSuggestionDTO {
 
   public CreateSuggestionDTO(Suggestion data) {
     this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
-    this.usuario_CPF = data.getUsuario_CPF();
+    this.usuario_CPF = data.getUsuario_CPF().getCpf();
   }
 
   public Float getReducaoCO2Estimado() {
@@ -40,11 +40,11 @@ public class CreateSuggestionDTO {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
   }
 
-  public CommonUser getUsuario_CPF() {
+  public String getUsuario_CPF() {
     return usuario_CPF;
   }
 
-  public void setUsuario_CPF(CommonUser usuario_CPF) {
+  public void setUsuario_CPF(String usuario_CPF) {
     this.usuario_CPF = usuario_CPF;
   }
 

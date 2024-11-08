@@ -39,7 +39,6 @@ public class Suggestion {
 
   public Suggestion(CreateSuggestionDTO data) {
     this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
-    this.usuario_CPF = data.getUsuario_CPF();
   }
 
   public Float getReducaoCO2Estimado() {

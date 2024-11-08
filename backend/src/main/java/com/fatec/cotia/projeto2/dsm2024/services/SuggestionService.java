@@ -3,24 +3,38 @@ package com.fatec.cotia.projeto2.dsm2024.services;
 import java.util.HashMap;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.DeleteSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.FindSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.UpdateSuggestionDTO;
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
+import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.SuggestionRepository;
 
 @Service
 public class SuggestionService {
+
+  @Autowired
+  private CommonUserRepository commonUserRepository;
+  @Autowired
   private SuggestionRepository suggestionRepository;
 
   public Optional<Suggestion> createSuggestion(CreateSuggestionDTO data) {
+
+    Optional<CommonUser> usuario = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
+
+    if (usuario.isEmpty()) {
+      return null;
+    }
+
     Suggestion newSuggestion = new Suggestion();
 
     newSuggestion.setReducaoCO2Estimado(data.getReducaoCO2Estimado());
-    newSuggestion.setUsuario_CPF(data.getUsuario_CPF());
+    newSuggestion.setUsuario_CPF(usuario.get());
 
     Suggestion savedSuggestion = this.suggestionRepository.save(newSuggestion);
 

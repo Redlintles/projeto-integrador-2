@@ -1,5 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
+import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -27,6 +29,16 @@ public class Suggestion {
   public Suggestion(Float reducaoCO2Estimado, CommonUser usuario_CPF) {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
     this.usuario_CPF = usuario_CPF;
+  }
+
+  public Suggestion(Suggestion data) {
+    this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
+    this.usuario_CPF = data.getUsuario_CPF();
+  }
+
+  public Suggestion(CreateSuggestionDTO data) {
+    this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
+    this.usuario_CPF = data.getUsuario_CPF();
   }
 
   public Float getReducaoCO2Estimado() {

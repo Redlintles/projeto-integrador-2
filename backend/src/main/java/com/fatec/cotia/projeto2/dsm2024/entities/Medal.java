@@ -45,6 +45,7 @@ public class Medal {
   }
 
   public Medal(Medal data) {
+    this.id = data.getId();
     this.nome = data.getNome();
     this.descricao = data.getDescricao();
     this.recompensa = data.getRecompensa();

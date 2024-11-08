@@ -61,6 +61,7 @@ public class DailyHabit {
   }
 
   public DailyHabit(DailyHabit data) {
+    this.id = data.getId();
     this.Usuario_CPF = data.getUsuario_CPF();
     this.usoEnergia = data.getUsoEnergia();
     this.alimentacao = data.getAlimentacao();

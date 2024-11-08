@@ -78,6 +78,7 @@ public class CommonUser {
   }
 
   public CommonUser(CommonUser data) {
+    this.id = data.getId();
     this.cpf = data.getCpf();
     this.nome = data.getNome();
     this.email = data.getEmail();

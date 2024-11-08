@@ -32,6 +32,7 @@ public class Suggestion {
   }
 
   public Suggestion(Suggestion data) {
+    this.id = data.getId();
     this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
     this.usuario_CPF = data.getUsuario_CPF();
   }

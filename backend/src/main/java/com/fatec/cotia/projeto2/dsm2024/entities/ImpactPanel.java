@@ -30,6 +30,7 @@ public class ImpactPanel {
   }
 
   public ImpactPanel(ImpactPanel data) {
+    this.id = data.getId();
     this.impactoColetivo = data.getImpactoColetivo();
     this.impactoIndividual = data.getImpactoIndividual();
   }

@@ -1,12 +1,9 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UpdateCommonUserDTO {
-  @NotNull
-  private Long id;
   @Size(min = 11, max = 11)
   private String cpf;
   @Size(min = 11, max = 45)
@@ -25,7 +22,7 @@ public class UpdateCommonUserDTO {
   public UpdateCommonUserDTO() {
   }
 
-  public UpdateCommonUserDTO(Long id, String cpf,
+  public UpdateCommonUserDTO(String cpf,
       String nome,
       String email,
       String senha,
@@ -33,7 +30,6 @@ public class UpdateCommonUserDTO {
       Long pegadaCarbono,
       Long medalhas,
       String endereco) {
-    this.id = id;
     this.cpf = cpf;
     this.nome = nome;
     this.email = email;
@@ -106,14 +102,6 @@ public class UpdateCommonUserDTO {
 
   public void setPegadaCarbono(Long pegadaCarbono) {
     this.pegadaCarbono = pegadaCarbono;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
 }

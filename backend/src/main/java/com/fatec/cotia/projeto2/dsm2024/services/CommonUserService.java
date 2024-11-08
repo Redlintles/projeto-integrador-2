@@ -69,10 +69,10 @@ public class CommonUserService {
     }
   }
 
-  public Optional<HashMap<String, CommonUser>> updateUser(UpdateCommonUserDTO data) {
+  public Optional<HashMap<String, CommonUser>> updateUser(Long id, UpdateCommonUserDTO data) {
     HashMap<String, CommonUser> list = new HashMap<>();
 
-    Optional<CommonUser> old = this.commonUserRepository.findById(data.getId());
+    Optional<CommonUser> old = this.commonUserRepository.findById(id);
 
     if (old.isEmpty()) {
       return null;

@@ -55,9 +55,10 @@ public class CommonUserController {
     }
   }
 
-  @PatchMapping
-  public ResponseEntity<HashMap<String, CommonUser>> updateUser(@Valid @RequestBody UpdateCommonUserDTO data) {
-    Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(data);
+  @PatchMapping("/{id}")
+  public ResponseEntity<HashMap<String, CommonUser>> updateUser(@PathVariable Long id,
+      @Valid @RequestBody UpdateCommonUserDTO data) {
+    Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(id, data);
 
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());
@@ -66,9 +67,10 @@ public class CommonUserController {
     }
   }
 
-  @DeleteMapping
-  public ResponseEntity<CommonUser> deleteUser(@Valid @RequestBody DeleteCommonUserDTO data) {
-    Optional<CommonUser> result = this.commonUserService.deleteUserById(data);
+  @DeleteMapping("/{id}")
+  public ResponseEntity<CommonUser> deleteUser(@PathVariable Long id) {
+
+    Optional<CommonUser> result = this.commonUserService.deleteUserById(new DeleteCommonUserDTO(id));
 
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());

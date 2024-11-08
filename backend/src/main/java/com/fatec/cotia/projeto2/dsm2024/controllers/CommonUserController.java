@@ -1,11 +1,13 @@
 package com.fatec.cotia.projeto2.dsm2024.controllers;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
 
@@ -47,6 +50,17 @@ public class CommonUserController {
       return ResponseEntity.status(HttpStatus.CREATED).body(newUser.get());
     } else {
       return ResponseEntity.badRequest().build();
+    }
+  }
+
+  @PatchMapping("/")
+  public ResponseEntity<HashMap<String, CommonUser>> updateUser(@Valid @RequestBody UpdateCommonUserDTO data) {
+    Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(data);
+
+    if (result.isPresent()) {
+      return ResponseEntity.ok(result.get());
+    } else {
+      return ResponseEntity.notFound().build();
     }
   }
 }

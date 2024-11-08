@@ -1,6 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.medal;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,6 +29,20 @@ public class CreateMedalDTO {
     this.descricao = descricao;
     this.recompensa = recompensa;
     this.usuario_CPF = usuario_CPF;
+  }
+
+  public CreateMedalDTO(CreateMedalDTO data) {
+    this.nome = data.getNome();
+    this.descricao = data.getDescricao();
+    this.recompensa = data.getRecompensa();
+    this.usuario_CPF = data.getUsuario_CPF();
+  }
+
+  public CreateMedalDTO(Medal data) {
+    this.nome = data.getNome();
+    this.descricao = data.getDescricao();
+    this.recompensa = data.getRecompensa();
+    this.usuario_CPF = data.getUsuario_CPF();
   }
 
   public String getNome() {

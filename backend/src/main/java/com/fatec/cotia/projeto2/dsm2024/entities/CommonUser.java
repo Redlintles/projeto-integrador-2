@@ -1,5 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
+import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -62,6 +64,29 @@ public class CommonUser {
     this.endereco = endereco;
     this.pegadaCarbono = pegadaCarbono;
 
+  }
+
+  public CommonUser(CreateCommonUserDTO data) {
+    this.cpf = data.getCpf();
+    this.nome = data.getNome();
+    this.email = data.getEmail();
+    this.habitosDiarios = data.getHabitosDiarios();
+    this.senha = data.getSenha();
+    this.endereco = data.getEndereco();
+    this.medalhas = data.getMedalhas();
+    this.pegadaCarbono = data.getPegadaCarbono();
+  }
+
+  public CommonUser(CommonUser data) {
+    this.cpf = data.getCpf();
+    this.nome = data.getNome();
+    this.email = data.getEmail();
+    this.habitosDiarios = data.getHabitosDiarios();
+    this.senha = data.getSenha();
+    this.endereco = data.getEndereco();
+    this.idPainelDeImpacto = data.getIdPainelDeImpacto();
+    this.medalhas = data.getMedalhas();
+    this.pegadaCarbono = data.getPegadaCarbono();
   }
 
   public String getNome() {

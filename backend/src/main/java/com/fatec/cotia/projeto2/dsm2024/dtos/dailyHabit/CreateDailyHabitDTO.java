@@ -1,6 +1,7 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,7 +36,24 @@ public class CreateDailyHabitDTO {
     this.descarteLixo = descarteLixo;
     this.calculoPegadaCarbono = calculoPegadaCarbono;
     this.transporte = transporte;
+  }
 
+  public CreateDailyHabitDTO(DailyHabit data) {
+    this.Usuario_CPF = data.getUsuario_CPF();
+    this.usoEnergia = data.getUsoEnergia();
+    this.alimentacao = data.getAlimentacao();
+    this.descarteLixo = data.getDescarteLixo();
+    this.calculoPegadaCarbono = data.getCalculoPegadaCarbono();
+    this.transporte = data.getTransporte();
+  }
+
+  public CreateDailyHabitDTO(CreateDailyHabitDTO data) {
+    this.Usuario_CPF = data.getUsuario_CPF();
+    this.usoEnergia = data.getUsoEnergia();
+    this.alimentacao = data.getAlimentacao();
+    this.descarteLixo = data.getDescarteLixo();
+    this.calculoPegadaCarbono = data.getCalculoPegadaCarbono();
+    this.transporte = data.getTransporte();
   }
 
   public Float getUsoEnergia() {

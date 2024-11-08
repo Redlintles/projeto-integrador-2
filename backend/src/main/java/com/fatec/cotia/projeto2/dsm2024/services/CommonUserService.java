@@ -77,43 +77,44 @@ public class CommonUserService {
     if (old.isEmpty()) {
       return null;
     }
-    CommonUser oldUser = old.get();
-    list.put("Old", oldUser);
+    CommonUser newUserObj = new CommonUser(old.get());
+
+    list.put("Old", old.get());
 
     if (data.getNome() != null) {
 
-      oldUser.setNome(data.getNome());
+      newUserObj.setNome(data.getNome());
     }
     if (data.getSenha() != null) {
 
-      oldUser.setSenha(data.getSenha());
+      newUserObj.setSenha(data.getSenha());
     }
     if (data.getCpf() != null) {
 
-      oldUser.setCpf(data.getCpf());
+      newUserObj.setCpf(data.getCpf());
     }
     if (data.getEmail() != null) {
 
-      oldUser.setEmail(data.getEmail());
+      newUserObj.setEmail(data.getEmail());
     }
     if (data.getEndereco() != null) {
 
-      oldUser.setEndereco(data.getEndereco());
+      newUserObj.setEndereco(data.getEndereco());
     }
     if (data.getHabitosDiarios() != null) {
 
-      oldUser.setHabitosDiarios(data.getHabitosDiarios());
+      newUserObj.setHabitosDiarios(data.getHabitosDiarios());
     }
     if (data.getMedalhas() != null) {
 
-      oldUser.setMedalhas(data.getMedalhas());
+      newUserObj.setMedalhas(data.getMedalhas());
     }
     if (data.getPegadaCarbono() != null) {
 
-      oldUser.setPegadaCarbono(data.getPegadaCarbono());
+      newUserObj.setPegadaCarbono(data.getPegadaCarbono());
     }
 
-    CommonUser user = this.commonUserRepository.save(oldUser);
+    CommonUser user = this.commonUserRepository.save(newUserObj);
 
     list.put("New", user);
 

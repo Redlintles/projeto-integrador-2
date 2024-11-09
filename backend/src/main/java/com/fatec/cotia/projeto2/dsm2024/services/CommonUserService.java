@@ -6,9 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
@@ -26,9 +25,9 @@ public class CommonUserService {
     return this.commonUserRepository.findById(id);
   }
 
-  public Optional<CommonUser> createUser(CreateCommonUserDTO data) {
+  public Optional<CommonUser> createUser(CommonUserDTO data) {
 
-    CreateImpactPanelDTO newImpactPanel = new CreateImpactPanelDTO();
+    ImpactPanelDTO newImpactPanel = new ImpactPanelDTO();
 
     newImpactPanel.setImpactoColetivo("Nulo");
     newImpactPanel.setImpactoIndividual("Nulo");
@@ -69,7 +68,7 @@ public class CommonUserService {
     }
   }
 
-  public Optional<HashMap<String, CommonUser>> updateUser(Long id, UpdateCommonUserDTO data) {
+  public Optional<HashMap<String, CommonUser>> updateUser(Long id, CommonUserDTO data) {
     HashMap<String, CommonUser> list = new HashMap<>();
 
     Optional<CommonUser> old = this.commonUserRepository.findById(id);

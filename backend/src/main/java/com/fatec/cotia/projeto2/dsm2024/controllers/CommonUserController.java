@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -41,7 +41,8 @@ public class CommonUserController {
   }
 
   @PostMapping
-  public ResponseEntity<CommonUser> createUser(@Valid @RequestBody CreateCommonUserDTO data) {
+  public ResponseEntity<CommonUser> createUser(
+      @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
     Optional<CommonUser> newUser = this.commonUserService.createUser(data);
 
     if (newUser.isPresent()) {
@@ -53,7 +54,7 @@ public class CommonUserController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<HashMap<String, CommonUser>> updateUser(@PathVariable Long id,
-      @Valid @RequestBody UpdateCommonUserDTO data) {
+      @Validated(UpdateGroupInterface.class) @RequestBody CommonUserDTO data) {
     Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(id, data);
 
     System.out.println(String.format("\n\n%s\n\n", result.get().get("New").getId()));

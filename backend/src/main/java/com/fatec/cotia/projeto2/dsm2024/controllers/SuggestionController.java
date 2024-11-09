@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.UpdateSuggestionDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.SuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.services.SuggestionService;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/suggestion")
@@ -39,7 +39,8 @@ public class SuggestionController {
   }
 
   @PostMapping
-  public ResponseEntity<Suggestion> createSuggestion(@Valid @RequestBody CreateSuggestionDTO data) {
+  public ResponseEntity<Suggestion> createSuggestion(
+      @Validated(CreationGroupInterface.class) @RequestBody SuggestionDTO data) {
     Optional<Suggestion> newSuggestion = this.suggestionService.createSuggestion(data);
 
     if (newSuggestion.isPresent()) {
@@ -51,7 +52,7 @@ public class SuggestionController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<HashMap<String, Suggestion>> updateSuggestion(@PathVariable Long id,
-      @Valid @RequestBody UpdateSuggestionDTO data) {
+      @Validated(UpdateGroupInterface.class) @RequestBody SuggestionDTO data) {
     Optional<HashMap<String, Suggestion>> updatedSuggestion = this.suggestionService.updateSuggestion(id, data);
 
     if (updatedSuggestion.isPresent()) {

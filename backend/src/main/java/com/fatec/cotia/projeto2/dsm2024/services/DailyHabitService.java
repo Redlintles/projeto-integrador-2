@@ -5,8 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.CreateDailyHabitDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.UpdateDailyHabitDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
 
@@ -14,7 +13,7 @@ public class DailyHabitService {
   @Autowired
   private DailyHabitRepository dailyHabitRepository;
 
-  public Optional<DailyHabit> createDailyHabit(CreateDailyHabitDTO data) {
+  public Optional<DailyHabit> createDailyHabit(DailyHabitDTO data) {
     DailyHabit newDailyHabit = new DailyHabit(data);
     newDailyHabit = this.dailyHabitRepository.save(newDailyHabit);
     return Optional.of(newDailyHabit);
@@ -24,7 +23,7 @@ public class DailyHabitService {
     return this.dailyHabitRepository.findById(id);
   }
 
-  public Optional<HashMap<String, DailyHabit>> updateDailyHabit(Long id, UpdateDailyHabitDTO data) {
+  public Optional<HashMap<String, DailyHabit>> updateDailyHabit(Long id, DailyHabitDTO data) {
     Optional<DailyHabit> toUpdate = this.dailyHabitRepository.findById(id);
 
     if (toUpdate.isEmpty()) {

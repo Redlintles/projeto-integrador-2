@@ -6,8 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.medal.CreateMedalDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.medal.UpdateMedalDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.MedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 import com.fatec.cotia.projeto2.dsm2024.repositories.MedalRepository;
 
@@ -16,7 +15,7 @@ public class MedalService {
   @Autowired
   MedalRepository medalRepository;
 
-  public Optional<Medal> createMedal(CreateMedalDTO data) {
+  public Optional<Medal> createMedal(MedalDTO data) {
 
     Medal newMedal = new Medal(data);
     Medal createdMedal = this.medalRepository.save(newMedal);
@@ -40,7 +39,7 @@ public class MedalService {
     }
   }
 
-  public Optional<HashMap<String, Medal>> updateMedal(Long id, UpdateMedalDTO data) {
+  public Optional<HashMap<String, Medal>> updateMedal(Long id, MedalDTO data) {
     Optional<Medal> toUpdate = this.medalRepository.findById(id);
 
     if (toUpdate.isEmpty()) {

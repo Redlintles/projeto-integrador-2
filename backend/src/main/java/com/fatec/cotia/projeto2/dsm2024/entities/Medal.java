@@ -56,7 +56,6 @@ public class Medal {
     this.nome = data.getNome();
     this.descricao = data.getDescricao();
     this.recompensa = data.getRecompensa();
-    this.usuario_CPF = data.getUsuario_CPF();
   }
 
   public String getNome() {

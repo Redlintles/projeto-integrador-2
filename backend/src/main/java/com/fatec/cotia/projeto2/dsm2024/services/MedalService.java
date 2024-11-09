@@ -8,21 +8,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.MedalDTO;
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
+import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.MedalRepository;
 
 @Service
 public class MedalService {
 
   @Autowired
-  MedalRepository medalRepository;
+  private MedalRepository medalRepository;
+
+  @Autowired
+  private CommonUserRepository commonUserRepository;
 
   public Optional<Medal> createMedal(MedalDTO data) {
 
-    Medal newMedal = new Medal(data);
-    Medal createdMedal = this.medalRepository.save(newMedal);
+    Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
-    return Optional.of(createdMedal);
+    if (user.isPresent()) {
+
+      Medal newMedal = new Medal(data);
+
+      newMedal.setUsuario_CPF(user.get());
+
+      Medal createdMedal = this.medalRepository.save(newMedal);
+      return Optional.of(createdMedal);
+    } else {
+      return null;
+    }
 
   }
 
@@ -61,7 +75,15 @@ public class MedalService {
       copy.setNome(data.getNome());
     }
     if (data.getUsuario_CPF() != null) {
-      copy.setUsuario_CPF(data.getUsuario_CPF());
+
+      Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
+
+      if (user.isPresent()) {
+        copy.setUsuario_CPF(user.get());
+      } else {
+        return null;
+      }
+
     }
     if (data.getRecompensa() != null) {
       copy.setRecompensa(data.getRecompensa());

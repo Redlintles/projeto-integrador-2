@@ -1,6 +1,5 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos;
 
-import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
@@ -19,13 +18,13 @@ public class MedalDTO {
   private String recompensa;
   @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 11, max = 11)
-  private CommonUser usuario_CPF;
+  private String usuario_CPF;
 
   public MedalDTO() {
 
   }
 
-  public MedalDTO(String nome, String descricao, String recompensa, CommonUser usuario_CPF) {
+  public MedalDTO(String nome, String descricao, String recompensa, String usuario_CPF) {
     this.nome = nome;
     this.descricao = descricao;
     this.recompensa = recompensa;
@@ -43,7 +42,7 @@ public class MedalDTO {
     this.nome = data.getNome();
     this.descricao = data.getDescricao();
     this.recompensa = data.getRecompensa();
-    this.usuario_CPF = data.getUsuario_CPF();
+    this.usuario_CPF = data.getUsuario_CPF().getCpf();
   }
 
   public String getNome() {
@@ -70,11 +69,11 @@ public class MedalDTO {
     this.recompensa = recompensa;
   }
 
-  public CommonUser getUsuario_CPF() {
+  public String getUsuario_CPF() {
     return usuario_CPF;
   }
 
-  public void setUsuario_CPF(CommonUser usuario_CPF) {
+  public void setUsuario_CPF(String usuario_CPF) {
     this.usuario_CPF = usuario_CPF;
   }
 

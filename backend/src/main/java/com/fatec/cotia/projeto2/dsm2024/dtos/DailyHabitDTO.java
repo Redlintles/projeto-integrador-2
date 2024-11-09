@@ -1,6 +1,5 @@
 package com.fatec.cotia.projeto2.dsm2024.dtos;
 
-import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
@@ -10,7 +9,7 @@ import jakarta.validation.constraints.Size;
 public class DailyHabitDTO {
   @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 11, max = 11)
-  private CommonUser Usuario_CPF;
+  private String Usuario_CPF;
 
   @NotNull(groups = CreationGroupInterface.class)
   private Float usoEnergia;
@@ -30,7 +29,7 @@ public class DailyHabitDTO {
   }
 
   public DailyHabitDTO(Float usoEnergia, String alimentacao, String descarteLixo, Long transporte,
-      Float calculoPegadaCarbono, CommonUser Usuario_CPF) {
+      Float calculoPegadaCarbono, String Usuario_CPF) {
     this.Usuario_CPF = Usuario_CPF;
     this.usoEnergia = usoEnergia;
     this.alimentacao = alimentacao;
@@ -40,7 +39,7 @@ public class DailyHabitDTO {
   }
 
   public DailyHabitDTO(DailyHabit data) {
-    this.Usuario_CPF = data.getUsuario_CPF();
+    this.Usuario_CPF = data.getUsuario_CPF().getCpf();
     this.usoEnergia = data.getUsoEnergia();
     this.alimentacao = data.getAlimentacao();
     this.descarteLixo = data.getDescarteLixo();
@@ -97,11 +96,11 @@ public class DailyHabitDTO {
     this.calculoPegadaCarbono = calculoPegadaCarbono;
   }
 
-  public CommonUser getUsuario_CPF() {
+  public String getUsuario_CPF() {
     return Usuario_CPF;
   }
 
-  public void setUsuario_CPF(CommonUser Usuario_CPF) {
+  public void setUsuario_CPF(String Usuario_CPF) {
     this.Usuario_CPF = Usuario_CPF;
   }
 }

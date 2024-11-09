@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
+import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
 
 @Service
@@ -15,10 +17,25 @@ public class DailyHabitService {
   @Autowired
   private DailyHabitRepository dailyHabitRepository;
 
+  @Autowired
+  private CommonUserRepository commonUserRepository;
+
   public Optional<DailyHabit> createDailyHabit(DailyHabitDTO data) {
-    DailyHabit newDailyHabit = new DailyHabit(data);
-    newDailyHabit = this.dailyHabitRepository.save(newDailyHabit);
-    return Optional.of(newDailyHabit);
+
+    Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
+
+    if (user.isPresent()) {
+      DailyHabit newDailyHabit = new DailyHabit(data);
+
+      newDailyHabit.setUsuario_CPF(user.get());
+
+      newDailyHabit = this.dailyHabitRepository.save(newDailyHabit);
+      return Optional.of(newDailyHabit);
+
+    } else {
+      return null;
+    }
+
   }
 
   public Optional<DailyHabit> findById(Long id) {
@@ -57,7 +74,12 @@ public class DailyHabitService {
     }
 
     if (data.getUsuario_CPF() != null) {
-      copy.setUsuario_CPF(data.getUsuario_CPF());
+      Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
+      if (user.isPresent()) {
+        copy.setUsuario_CPF(user.get());
+      } else {
+        return null;
+      }
     }
 
     DailyHabit updatedDailyHabit = this.dailyHabitRepository.save(copy);

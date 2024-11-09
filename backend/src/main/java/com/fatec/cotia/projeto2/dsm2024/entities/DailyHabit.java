@@ -52,7 +52,6 @@ public class DailyHabit {
   }
 
   public DailyHabit(DailyHabitDTO data) {
-    this.Usuario_CPF = data.getUsuario_CPF();
     this.usoEnergia = data.getUsoEnergia();
     this.alimentacao = data.getAlimentacao();
     this.descarteLixo = data.getDescarteLixo();

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.DeleteSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.FindSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.UpdateSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
@@ -41,8 +39,8 @@ public class SuggestionService {
     return Optional.of(savedSuggestion);
   }
 
-  public Optional<Suggestion> findSuggestionById(FindSuggestionDTO data) {
-    return this.suggestionRepository.findById(data.getId());
+  public Optional<Suggestion> findSuggestionById(Long id) {
+    return this.suggestionRepository.findById(id);
   }
 
   public Optional<HashMap<String, Suggestion>> updateSuggestion(Long id, UpdateSuggestionDTO data) {
@@ -80,13 +78,13 @@ public class SuggestionService {
 
   }
 
-  public Optional<Suggestion> deleteSuggestionById(DeleteSuggestionDTO data) {
-    Optional<Suggestion> toDelete = this.suggestionRepository.findById(data.getId());
+  public Optional<Suggestion> deleteSuggestionById(Long id) {
+    Optional<Suggestion> toDelete = this.suggestionRepository.findById(id);
 
     if (toDelete.isEmpty()) {
       return null;
     } else {
-      this.suggestionRepository.deleteById(data.getId());
+      this.suggestionRepository.deleteById(id);
       return toDelete;
     }
   }

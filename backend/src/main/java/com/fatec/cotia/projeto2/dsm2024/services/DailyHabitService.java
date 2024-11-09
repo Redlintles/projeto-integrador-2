@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.CreateDailyHabitDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.DeleteDailyHabitDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.FindDailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit.UpdateDailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
@@ -22,8 +20,8 @@ public class DailyHabitService {
     return Optional.of(newDailyHabit);
   }
 
-  public Optional<DailyHabit> findById(FindDailyHabitDTO data) {
-    return this.dailyHabitRepository.findById(data.getId());
+  public Optional<DailyHabit> findById(Long id) {
+    return this.dailyHabitRepository.findById(id);
   }
 
   public Optional<HashMap<String, DailyHabit>> updateDailyHabit(Long id, UpdateDailyHabitDTO data) {
@@ -67,13 +65,13 @@ public class DailyHabitService {
     return Optional.of(resultValue);
   }
 
-  public Optional<DailyHabit> deleteById(DeleteDailyHabitDTO data) {
-    Optional<DailyHabit> toDelete = this.dailyHabitRepository.findById(data.getId());
+  public Optional<DailyHabit> deleteById(Long id) {
+    Optional<DailyHabit> toDelete = this.dailyHabitRepository.findById(id);
 
     if (toDelete.isEmpty()) {
       return null;
     } else {
-      this.dailyHabitRepository.deleteById(data.getId());
+      this.dailyHabitRepository.deleteById(id);
       return toDelete;
     }
   }

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.DeleteCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
@@ -24,8 +22,8 @@ public class CommonUserService {
   @Autowired
   private CommonUserRepository commonUserRepository;
 
-  public Optional<CommonUser> findById(FindCommonUserDTO data) {
-    return this.commonUserRepository.findById(data.getId());
+  public Optional<CommonUser> findById(Long id) {
+    return this.commonUserRepository.findById(id);
   }
 
   public Optional<CommonUser> createUser(CreateCommonUserDTO data) {
@@ -58,13 +56,15 @@ public class CommonUserService {
     return Optional.of(savedUser);
   }
 
-  public Optional<CommonUser> deleteUserById(DeleteCommonUserDTO data) {
-    Optional<CommonUser> toDelete = this.commonUserRepository.findById(data.getId());
+  public Optional<CommonUser> deleteUserById(Long id) {
+    Optional<CommonUser> toDelete = this.commonUserRepository.findById(id);
 
     if (toDelete.isEmpty()) {
       return null;
     } else {
-      this.commonUserRepository.deleteById(data.getId());
+      this.impactPanelService
+          .deleteById(toDelete.get().getIdPainelDeImpacto().getId());
+      this.commonUserRepository.deleteById(id);
       return toDelete;
     }
   }

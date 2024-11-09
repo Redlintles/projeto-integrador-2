@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.DeleteSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.FindSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.UpdateSuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
 import com.fatec.cotia.projeto2.dsm2024.services.SuggestionService;
@@ -32,7 +30,7 @@ public class SuggestionController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Suggestion> findOneById(@PathVariable Long id) {
-    Optional<Suggestion> obj = this.suggestionService.findSuggestionById(new FindSuggestionDTO(id));
+    Optional<Suggestion> obj = this.suggestionService.findSuggestionById(id);
     if (obj.isPresent()) {
       return ResponseEntity.ok(obj.get());
     } else {
@@ -65,7 +63,7 @@ public class SuggestionController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Suggestion> deleteSuggestionById(@PathVariable Long id) {
-    Optional<Suggestion> deletedSuggestion = this.suggestionService.deleteSuggestionById(new DeleteSuggestionDTO(id));
+    Optional<Suggestion> deletedSuggestion = this.suggestionService.deleteSuggestionById(id);
 
     if (deletedSuggestion.isPresent()) {
       return ResponseEntity.ok(deletedSuggestion.get());

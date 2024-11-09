@@ -7,8 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.medal.CreateMedalDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.medal.DeleteMedalDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.medal.FindMedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.medal.UpdateMedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 import com.fatec.cotia.projeto2.dsm2024.repositories.MedalRepository;
@@ -27,17 +25,17 @@ public class MedalService {
 
   }
 
-  public Optional<Medal> findById(FindMedalDTO data) {
-    return this.medalRepository.findById(data.getId());
+  public Optional<Medal> findById(Long id) {
+    return this.medalRepository.findById(id);
   }
 
-  public Optional<Medal> deleteById(DeleteMedalDTO data) {
-    Optional<Medal> toDelete = this.medalRepository.findById(data.getId());
+  public Optional<Medal> deleteById(Long id) {
+    Optional<Medal> toDelete = this.medalRepository.findById(id);
 
     if (toDelete.isEmpty()) {
       return null;
     } else {
-      this.medalRepository.deleteById(data.getId());
+      this.medalRepository.deleteById(id);
       return toDelete;
     }
   }

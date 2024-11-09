@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.DeleteCommonUserDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.FindCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.UpdateCommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
@@ -34,9 +32,7 @@ public class CommonUserController {
   @GetMapping("/{id}")
   public ResponseEntity<CommonUser> findUser(@PathVariable Long id) {
 
-    FindCommonUserDTO userDTO = new FindCommonUserDTO();
-    userDTO.setId(id);
-    Optional<CommonUser> user = this.commonUserService.findById(userDTO);
+    Optional<CommonUser> user = this.commonUserService.findById(id);
     if (user.isPresent()) {
       return ResponseEntity.ok(user.get());
     } else {
@@ -71,7 +67,7 @@ public class CommonUserController {
   @DeleteMapping("/{id}")
   public ResponseEntity<CommonUser> deleteUser(@PathVariable Long id) {
 
-    Optional<CommonUser> result = this.commonUserService.deleteUserById(new DeleteCommonUserDTO(id));
+    Optional<CommonUser> result = this.commonUserService.deleteUserById(id);
 
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());

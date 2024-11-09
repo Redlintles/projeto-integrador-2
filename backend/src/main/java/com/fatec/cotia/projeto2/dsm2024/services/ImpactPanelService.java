@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.DeleteImpactPanelDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.FindImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.UpdateImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.repositories.ImpactPanelRepository;
@@ -29,8 +27,8 @@ public class ImpactPanelService {
     return Optional.of(newPanel);
   }
 
-  public Optional<ImpactPanel> findById(FindImpactPanelDTO data) {
-    return this.impactPanelRepository.findById(data.getId());
+  public Optional<ImpactPanel> findById(Long id) {
+    return this.impactPanelRepository.findById(id);
   }
 
   public Optional<HashMap<String, ImpactPanel>> updateImpactPanel(Long id, UpdateImpactPanelDTO data) {
@@ -62,13 +60,13 @@ public class ImpactPanelService {
 
   }
 
-  public Optional<ImpactPanel> deleteById(DeleteImpactPanelDTO data) {
-    Optional<ImpactPanel> toDelete = this.impactPanelRepository.findById(data.getId());
+  public Optional<ImpactPanel> deleteById(Long id) {
+    Optional<ImpactPanel> toDelete = this.impactPanelRepository.findById(id);
 
     if (toDelete.isEmpty()) {
       return null;
     } else {
-      this.impactPanelRepository.deleteById(data.getId());
+      this.impactPanelRepository.deleteById(id);
       return toDelete;
     }
   }

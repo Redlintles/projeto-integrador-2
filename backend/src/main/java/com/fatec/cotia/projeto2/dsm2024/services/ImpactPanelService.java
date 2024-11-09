@@ -6,8 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.UpdateImpactPanelDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.repositories.ImpactPanelRepository;
 
@@ -16,7 +15,7 @@ public class ImpactPanelService {
   @Autowired
   private ImpactPanelRepository impactPanelRepository;
 
-  public Optional<ImpactPanel> createImpactPanel(CreateImpactPanelDTO data) {
+  public Optional<ImpactPanel> createImpactPanel(ImpactPanelDTO data) {
     ImpactPanel newPanel = new ImpactPanel();
 
     newPanel.setImpactoColetivo(data.getImpactoColetivo());
@@ -31,7 +30,7 @@ public class ImpactPanelService {
     return this.impactPanelRepository.findById(id);
   }
 
-  public Optional<HashMap<String, ImpactPanel>> updateImpactPanel(Long id, UpdateImpactPanelDTO data) {
+  public Optional<HashMap<String, ImpactPanel>> updateImpactPanel(Long id, ImpactPanelDTO data) {
     Optional<ImpactPanel> toUpdate = this.impactPanelRepository.findById(id);
 
     if (toUpdate.isEmpty()) {

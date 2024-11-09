@@ -66,7 +66,7 @@ public class MedalService {
 
     Medal copy = new Medal(toUpdate.get());
 
-    result.put("Old", toUpdate.get());
+    result.put("Old", new Medal(toUpdate.get()));
 
     if (data.getDescricao() != null) {
       copy.setDescricao(data.getDescricao());

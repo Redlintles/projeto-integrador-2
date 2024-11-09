@@ -1,6 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.commonUser.CreateCommonUserDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -66,7 +66,7 @@ public class CommonUser {
 
   }
 
-  public CommonUser(CreateCommonUserDTO data) {
+  public CommonUser(CommonUserDTO data) {
     this.cpf = data.getCpf();
     this.nome = data.getNome();
     this.email = data.getEmail();

@@ -1,6 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.entities;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel.CreateImpactPanelDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +35,7 @@ public class ImpactPanel {
     this.impactoIndividual = data.getImpactoIndividual();
   }
 
-  public ImpactPanel(CreateImpactPanelDTO data) {
+  public ImpactPanel(ImpactPanelDTO data) {
     this.impactoColetivo = data.getImpactoColetivo();
     this.impactoIndividual = data.getImpactoIndividual();
   }

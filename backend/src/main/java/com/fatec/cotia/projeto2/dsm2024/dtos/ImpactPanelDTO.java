@@ -1,33 +1,34 @@
-package com.fatec.cotia.projeto2.dsm2024.dtos.impactPanel;
+package com.fatec.cotia.projeto2.dsm2024.dtos;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CreateImpactPanelDTO {
+public class ImpactPanelDTO {
   @Size(min = 0, max = 90)
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private String impactoIndividual;
   @Size(min = 0, max = 90)
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private String impactoColetivo;
 
-  public CreateImpactPanelDTO() {
+  public ImpactPanelDTO() {
 
   }
 
-  public CreateImpactPanelDTO(String impactoIndividual, String impactColetivo) {
+  public ImpactPanelDTO(String impactoIndividual, String impactColetivo) {
     this.impactoColetivo = impactColetivo;
     this.impactoIndividual = impactoIndividual;
   }
 
-  public CreateImpactPanelDTO(CreateImpactPanelDTO data) {
+  public ImpactPanelDTO(ImpactPanelDTO data) {
     this.impactoColetivo = data.getImpactoColetivo();
     this.impactoIndividual = data.getImpactoIndividual();
   }
 
-  public CreateImpactPanelDTO(ImpactPanel data) {
+  public ImpactPanelDTO(ImpactPanel data) {
     this.impactoColetivo = data.getImpactoColetivo();
     this.impactoIndividual = data.getImpactoIndividual();
   }

@@ -1,42 +1,44 @@
-package com.fatec.cotia.projeto2.dsm2024.dtos.commonUser;
+package com.fatec.cotia.projeto2.dsm2024.dtos;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CreateCommonUserDTO {
-  @NotNull
+public class CommonUserDTO {
+
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 11, max = 11)
   private String cpf;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 45)
   private String nome;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 45)
   private String senha;
   @Email
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 45)
   private String email;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 90)
   private String endereco;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Long habitosDiarios;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Long medalhas;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Long pegadaCarbono;
 
   private ImpactPanel painelDeImpacto;
 
-  public CreateCommonUserDTO() {
+  public CommonUserDTO() {
   }
 
-  public CreateCommonUserDTO(String cpf,
+  public CommonUserDTO(String cpf,
       String nome,
       String email,
       String senha,
@@ -54,7 +56,7 @@ public class CreateCommonUserDTO {
     this.pegadaCarbono = pegadaCarbono;
   }
 
-  public CreateCommonUserDTO(CreateCommonUserDTO data) {
+  public CommonUserDTO(CommonUserDTO data) {
     this.cpf = data.getCpf();
     this.medalhas = data.getMedalhas();
     this.endereco = data.getEndereco();
@@ -66,7 +68,7 @@ public class CreateCommonUserDTO {
     this.painelDeImpacto = data.getPainelDeImpacto();
   }
 
-  public CreateCommonUserDTO(CommonUser data) {
+  public CommonUserDTO(CommonUser data) {
     this.cpf = data.getCpf();
     this.medalhas = data.getMedalhas();
     this.endereco = data.getEndereco();

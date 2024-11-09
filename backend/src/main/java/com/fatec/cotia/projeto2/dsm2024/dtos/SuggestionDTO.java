@@ -1,33 +1,33 @@
-package com.fatec.cotia.projeto2.dsm2024.dtos.suggestion;
+package com.fatec.cotia.projeto2.dsm2024.dtos;
 
-import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CreateSuggestionDTO {
-  @NotNull
+public class SuggestionDTO {
+  @NotNull(groups = CreationGroupInterface.class)
   private Float reducaoCO2Estimado;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 11, max = 11)
   private String usuario_CPF;
 
-  public CreateSuggestionDTO() {
+  public SuggestionDTO() {
 
   }
 
-  public CreateSuggestionDTO(Float reducaoCO2Estimado, String usuario_CPF) {
+  public SuggestionDTO(Float reducaoCO2Estimado, String usuario_CPF) {
     this.reducaoCO2Estimado = reducaoCO2Estimado;
     this.usuario_CPF = usuario_CPF;
   }
 
-  public CreateSuggestionDTO(CreateSuggestionDTO data) {
+  public SuggestionDTO(SuggestionDTO data) {
     this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
     this.usuario_CPF = data.getUsuario_CPF();
   }
 
-  public CreateSuggestionDTO(Suggestion data) {
+  public SuggestionDTO(Suggestion data) {
     this.reducaoCO2Estimado = data.getReducaoCO2Estimado();
     this.usuario_CPF = data.getUsuario_CPF().getCpf();
   }

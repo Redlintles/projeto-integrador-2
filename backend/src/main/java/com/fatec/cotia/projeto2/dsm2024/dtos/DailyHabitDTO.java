@@ -1,34 +1,35 @@
-package com.fatec.cotia.projeto2.dsm2024.dtos.dailyHabit;
+package com.fatec.cotia.projeto2.dsm2024.dtos;
 
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
+import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CreateDailyHabitDTO {
-  @NotNull
+public class DailyHabitDTO {
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 11, max = 11)
   private CommonUser Usuario_CPF;
 
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Float usoEnergia;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 45)
   private String alimentacao;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   @Size(min = 0, max = 45)
   private String descarteLixo;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Long transporte;
-  @NotNull
+  @NotNull(groups = CreationGroupInterface.class)
   private Float calculoPegadaCarbono;
 
-  public CreateDailyHabitDTO() {
+  public DailyHabitDTO() {
 
   }
 
-  public CreateDailyHabitDTO(Float usoEnergia, String alimentacao, String descarteLixo, Long transporte,
+  public DailyHabitDTO(Float usoEnergia, String alimentacao, String descarteLixo, Long transporte,
       Float calculoPegadaCarbono, CommonUser Usuario_CPF) {
     this.Usuario_CPF = Usuario_CPF;
     this.usoEnergia = usoEnergia;
@@ -38,7 +39,7 @@ public class CreateDailyHabitDTO {
     this.transporte = transporte;
   }
 
-  public CreateDailyHabitDTO(DailyHabit data) {
+  public DailyHabitDTO(DailyHabit data) {
     this.Usuario_CPF = data.getUsuario_CPF();
     this.usoEnergia = data.getUsoEnergia();
     this.alimentacao = data.getAlimentacao();
@@ -47,7 +48,7 @@ public class CreateDailyHabitDTO {
     this.transporte = data.getTransporte();
   }
 
-  public CreateDailyHabitDTO(CreateDailyHabitDTO data) {
+  public DailyHabitDTO(DailyHabitDTO data) {
     this.Usuario_CPF = data.getUsuario_CPF();
     this.usoEnergia = data.getUsoEnergia();
     this.alimentacao = data.getAlimentacao();

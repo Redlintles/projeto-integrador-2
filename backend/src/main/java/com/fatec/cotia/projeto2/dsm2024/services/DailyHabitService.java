@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
 
+@Service
 public class DailyHabitService {
   @Autowired
   private DailyHabitRepository dailyHabitRepository;

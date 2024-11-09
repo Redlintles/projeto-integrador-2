@@ -39,7 +39,7 @@ public class ImpactPanelService {
 
     HashMap<String, ImpactPanel> returnResult = new HashMap<>();
 
-    returnResult.put("Old", toUpdate.get());
+    returnResult.put("Old", new ImpactPanel(toUpdate.get()));
 
     ImpactPanel copy = new ImpactPanel(toUpdate.get());
 

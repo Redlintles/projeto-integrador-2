@@ -6,8 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.CreateSuggestionDTO;
-import com.fatec.cotia.projeto2.dsm2024.dtos.suggestion.UpdateSuggestionDTO;
+import com.fatec.cotia.projeto2.dsm2024.dtos.SuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
@@ -21,7 +20,7 @@ public class SuggestionService {
   @Autowired
   private SuggestionRepository suggestionRepository;
 
-  public Optional<Suggestion> createSuggestion(CreateSuggestionDTO data) {
+  public Optional<Suggestion> createSuggestion(SuggestionDTO data) {
 
     Optional<CommonUser> usuario = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
@@ -43,7 +42,7 @@ public class SuggestionService {
     return this.suggestionRepository.findById(id);
   }
 
-  public Optional<HashMap<String, Suggestion>> updateSuggestion(Long id, UpdateSuggestionDTO data) {
+  public Optional<HashMap<String, Suggestion>> updateSuggestion(Long id, SuggestionDTO data) {
 
     Optional<Suggestion> toUpdate = this.suggestionRepository.findById(id);
 

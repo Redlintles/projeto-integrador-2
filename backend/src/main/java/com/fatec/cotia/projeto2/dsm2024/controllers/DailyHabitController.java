@@ -41,6 +41,8 @@ public class DailyHabitController {
   @PostMapping
   public ResponseEntity<DailyHabit> createDailyHabit(
       @Validated(CreationGroupInterface.class) @RequestBody DailyHabitDTO data) {
+    System.out.println(String.format("\n\n%s\n\n", data.getUsuario_CPF()));
+
     Optional<DailyHabit> result = this.dailyHabitService.createDailyHabit(data);
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());

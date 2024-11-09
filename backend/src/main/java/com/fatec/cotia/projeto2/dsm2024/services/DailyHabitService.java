@@ -21,7 +21,7 @@ public class DailyHabitService {
   private CommonUserRepository commonUserRepository;
 
   public Optional<DailyHabit> createDailyHabit(DailyHabitDTO data) {
-
+    System.out.println(String.format("\n\n%s\n\n", data.getUsuario_CPF()));
     Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
     if (user.isPresent()) {
@@ -50,7 +50,7 @@ public class DailyHabitService {
     }
 
     HashMap<String, DailyHabit> resultValue = new HashMap<>();
-    resultValue.put("Old", toUpdate.get());
+    resultValue.put("Old", new DailyHabit(toUpdate.get()));
     DailyHabit copy = new DailyHabit(toUpdate.get());
 
     if (data.getAlimentacao() != null) {

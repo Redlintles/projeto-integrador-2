@@ -54,7 +54,7 @@ public class SuggestionService {
     }
 
     HashMap<String, Suggestion> returnValue = new HashMap<>();
-    returnValue.put("Old", toUpdate.get());
+    returnValue.put("Old", new Suggestion(toUpdate.get()));
 
     Suggestion copy = new Suggestion(toUpdate.get());
 
@@ -63,7 +63,13 @@ public class SuggestionService {
     }
 
     if (data.getUsuario_CPF() != null) {
-      copy.setUsuario_CPF(data.getUsuario_CPF());
+
+      Optional<CommonUser> newUser = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
+
+      if (newUser.isEmpty()) {
+        return null;
+      }
+      copy.setUsuario_CPF(newUser.get());
     }
 
     Suggestion updatedSuggestion = this.suggestionRepository.save(copy);

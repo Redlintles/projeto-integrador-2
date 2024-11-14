@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Home from "./pages/Home";
 
 function App() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/hello")
-      .then((res) => {
-        console.log(res);
-        return res.text();
-      })
-      .then((res) => {
-        console.log(res);
-        setData(res);
-      });
-  }, []);
-
   return (
     <>
-      <h1>{data ? data : "It's not working"}</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

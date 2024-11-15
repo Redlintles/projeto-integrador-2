@@ -1,0 +1,10 @@
+.login {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.login > * {
+  grid-column: span 1;
+}

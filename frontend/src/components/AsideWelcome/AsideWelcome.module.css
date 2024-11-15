@@ -1,0 +1,22 @@
+.aside-welcome {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+
+}
+
+.aside-welcome__title {
+  margin-bottom: 1rem;
+}
+
+.aside-welcome__text {
+  margin-bottom: 2rem;
+}
+
+.aside-welcome__goback {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+.aside-welcome__img {}

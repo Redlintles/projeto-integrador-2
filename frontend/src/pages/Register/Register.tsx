@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import AsideWelcome from "../components/AsideWelcome";
+import AsideWelcome from "../../components/AsideWelcome/AsideWelcome";
 import { FaLock, FaUser } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-import WelcomeFormInput from "../components/WelcomeFormInput";
+import WelcomeFormInput from "../../components/WelcomeFormInput/WelcomeFormInput";
 
 export default function Register() {
   return (

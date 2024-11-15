@@ -1,5 +1,5 @@
-import React from "react";
 import Question from "../Question/Question";
+import styles from "./QuestionWrapper.module.css";
 
 interface QuestionInfo {
   title: string;
@@ -18,17 +18,17 @@ export default function QuestionWrapper({
   questions,
 }: QuestionWrapperProps) {
   return (
-    <div>
-      <div>
-        <h3>
+    <div className={styles["question-wrapper"]}>
+      <div className={styles["question-wrapper__top"]}>
+        <h3 className={styles["question-wrapper__title"]}>
           Seção {section[0]}: {title}
         </h3>
-        <span>
+        <span className={styles["question-wrapper__progress"]}>
           Passo {section[0]} de {section[1]}
         </span>
       </div>
 
-      <div>
+      <div className={styles["question-wrapper__wrapper"]}>
         {questions.map((item: QuestionInfo, i: number) => (
           <Question
             alternatives={item.answers}

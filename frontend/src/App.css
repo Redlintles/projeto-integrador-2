@@ -1,0 +1,34 @@
+:root {
+  --bg-color: #74996A;
+  --light-green: #228B22;
+  --dark-green: #006400;
+  --input-bg: #DDEAD1;
+  --txt-color: white;
+}
+
+.btn {
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  margin: .5rem 0;
+}
+
+.btn--sm {
+  padding: .5rem 1rem;
+}
+
+.btn--lg {
+  padding: 1rem 2rem;
+}
+
+.btn--upper {
+  text-transform: uppercase;
+}
+
+.btn--light {
+  background-color: lightgreen;
+}
+
+.btn--dark {
+  background-color: green;
+}

@@ -1,6 +1,8 @@
 import styles from "./Home.module.css";
 import greenActionLogo from "../../assets/greenactionlogo.png";
 import { Link } from "react-router-dom";
+import homeReason1 from "../../assets/paginainicial-1.png";
+import homeReason2 from "../../assets/paginainicial-2.png";
 
 export default function Home() {
   return (
@@ -36,6 +38,48 @@ export default function Home() {
       <p className={styles["home__text"]}>
         Receba sugestões personalizadas de acordo com o seu estilo de vida!
       </p>
+      <div className={styles["home-reason"]}>
+        <img src={homeReason1} alt="" className={styles["home-reason__img"]} />
+        <div className={styles["home-reason__text"]}>
+          <h2>Luta contra mudanças climáticas.</h2>
+          <p>
+            Com o agravamento dos fenômenos naturais, adotar hábitos
+            sustentáveis não é mais uma escolha - é uma necessidade para lutar
+            contra as mudanças climáticas.
+          </p>
+        </div>
+      </div>
+      <div className={styles["home-reason"]}>
+        <img src={homeReason2} alt="" className={styles["home-reason__img"]} />
+        <div className={styles["home-reason__text"]}>
+          <h2>Transformar de forma simples.</h2>
+          <p>
+            Através do Green Action, você pode fazer parte dessa transformação,
+            implementando ações simples que fazem a diferença para o planeta
+          </p>
+        </div>
+      </div>
+      <div className={styles["home-feature"]}>
+        <img src="" alt="" className={styles["home-feature__img"]} />
+        <div className={styles["home-feature__text"]}>
+          <h2>Sugestões Personalizadas:</h2>
+          <p>Receba dicas práticas para reduzir o seu impacto ambiental.</p>
+        </div>
+      </div>
+      <div className={styles["home-feature"]}>
+        <img src="" alt="" className={styles["home-feature__img"]} />
+        <div className={styles["home-feature__text"]}>
+          <h2>Impacto Coletivo:</h2>
+          <p>Veja o efeito da sua contribuição em tempo real.</p>
+        </div>
+      </div>
+      <div className={styles["home-feature"]}>
+        <img src="" alt="" className={styles["home-feature__img"]} />
+        <div className={styles["home-feature__text"]}>
+          <h2>Desafios Semanais:</h2>
+          <p>Partice de desafios semanais e suba no ranking.</p>
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 
+import styles from "./WelcomeFormInput.module.css";
 interface WelcomeFormInputProps {
   type: string;
   icon: ReactNode;
@@ -14,13 +15,13 @@ export default function WelcomeFormInput({
   name,
 }: WelcomeFormInputProps) {
   return (
-    <label className="welcome-form-input">
-      {icon}
+    <label className={styles["welcome-form-input"]}>
+      <span className={styles["welcome-form-input__icon"]}>{icon}</span>
       <input
         type={type}
         placeholder={placeholder}
         name={name}
-        className="welcome-form-input__input"
+        className={styles["welcome-form-input__input"]}
       />
     </label>
   );

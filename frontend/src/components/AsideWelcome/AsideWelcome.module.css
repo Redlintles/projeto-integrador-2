@@ -2,21 +2,40 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 5rem;
+  align-items: center;
+  justify-content: center;
 
 
 }
 
 .aside-welcome__title {
   margin-bottom: 1rem;
+  color: var(--dark-green);
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .aside-welcome__text {
   margin-bottom: 2rem;
+  width: 35%;
+  text-align: center;
+  font-weight: 600;
 }
 
 .aside-welcome__goback {
   position: absolute;
   top: 1rem;
   left: 1rem;
+  border-radius: 50%;
+  border: 5px solid var(--dark-green);
+  padding: .5rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-green);
 }
-.aside-welcome__img {}
+.aside-welcome__img {
+  width: 70%;
+}

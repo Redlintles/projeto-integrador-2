@@ -1,0 +1,52 @@
+.register {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.register > * {
+  grid-column: span 1;
+}
+
+.register__right {
+  background-color: var(--bg-color);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register__right > h2 {
+  font-size: 2.5rem;
+  position: relative;
+  top: 2.5rem;
+  margin-bottom: 12rem;
+  color: var(--txt-color);
+}
+
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.welcome-form__text {
+  margin-top: 1rem;
+  margin-left: 3rem;
+  color: white;
+}
+
+.welcome-form__text > a {
+  color: inherit;
+  font-weight: bold;
+
+  font-size: 1.2rem;
+}
+
+.welcome-form__submit-btn {
+  align-self: end;
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+
+  border-radius: 30px;
+}

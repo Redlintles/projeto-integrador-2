@@ -1,5 +1,6 @@
 import styles from "./Home.module.css";
 import greenActionLogo from "../../assets/greenactionlogo.png";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -19,16 +20,18 @@ export default function Home() {
           Reduza sua pegada de carbono e faça parte da mudança para um futuro
           sustentável
         </p>
-        <button
+        <Link
+          to="/register"
           className={`btn btn--lg btn--upper btn--light ${styles["home-actions__btn"]} ${styles["home-actions__btn--register"]}`}
         >
           Comece Agora
-        </button>
-        <button
+        </Link>
+        <Link
+          to="/login"
           className={`btn btn--lg btn--upper btn--dark ${styles["home-actions__btn"]} ${styles["home-actions__btn--login"]}`}
         >
           Já tenho uma conta
-        </button>
+        </Link>
       </div>
       <p className={styles["home__text"]}>
         Receba sugestões personalizadas de acordo com o seu estilo de vida!

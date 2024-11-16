@@ -24,10 +24,12 @@ export default function Login() {
             placeholder="Senha"
             icon={<FaLock />}
           />
-          <p>
+          <p className={styles["login-form__text"]}>
             Não tem uma conta? <Link to="/register">Cadastre-se</Link>
           </p>
-          <button className={`btn btn--sm ${styles["welcome__submit-btn"]}`}>
+          <button
+            className={`btn btn--lg btn--dark ${styles["welcome-form__submit-btn"]}`}
+          >
             Acessar
           </button>
         </form>

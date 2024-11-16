@@ -1,10 +1,51 @@
 .login {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  width: 100vw;
-  min-height: 100vh;
+  /* width: 100vw;
+  min-height: 100vh; */
 }
 
 .login > * {
   grid-column: span 1;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__right {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  justify-content: center;
+  padding: 3rem;
+}
+
+.login__right > h2 {
+  font-size: 2.5rem;
+  position: relative;
+  top: -15rem;
+  text-align: center;
+  color: var(--txt-color);
+}
+
+.login-form__text {
+  margin-top: 1rem;
+  color: var(--txt-color);
+  margin-left: 3rem;
+}
+
+.login-form__text > a {
+  font-weight: bold;
+  color: inherit;
+  font-size: 1.2rem;
+}
+
+.welcome-form__submit-btn {
+  align-self: end;
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+
+  border-radius: 30px;
 }

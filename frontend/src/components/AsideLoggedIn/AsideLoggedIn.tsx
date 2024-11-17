@@ -3,7 +3,7 @@ import { FaHouse } from "react-icons/fa6";
 import { PiMedal } from "react-icons/pi";
 import { HiMiniViewColumns } from "react-icons/hi2";
 import { RxExit } from "react-icons/rx";
-
+import styles from "./AsideLoggedIn.module.css";
 interface AsideLoggedInProps {
   fullName: string;
 }
@@ -15,10 +15,12 @@ export default function AsideLoggedIn({ fullName }: AsideLoggedInProps) {
     .join("")
     .toUpperCase();
   return (
-    <aside className="logged-in">
-      <div className="logged-in__profile">
-        <h3>{nomeIniciais}</h3>
-        <div className="logged-in__container">
+    <aside className={styles["logged-in"]}>
+      <div>
+        <div className={styles["logged-in__profile"]}>
+          <h3>{nomeIniciais}</h3>
+        </div>
+        <div className={styles["logged-in__container"]}>
           <AsideLoggedInItem
             icon={<FaHouse />}
             to="/initial"
@@ -40,8 +42,8 @@ export default function AsideLoggedIn({ fullName }: AsideLoggedInProps) {
             text="Medalhas"
           />
         </div>
-        <AsideLoggedInItem icon={<RxExit />} to="/" text="Sair" />
       </div>
+      <AsideLoggedInItem icon={<RxExit />} to="/" text="Sair" />
     </aside>
   );
 }

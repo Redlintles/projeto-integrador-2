@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Initial from "./pages/Initial/Initial";
+import Suggestion from "./pages/Suggestion/Suggestion";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/initial" element={<Initial />}></Route>
+          <Route path="/suggestion" element={<Suggestion />}></Route>
         </Routes>
       </BrowserRouter>
     </>

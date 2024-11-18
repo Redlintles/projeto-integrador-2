@@ -1,0 +1,72 @@
+.suggestion {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+}
+
+.suggestion-main {
+  grid-column: span 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  padding: 2rem;
+}
+
+.suggestion-main__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  color: var(--txt-color);
+  margin-bottom: 5rem;
+}
+
+.suggestion-main__header > h4 {
+  font-size: 2rem;
+}
+
+.suggestion-main__header > p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.suggestion-item {
+  background-color: var(--suggestion-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  text-align: center;
+  gap: 1rem;
+}
+
+.suggestion-item > h5 {
+  font-size: 1.5rem;
+}
+
+.suggestion-item > p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.suggestion-item__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.suggestion-item__footer > p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.suggestion-item__footer > div {
+  display: flex;
+  gap: 1rem;
+}
+
+.suggestion-item__btn {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  font-weight: bold;
+}

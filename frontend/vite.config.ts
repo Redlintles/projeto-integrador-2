@@ -6,6 +6,9 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: parseInt(process.env.API_PORT || "3000"),
+    hmr: {
+      overlay: false,
+    },
   },
   plugins: [react()],
 });

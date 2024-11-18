@@ -5,6 +5,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Initial from "./pages/Initial/Initial";
 import Suggestion from "./pages/Suggestion/Suggestion";
+import Ranking from "./pages/Ranking/Ranking";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/initial" element={<Initial />}></Route>
           <Route path="/suggestion" element={<Suggestion />}></Route>
+          <Route path="/ranking" element={<Ranking />}></Route>
         </Routes>
       </BrowserRouter>
     </>

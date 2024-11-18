@@ -1,0 +1,73 @@
+.ranking {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+}
+
+.ranking-main {
+  grid-column: span 5;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.ranking-main__header {
+  display: flex;
+  flex-direction: column;
+  color: var(--txt-color);
+  align-items: center;
+  text-align: center;
+}
+
+
+.ranking-main__header > h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+
+}
+
+.ranking-main__header > p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.ranking-main__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ranking-item {
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ranking-item > div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+.ranking-item__profile {
+  display: flex;
+  width: 5rem;
+  aspect-ratio: 1;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.ranking-item__title, .ranking-item__score {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

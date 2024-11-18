@@ -2,9 +2,11 @@
   --bg-color: #74996A;
   --light-green: #228B22;
   --dark-green: #006400;
+  --dark-red: #640000;
   --input-bg: #DDEAD1;
   --txt-color: white;
   --input-placeholder-color: #8C8383;
+  --suggestion-bg: #D9D9D9;
 }
 
 .btn {
@@ -27,9 +29,13 @@
 }
 
 .btn--light {
-  background-color: lightgreen;
+  background-color: var(--light-green);
 }
 
 .btn--dark {
-  background-color: green;
+  background-color: var(--dark-green);
+}
+
+.btn--red {
+  background-color: var(--dark-red);
 }

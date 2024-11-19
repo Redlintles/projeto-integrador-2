@@ -1,7 +1,9 @@
 package com.fatec.cotia.projeto2.dsm2024.services;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,9 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
+import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
+import com.fatec.cotia.projeto2.dsm2024.repositories.TokenRepository;
 
 @Service
 public class CommonUserService {
@@ -19,13 +23,16 @@ public class CommonUserService {
   private ImpactPanelService impactPanelService;
 
   @Autowired
+  private TokenRepository tokenRepository;
+
+  @Autowired
   private CommonUserRepository commonUserRepository;
 
   public Optional<CommonUser> findById(Long id) {
     return this.commonUserRepository.findById(id);
   }
 
-  public Optional<CommonUser> createUser(CommonUserDTO data) {
+  public HashMap<String, Object> createUser(CommonUserDTO data) {
 
     ImpactPanelDTO newImpactPanel = new ImpactPanelDTO();
 
@@ -52,7 +59,24 @@ public class CommonUserService {
 
     CommonUser savedUser = commonUserRepository.save(newUser);
 
-    return Optional.of(savedUser);
+    Token newAccountToken = new Token();
+
+    newAccountToken.setUsuario_CPF(savedUser);
+    newAccountToken.setToken(UUID.randomUUID().toString());
+    newAccountToken.setCreatedAt(LocalDateTime.now());
+
+    Token savedToken = this.tokenRepository.save(newAccountToken);
+
+    HashMap<String, Object> returnValue = new HashMap<>();
+
+    if (savedUser != null && savedToken != null) {
+      returnValue.put("User", savedUser);
+      returnValue.put("Token", savedToken);
+      return returnValue;
+    } else {
+      return null;
+    }
+
   }
 
   public Optional<CommonUser> deleteUserById(Long id) {

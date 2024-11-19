@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
 
 import styles from "./WelcomeFormInput.module.css";
-interface WelcomeFormInputProps {
-  type: string;
+interface WelcomeFormInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   icon: ReactNode;
-  placeholder: string;
-  name: string;
 }
 
 export default function WelcomeFormInput({
   type,
   icon,
   placeholder,
+  value,
+  onChange,
   name,
 }: WelcomeFormInputProps) {
   return (
@@ -21,6 +21,8 @@ export default function WelcomeFormInput({
         type={type}
         placeholder={placeholder}
         name={name}
+        value={value}
+        onChange={onChange}
         className={styles["welcome-form-input__input"]}
       />
     </label>

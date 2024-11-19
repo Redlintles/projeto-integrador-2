@@ -32,7 +32,7 @@ public class CommonUserService {
     return this.commonUserRepository.findById(id);
   }
 
-  public HashMap<String, Object> createUser(CommonUserDTO data) {
+  public Optional<HashMap<String, Object>> createUser(CommonUserDTO data) {
 
     ImpactPanelDTO newImpactPanel = new ImpactPanelDTO();
 
@@ -72,7 +72,7 @@ public class CommonUserService {
     if (savedUser != null && savedToken != null) {
       returnValue.put("User", savedUser);
       returnValue.put("Token", savedToken);
-      return returnValue;
+      return Optional.of(returnValue);
     } else {
       return null;
     }

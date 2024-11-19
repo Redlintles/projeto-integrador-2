@@ -41,9 +41,9 @@ public class CommonUserController {
   }
 
   @PostMapping
-  public ResponseEntity<CommonUser> createUser(
+  public ResponseEntity<HashMap<String, Object>> createUser(
       @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
-    Optional<CommonUser> newUser = this.commonUserService.createUser(data);
+    Optional<HashMap<String, Object>> newUser = this.commonUserService.createUser(data);
 
     if (newUser.isPresent()) {
       return ResponseEntity.status(HttpStatus.CREATED).body(newUser.get());

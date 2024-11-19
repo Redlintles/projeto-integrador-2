@@ -40,11 +40,16 @@ public class CommonUserService {
 
     CommonUser user = optionalUser.get();
 
+    Optional<Token> existingToken = this.tokenRepository.findByCpf(user.getCpf());
+
+    if (existingToken.isPresent()) {
+      return null;
+    }
     if (user.getSenha().equals(password)) {
       Token newToken = new Token();
       newToken.setCreatedAt(LocalDateTime.now());
       newToken.setToken(UUID.randomUUID().toString());
-      newToken.setUsuario_CPF(user);
+      newToken.setCpf(user.getCpf());
 
       Token savedToken = this.tokenRepository.save(newToken);
 
@@ -86,7 +91,7 @@ public class CommonUserService {
 
     Token newAccountToken = new Token();
 
-    newAccountToken.setUsuario_CPF(savedUser);
+    newAccountToken.setCpf(savedUser.getCpf());
     newAccountToken.setToken(UUID.randomUUID().toString());
     newAccountToken.setCreatedAt(LocalDateTime.now());
 
@@ -94,7 +99,7 @@ public class CommonUserService {
 
     HashMap<String, Object> returnValue = new HashMap<>();
 
-    if (savedUser != null && savedToken != null) {
+    if (savedToken != null) {
       returnValue.put("User", savedUser);
       returnValue.put("Token", savedToken);
       return Optional.of(returnValue);

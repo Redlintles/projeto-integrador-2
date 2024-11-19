@@ -2,11 +2,10 @@ package com.fatec.cotia.projeto2.dsm2024.dtos;
 
 import java.time.LocalDateTime;
 
-import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 
 public class TokenDTO {
-  private CommonUser Usuario_CPF;
+  private String cpf;
   private String token;
   private LocalDateTime createdAt;
 
@@ -17,21 +16,21 @@ public class TokenDTO {
   public TokenDTO(Token data) {
     this.createdAt = data.getCreatedAt();
     this.token = data.getToken();
-    this.Usuario_CPF = data.getUsuario_CPF();
+    this.cpf = data.getCpf();
   }
 
   public TokenDTO(TokenDTO data) {
     this.createdAt = data.getCreatedAt();
     this.token = data.getToken();
-    this.Usuario_CPF = data.getUsuario_CPF();
+    this.cpf = data.getCpf();
   }
 
-  public CommonUser getUsuario_CPF() {
-    return Usuario_CPF;
+  public String getCpf() {
+    return cpf;
   }
 
-  public void setUsuario_CPF(CommonUser Usuario_CPF) {
-    this.Usuario_CPF = Usuario_CPF;
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
   }
 
   public String getToken() {

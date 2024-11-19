@@ -20,9 +20,8 @@ public class Token {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @OneToOne
-  @JoinColumn(name = "cpf")
-  private CommonUser Usuario_CPF;
+  @Column(nullable = false, unique = true)
+  private String cpf;
 
   @Column(nullable = false, unique = true)
   private String token;
@@ -37,13 +36,13 @@ public class Token {
   public Token(Token data) {
     this.createdAt = data.getCreatedAt();
     this.token = data.getToken();
-    this.Usuario_CPF = data.getUsuario_CPF();
+    this.cpf = data.getCpf();
   }
 
   public Token(TokenDTO data) {
     this.createdAt = data.getCreatedAt();
     this.token = data.getToken();
-    this.Usuario_CPF = data.getUsuario_CPF();
+    this.cpf = data.getCpf();
   }
 
   public long getId() {
@@ -54,12 +53,12 @@ public class Token {
     this.id = id;
   }
 
-  public CommonUser getUsuario_CPF() {
-    return Usuario_CPF;
+  public String getCpf() {
+    return cpf;
   }
 
-  public void setUsuario_CPF(CommonUser Usuario_CPF) {
-    this.Usuario_CPF = Usuario_CPF;
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
   }
 
   public String getToken() {

@@ -1,6 +1,7 @@
 
 package com.fatec.cotia.projeto2.dsm2024.services;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,9 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
-import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
-
-import jakarta.transaction.Transactional;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -46,11 +44,11 @@ public class CommonUserServiceTest {
     userDTO.setSenha("Senha 123");
     userDTO.setPegadaCarbono((long) 2);
 
-    Optional<CommonUser> result = this.commonUserService.createUser(userDTO);
+    Optional<HashMap<String, Object>> result = this.commonUserService.createUser(userDTO);
 
     assertTrue(result.isPresent());
 
-    CommonUser savedUser = result.get();
+    CommonUser savedUser = (CommonUser) result.get().get("User");
 
     assertNotNull(savedUser.getId());
     assertEquals(userDTO.getCpf(), savedUser.getCpf());

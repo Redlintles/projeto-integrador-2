@@ -32,7 +32,7 @@ public class CommonUserService {
     return this.commonUserRepository.findById(id);
   }
 
-  public Optional<Token> loginUser(String email, String password) {
+  public Optional<HashMap<String, Object>> loginUser(String email, String password) {
     Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
     if (optionalUser.isEmpty()) {
       return null;
@@ -53,8 +53,12 @@ public class CommonUserService {
 
       Token savedToken = this.tokenRepository.save(newToken);
 
+      HashMap<String, Object> returnValue = new HashMap<>();
+
+      returnValue.put("user", user);
+      returnValue.put("token", savedToken);
       if (savedToken != null) {
-        return Optional.of(savedToken);
+        return Optional.of(returnValue);
       }
     }
 

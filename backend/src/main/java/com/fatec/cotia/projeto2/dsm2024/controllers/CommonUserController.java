@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.CommonUserDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
-import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.requests.LoginRequest;
@@ -43,8 +42,8 @@ public class CommonUserController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<Token> loginUser(@RequestBody LoginRequest data) {
-    Optional<Token> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
+  public ResponseEntity<HashMap<String, Object>> loginUser(@RequestBody LoginRequest data) {
+    Optional<HashMap<String, Object>> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
     if (newToken.isPresent()) {
       return ResponseEntity.ok(newToken.get());

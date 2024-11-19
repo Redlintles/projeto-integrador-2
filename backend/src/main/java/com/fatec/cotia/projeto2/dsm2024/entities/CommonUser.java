@@ -23,7 +23,7 @@ public class CommonUser {
 
   @Column(length = 45, nullable = false)
   private String nome;
-  @Column(length = 45, nullable = false)
+  @Column(length = 45, nullable = false, unique = true)
   private String email;
   @Column(length = 45, nullable = false)
   private String senha;

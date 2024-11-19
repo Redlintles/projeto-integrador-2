@@ -32,6 +32,31 @@ public class CommonUserService {
     return this.commonUserRepository.findById(id);
   }
 
+  public Optional<Token> loginUser(String email, String password) {
+    Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
+    if (optionalUser.isEmpty()) {
+      return null;
+    }
+
+    CommonUser user = optionalUser.get();
+
+    if (user.getSenha().equals(password)) {
+      Token newToken = new Token();
+      newToken.setCreatedAt(LocalDateTime.now());
+      newToken.setToken(UUID.randomUUID().toString());
+      newToken.setUsuario_CPF(user);
+
+      Token savedToken = this.tokenRepository.save(newToken);
+
+      if (savedToken != null) {
+        return Optional.of(savedToken);
+      }
+    }
+
+    return null;
+
+  }
+
   public Optional<HashMap<String, Object>> createUser(CommonUserDTO data) {
 
     ImpactPanelDTO newImpactPanel = new ImpactPanelDTO();

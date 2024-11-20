@@ -19,13 +19,18 @@ export default function Login() {
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    fetch("localhost:81/api/user/login", {
+    console.log(setUser, setErrorMsg, navigate);
+
+    fetch("/api/user/login", {
       method: "POST",
 
       body: JSON.stringify({
         email,
         password,
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         return res.json();

@@ -13,6 +13,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
 import com.fatec.cotia.projeto2.dsm2024.errors.UserNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
@@ -35,7 +36,7 @@ public class CommonUserService {
   }
 
   public Optional<HashMap<String, Object>> loginUser(String email, String password)
-      throws UserNotFoundException, TokenAlreadyExistsException {
+      throws UserNotFoundException, TokenAlreadyExistsException, EntityCouldNotBeCreatedException {
     Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
     if (optionalUser.isEmpty()) {
       throw new UserNotFoundException("Usuário Não encontrado");
@@ -56,13 +57,17 @@ public class CommonUserService {
 
       Token savedToken = this.tokenRepository.save(newToken);
 
-      HashMap<String, Object> returnValue = new HashMap<>();
+      Optional<Token> foundToken = this.tokenRepository.findByCpf(user.getCpf());
 
-      returnValue.put("user", user);
-      returnValue.put("token", savedToken);
-      if (savedToken != null) {
+      if (foundToken.isPresent()) {
+        HashMap<String, Object> returnValue = new HashMap<>();
+        returnValue.put("user", user);
+        returnValue.put("token", savedToken);
         return Optional.of(returnValue);
+      } else {
+        throw new EntityCouldNotBeCreatedException("Token Could Not be saved by a unknown reason");
       }
+
     }
 
     return null;

@@ -13,6 +13,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
+import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
 import com.fatec.cotia.projeto2.dsm2024.errors.UserNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.TokenRepository;
@@ -33,7 +34,8 @@ public class CommonUserService {
     return this.commonUserRepository.findById(id);
   }
 
-  public Optional<HashMap<String, Object>> loginUser(String email, String password) throws UserNotFoundException {
+  public Optional<HashMap<String, Object>> loginUser(String email, String password)
+      throws UserNotFoundException, TokenAlreadyExistsException {
     Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
     if (optionalUser.isEmpty()) {
       throw new UserNotFoundException("Usuário Não encontrado");
@@ -44,7 +46,7 @@ public class CommonUserService {
     Optional<Token> existingToken = this.tokenRepository.findByCpf(user.getCpf());
 
     if (existingToken.isPresent()) {
-      return null;
+      throw new TokenAlreadyExistsException("Já existe um token em vigor para o usuário especificado!");
     }
     if (user.getSenha().equals(password)) {
       Token newToken = new Token();

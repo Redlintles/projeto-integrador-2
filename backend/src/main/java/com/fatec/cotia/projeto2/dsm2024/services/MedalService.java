@@ -52,8 +52,15 @@ public class MedalService {
 
   }
 
-  public Optional<Medal> findById(Long id) {
-    return this.medalRepository.findById(id);
+  public Medal findById(Long id) throws EntityNotFoundException {
+
+    Optional<Medal> toFind = this.medalRepository.findById(id);
+
+    if (toFind.isEmpty()) {
+      throw new EntityNotFoundException("A medalha não pode ser encontrada");
+    } else {
+      return toFind.get();
+    }
   }
 
   public Optional<Medal> deleteById(Long id) {

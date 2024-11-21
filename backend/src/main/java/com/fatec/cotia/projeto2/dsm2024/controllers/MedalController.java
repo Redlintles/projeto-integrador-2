@@ -29,13 +29,10 @@ public class MedalController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Medal> findMedalById(@PathVariable Long id) {
-    Optional<Medal> result = this.medalService.findById(id);
+    Medal result = this.medalService.findById(id);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 
   @PostMapping

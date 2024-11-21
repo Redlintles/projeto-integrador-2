@@ -64,11 +64,11 @@ public class DailyHabitService {
     }
   }
 
-  public Optional<HashMap<String, DailyHabit>> updateDailyHabit(Long id, DailyHabitDTO data) {
+  public HashMap<String, DailyHabit> updateDailyHabit(Long id, DailyHabitDTO data) {
     Optional<DailyHabit> toUpdate = this.dailyHabitRepository.findById(id);
 
     if (toUpdate.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("O hábito a ser atualizado não foi encontrado");
     }
 
     HashMap<String, DailyHabit> resultValue = new HashMap<>();
@@ -100,14 +100,14 @@ public class DailyHabitService {
       if (user.isPresent()) {
         copy.setUsuario_CPF(user.get());
       } else {
-        return null;
+        throw new EntityNotFoundException("O Usuário não foi encontrado");
       }
     }
 
     DailyHabit updatedDailyHabit = this.dailyHabitRepository.save(copy);
     resultValue.put("New", updatedDailyHabit);
 
-    return Optional.of(resultValue);
+    return resultValue;
   }
 
   public Optional<DailyHabit> deleteById(Long id) {

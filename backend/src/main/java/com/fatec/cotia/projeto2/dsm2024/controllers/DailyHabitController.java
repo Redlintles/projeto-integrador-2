@@ -59,12 +59,9 @@ public class DailyHabitController {
   public ResponseEntity<HashMap<String, DailyHabit>> updateDailyHabit(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody DailyHabitDTO data) {
 
-    Optional<HashMap<String, DailyHabit>> result = this.dailyHabitService.updateDailyHabit(id, data);
+    HashMap<String, DailyHabit> result = this.dailyHabitService.updateDailyHabit(id, data);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 }

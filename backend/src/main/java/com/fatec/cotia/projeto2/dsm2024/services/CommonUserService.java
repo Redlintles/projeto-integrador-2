@@ -161,7 +161,7 @@ public class CommonUserService {
     }
   }
 
-  public Optional<HashMap<String, CommonUser>> updateUser(Long id, CommonUserDTO data)
+  public HashMap<String, CommonUser> updateUser(Long id, CommonUserDTO data)
       throws EntityCouldNotBeUpdatedException, EntityNotFoundException {
     HashMap<String, CommonUser> list = new HashMap<>();
 
@@ -218,7 +218,7 @@ public class CommonUserService {
 
     list.put("New", user);
 
-    return Optional.of(list);
+    return list;
 
   }
 

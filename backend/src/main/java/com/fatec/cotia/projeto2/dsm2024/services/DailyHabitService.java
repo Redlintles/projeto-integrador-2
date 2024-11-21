@@ -10,6 +10,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
@@ -110,14 +111,21 @@ public class DailyHabitService {
     return resultValue;
   }
 
-  public Optional<DailyHabit> deleteById(Long id) {
+  public Optional<DailyHabit> deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeDeletedException {
     Optional<DailyHabit> toDelete = this.dailyHabitRepository.findById(id);
 
     if (toDelete.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("Hábito não encontrado");
     } else {
       this.dailyHabitRepository.deleteById(id);
-      return toDelete;
+
+      Optional<DailyHabit> isDeleted = this.dailyHabitRepository.findById(id);
+
+      if (isDeleted.isEmpty()) {
+        return toDelete;
+      } else {
+        throw new EntityCouldNotBeDeletedException("Daily Habit não pode ser deletado");
+      }
     }
   }
 }

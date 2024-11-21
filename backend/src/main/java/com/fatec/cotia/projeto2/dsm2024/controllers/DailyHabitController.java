@@ -1,7 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.controllers;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,13 +45,10 @@ public class DailyHabitController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<DailyHabit> deleteById(@PathVariable Long id) {
-    Optional<DailyHabit> result = this.dailyHabitService.deleteById(id);
+    DailyHabit result = this.dailyHabitService.deleteById(id);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 
   @PatchMapping("/{id}")

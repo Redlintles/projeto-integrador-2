@@ -111,7 +111,7 @@ public class DailyHabitService {
     return resultValue;
   }
 
-  public Optional<DailyHabit> deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeDeletedException {
+  public DailyHabit deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeDeletedException {
     Optional<DailyHabit> toDelete = this.dailyHabitRepository.findById(id);
 
     if (toDelete.isEmpty()) {
@@ -122,7 +122,7 @@ public class DailyHabitService {
       Optional<DailyHabit> isDeleted = this.dailyHabitRepository.findById(id);
 
       if (isDeleted.isEmpty()) {
-        return toDelete;
+        return toDelete.get();
       } else {
         throw new EntityCouldNotBeDeletedException("Daily Habit não pode ser deletado");
       }

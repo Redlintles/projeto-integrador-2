@@ -47,8 +47,15 @@ public class SuggestionService {
     return savedSuggestion;
   }
 
-  public Optional<Suggestion> findSuggestionById(Long id) {
-    return this.suggestionRepository.findById(id);
+  public Suggestion findSuggestionById(Long id) {
+
+    Optional<Suggestion> foundSuggestion = this.suggestionRepository.findById(id);
+
+    if (foundSuggestion.isEmpty()) {
+      throw new EntityNotFoundException("Sugestão não encontrada");
+    } else {
+      return foundSuggestion.get();
+    }
   }
 
   public Optional<HashMap<String, Suggestion>> updateSuggestion(Long id, SuggestionDTO data) {

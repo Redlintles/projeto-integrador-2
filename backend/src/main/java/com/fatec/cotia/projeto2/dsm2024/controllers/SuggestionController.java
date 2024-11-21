@@ -30,12 +30,10 @@ public class SuggestionController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Suggestion> findOneById(@PathVariable Long id) {
-    Optional<Suggestion> obj = this.suggestionService.findSuggestionById(id);
-    if (obj.isPresent()) {
-      return ResponseEntity.ok(obj.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    Suggestion obj = this.suggestionService.findSuggestionById(id);
+
+    return ResponseEntity.ok(obj);
+
   }
 
   @PostMapping

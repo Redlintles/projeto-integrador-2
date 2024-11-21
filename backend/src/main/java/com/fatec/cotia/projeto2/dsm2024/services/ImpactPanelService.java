@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.ImpactPanelRepository;
 
@@ -74,14 +75,23 @@ public class ImpactPanelService {
 
   }
 
-  public Optional<ImpactPanel> deleteById(Long id) {
+  public ImpactPanel deleteById(Long id) {
     Optional<ImpactPanel> toDelete = this.impactPanelRepository.findById(id);
 
     if (toDelete.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("o painel de impacto não fora encontrado, ele já fora deletado anteriormente?");
     } else {
       this.impactPanelRepository.deleteById(id);
-      return toDelete;
+
+      Optional<ImpactPanel> isDeleted = this.impactPanelRepository.findById(id);
+
+      if (isDeleted.isEmpty()) {
+        return toDelete.get();
+
+      } else {
+        throw new EntityCouldNotBeDeletedException(
+            "O painel de impacto não pode ser deletado devido à algum erro interno");
+      }
     }
   }
 }

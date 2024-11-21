@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import homeReason1 from "../../assets/paginainicial-1.png";
 import homeReason2 from "../../assets/paginainicial-2.png";
 
+import webDevImg from "../../assets/Web Development.png";
+import chartImg from "../../assets/Bar Chart.png";
+import prizeImg from "../../assets/Prize.png";
+
 export default function Home() {
   return (
     <section className={styles["home"]}>
@@ -60,21 +64,21 @@ export default function Home() {
         </div>
       </div>
       <div className={styles["home-feature"]}>
-        <img src="" alt="" className={styles["home-feature__img"]} />
+        <img src={webDevImg} alt="" className={styles["home-feature__img"]} />
         <div className={styles["home-feature__text"]}>
           <h2>Sugestões Personalizadas:</h2>
           <p>Receba dicas práticas para reduzir o seu impacto ambiental.</p>
         </div>
       </div>
       <div className={styles["home-feature"]}>
-        <img src="" alt="" className={styles["home-feature__img"]} />
+        <img src={chartImg} alt="" className={styles["home-feature__img"]} />
         <div className={styles["home-feature__text"]}>
           <h2>Impacto Coletivo:</h2>
           <p>Veja o efeito da sua contribuição em tempo real.</p>
         </div>
       </div>
       <div className={styles["home-feature"]}>
-        <img src="" alt="" className={styles["home-feature__img"]} />
+        <img src={prizeImg} alt="" className={styles["home-feature__img"]} />
         <div className={styles["home-feature__text"]}>
           <h2>Desafios Semanais:</h2>
           <p>Partice de desafios semanais e suba no ranking.</p>

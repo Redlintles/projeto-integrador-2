@@ -128,8 +128,7 @@
   font-weight: bolder;
 }
 .home-feature__img {
-  width: 10%;
-  background-color: red;
+  width: 5%;
 }
 
 .home-feature:nth-last-child(2) > img {

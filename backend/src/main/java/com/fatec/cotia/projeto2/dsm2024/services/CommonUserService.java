@@ -204,13 +204,6 @@ public class CommonUserService {
 
     CommonUser user = this.commonUserRepository.save(existingUser);
 
-    Optional<CommonUser> foundUser = this.commonUserRepository.findByCpf(data.getCpf());
-
-    if (foundUser.isEmpty()) {
-      // EntityCouldNotBeUpdated
-      throw new EntityCouldNotBeUpdatedException("Ocorreu um erro na atualização");
-    }
-
     list.put("New", user);
 
     return list;

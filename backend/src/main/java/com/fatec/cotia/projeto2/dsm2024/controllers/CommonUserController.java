@@ -1,7 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.controllers;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,13 +55,10 @@ public class CommonUserController {
   @PatchMapping("/{id}")
   public ResponseEntity<HashMap<String, CommonUser>> updateUser(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody CommonUserDTO data) {
-    Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(id, data);
+    HashMap<String, CommonUser> result = this.commonUserService.updateUser(id, data);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 
   @DeleteMapping("/{id}")

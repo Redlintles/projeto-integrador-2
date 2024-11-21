@@ -1,7 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.controllers;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,13 +55,10 @@ public class SuggestionController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Suggestion> deleteSuggestionById(@PathVariable Long id) {
-    Optional<Suggestion> deletedSuggestion = this.suggestionService.deleteSuggestionById(id);
+    Suggestion deletedSuggestion = this.suggestionService.deleteSuggestionById(id);
 
-    if (deletedSuggestion.isPresent()) {
-      return ResponseEntity.ok(deletedSuggestion.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(deletedSuggestion);
+
   }
 
 }

@@ -10,6 +10,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.SuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.SuggestionRepository;
@@ -93,14 +94,22 @@ public class SuggestionService {
 
   }
 
-  public Optional<Suggestion> deleteSuggestionById(Long id) {
+  public Suggestion deleteSuggestionById(Long id) {
     Optional<Suggestion> toDelete = this.suggestionRepository.findById(id);
 
     if (toDelete.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException(
+          "O usuário a ser deletado não foi encontrado, talvez ele já tenha sido excluído anteriormente!");
     } else {
       this.suggestionRepository.deleteById(id);
-      return toDelete;
+
+      Optional<Suggestion> isDeleted = this.suggestionRepository.findById(id);
+
+      if (isDeleted.isEmpty()) {
+        return toDelete.get();
+      } else {
+        throw new EntityCouldNotBeDeletedException("A sugestão não pode ser deletada devido a algum erro interno");
+      }
     }
   }
 }

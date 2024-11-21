@@ -7,8 +7,12 @@ import homeReason2 from "../../assets/paginainicial-2.png";
 import webDevImg from "../../assets/Web Development.png";
 import chartImg from "../../assets/Bar Chart.png";
 import prizeImg from "../../assets/Prize.png";
+import { useContext } from "react";
+import { userContext } from "../../contexts/UserContext";
 
 export default function Home() {
+  const { user } = useContext(userContext);
+  console.log(user);
   return (
     <section className={styles["home"]}>
       <div className={styles["home-logo"]}>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeUpdatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
@@ -39,6 +40,13 @@ public class ExceptionController {
     ErrorResponse response = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), null);
 
     return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+  }
+
+  @ExceptionHandler(EntityCouldNotBeUpdatedException.class)
+  public ResponseEntity<ErrorResponse> handleEntityCouldNotBeUpdated(EntityCouldNotBeUpdatedException ex) {
+    ErrorResponse response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+
+    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 }

@@ -2,11 +2,9 @@
 package com.fatec.cotia.projeto2.dsm2024.services;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +42,9 @@ public class CommonUserServiceTest {
     userDTO.setSenha("Senha 123");
     userDTO.setPegadaCarbono((long) 2);
 
-    Optional<HashMap<String, Object>> result = this.commonUserService.createUser(userDTO);
+    HashMap<String, Object> result = this.commonUserService.createUser(userDTO);
 
-    assertTrue(result.isPresent());
-
-    CommonUser savedUser = (CommonUser) result.get().get("User");
+    CommonUser savedUser = (CommonUser) result.get("User");
 
     assertNotNull(savedUser.getId());
     assertEquals(userDTO.getCpf(), savedUser.getCpf());

@@ -1,7 +1,6 @@
 package com.fatec.cotia.projeto2.dsm2024.controllers;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +35,9 @@ public class ImpactPanelController {
   public ResponseEntity<HashMap<String, ImpactPanel>> updateImpactPanelById(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody ImpactPanelDTO data) {
 
-    Optional<HashMap<String, ImpactPanel>> result = this.impactPanelService.updateImpactPanel(id, data);
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    HashMap<String, ImpactPanel> result = this.impactPanelService.updateImpactPanel(id, data);
+
+    return ResponseEntity.ok(result);
 
   }
 }

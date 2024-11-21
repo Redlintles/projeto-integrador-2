@@ -45,11 +45,11 @@ public class ImpactPanelService {
 
   }
 
-  public Optional<HashMap<String, ImpactPanel>> updateImpactPanel(Long id, ImpactPanelDTO data) {
+  public HashMap<String, ImpactPanel> updateImpactPanel(Long id, ImpactPanelDTO data) throws EntityNotFoundException {
     Optional<ImpactPanel> toUpdate = this.impactPanelRepository.findById(id);
 
     if (toUpdate.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("A entidade não pode ser encontrada para ser atualizada");
     }
 
     HashMap<String, ImpactPanel> returnResult = new HashMap<>();
@@ -70,7 +70,7 @@ public class ImpactPanelService {
 
     returnResult.put("New", updatedImpactPanel);
 
-    return Optional.of(returnResult);
+    return returnResult;
 
   }
 

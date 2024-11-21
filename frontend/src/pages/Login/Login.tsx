@@ -19,8 +19,6 @@ export default function Login() {
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log(setUser, setErrorMsg, navigate);
-
     fetch("/api/user/login", {
       method: "POST",
 
@@ -64,6 +62,7 @@ export default function Login() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <WelcomeFormInput
             name="password"
@@ -72,6 +71,7 @@ export default function Login() {
             icon={<FaLock />}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <p className={styles["login-form__text"]}>
             Não tem uma conta? <Link to="/register">Cadastre-se</Link>

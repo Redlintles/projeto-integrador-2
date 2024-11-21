@@ -41,13 +41,10 @@ public class SuggestionController {
   @PostMapping
   public ResponseEntity<Suggestion> createSuggestion(
       @Validated(CreationGroupInterface.class) @RequestBody SuggestionDTO data) {
-    Optional<Suggestion> newSuggestion = this.suggestionService.createSuggestion(data);
+    Suggestion newSuggestion = this.suggestionService.createSuggestion(data);
 
-    if (newSuggestion.isPresent()) {
-      return ResponseEntity.ok(newSuggestion.get());
-    } else {
-      return ResponseEntity.badRequest().build();
-    }
+    return ResponseEntity.ok(newSuggestion);
+
   }
 
   @PatchMapping("/{id}")

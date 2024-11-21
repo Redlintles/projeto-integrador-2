@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.SuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.SuggestionRepository;
 
@@ -20,12 +22,13 @@ public class SuggestionService {
   @Autowired
   private SuggestionRepository suggestionRepository;
 
-  public Optional<Suggestion> createSuggestion(SuggestionDTO data) {
+  public Suggestion createSuggestion(SuggestionDTO data)
+      throws EntityNotFoundException, EntityCouldNotBeCreatedException {
 
     Optional<CommonUser> usuario = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
     if (usuario.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("O usuário dono da sugestão não foi encontrado");
     }
 
     Suggestion newSuggestion = new Suggestion();
@@ -35,7 +38,13 @@ public class SuggestionService {
 
     Suggestion savedSuggestion = this.suggestionRepository.save(newSuggestion);
 
-    return Optional.of(savedSuggestion);
+    Optional<Suggestion> isSavedSuggestion = this.suggestionRepository.findById(savedSuggestion.getId());
+
+    if (isSavedSuggestion.isEmpty()) {
+      throw new EntityCouldNotBeCreatedException("A entidade não pode ser salva");
+    }
+
+    return savedSuggestion;
   }
 
   public Optional<Suggestion> findSuggestionById(Long id) {

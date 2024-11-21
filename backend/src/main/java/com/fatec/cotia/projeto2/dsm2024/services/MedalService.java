@@ -64,7 +64,7 @@ public class MedalService {
     }
   }
 
-  public Optional<Medal> deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeCreatedException {
+  public Medal deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeCreatedException {
     Optional<Medal> toDelete = this.medalRepository.findById(id);
 
     if (toDelete.isEmpty()) {
@@ -76,7 +76,7 @@ public class MedalService {
 
       if (isDeleted.isEmpty()) {
 
-        return toDelete;
+        return toDelete.get();
       } else {
         throw new EntityCouldNotBeDeletedException("A medalha não pode ser deletada");
       }

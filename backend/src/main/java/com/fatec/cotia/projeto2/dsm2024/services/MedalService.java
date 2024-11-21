@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.MedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.MedalRepository;
 
@@ -22,7 +24,7 @@ public class MedalService {
   @Autowired
   private CommonUserRepository commonUserRepository;
 
-  public Optional<Medal> createMedal(MedalDTO data) {
+  public Medal createMedal(MedalDTO data) throws EntityNotFoundException, EntityCouldNotBeCreatedException {
 
     Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
@@ -31,11 +33,21 @@ public class MedalService {
       Medal newMedal = new Medal(data);
 
       newMedal.setUsuario_CPF(user.get());
+      newMedal.setDescricao(data.getDescricao());
+      newMedal.setNome(data.getNome());
+      newMedal.setRecompensa(data.getRecompensa());
 
       Medal createdMedal = this.medalRepository.save(newMedal);
-      return Optional.of(createdMedal);
+
+      Optional<Medal> savedMedal = this.medalRepository.findById(createdMedal.getId());
+
+      if (savedMedal.isPresent()) {
+        return savedMedal.get();
+      } else {
+        throw new EntityCouldNotBeCreatedException("A entidade não pode ser criada");
+      }
     } else {
-      return null;
+      throw new EntityNotFoundException("O usuário não pode ser encontrado");
     }
 
   }

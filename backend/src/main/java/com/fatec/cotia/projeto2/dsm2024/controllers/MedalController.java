@@ -40,12 +40,10 @@ public class MedalController {
 
   @PostMapping
   public ResponseEntity<Medal> createMedal(@Validated(CreationGroupInterface.class) @RequestBody MedalDTO data) {
-    Optional<Medal> result = this.medalService.createMedal(data);
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.badRequest().build();
-    }
+    Medal result = this.medalService.createMedal(data);
+
+    return ResponseEntity.ok(result);
+
   }
 
   @DeleteMapping("/{id}")

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeUpdatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
@@ -44,6 +45,13 @@ public class ExceptionController {
 
   @ExceptionHandler(EntityCouldNotBeUpdatedException.class)
   public ResponseEntity<ErrorResponse> handleEntityCouldNotBeUpdated(EntityCouldNotBeUpdatedException ex) {
+    ErrorResponse response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+
+    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @ExceptionHandler(EntityCouldNotBeDeletedException.class)
+  public ResponseEntity<ErrorResponse> handleEntityCouldNotBeDeleted(EntityCouldNotBeDeletedException ex) {
     ErrorResponse response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
 
     return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

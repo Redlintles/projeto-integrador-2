@@ -14,6 +14,8 @@ import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeUpdatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
@@ -139,7 +141,7 @@ public class CommonUserService {
 
   }
 
-  public CommonUser deleteUserById(Long id) throws EntityNotFoundException {
+  public CommonUser deleteUserById(Long id) throws EntityNotFoundException, EntityCouldNotBeDeletedException {
     Optional<CommonUser> toDelete = this.commonUserRepository.findById(id);
 
     if (toDelete.isEmpty()) {
@@ -148,11 +150,19 @@ public class CommonUserService {
       this.impactPanelService
           .deleteById(toDelete.get().getIdPainelDeImpacto().getId());
       this.commonUserRepository.deleteById(id);
-      return toDelete.get();
+
+      Optional<CommonUser> isDeleted = this.commonUserRepository.findById(id);
+
+      if (isDeleted.isEmpty()) {
+        return toDelete.get();
+      } else {
+        throw new EntityCouldNotBeDeletedException("O usuário não pode ser deletado devido à algum erro interno");
+      }
     }
   }
 
-  public Optional<HashMap<String, CommonUser>> updateUser(Long id, CommonUserDTO data) {
+  public Optional<HashMap<String, CommonUser>> updateUser(Long id, CommonUserDTO data)
+      throws EntityCouldNotBeUpdatedException, EntityNotFoundException {
     HashMap<String, CommonUser> list = new HashMap<>();
 
     Optional<CommonUser> old = this.commonUserRepository.findById(id);
@@ -203,7 +213,7 @@ public class CommonUserService {
 
     if (foundUser.isEmpty()) {
       // EntityCouldNotBeUpdated
-      throw new EntityCouldNotBeCreatedException("Ocorreu um erro na atualização");
+      throw new EntityCouldNotBeUpdatedException("Ocorreu um erro na atualização");
     }
 
     list.put("New", user);

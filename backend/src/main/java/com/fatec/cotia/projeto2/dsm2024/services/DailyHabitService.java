@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
 
@@ -20,20 +22,33 @@ public class DailyHabitService {
   @Autowired
   private CommonUserRepository commonUserRepository;
 
-  public Optional<DailyHabit> createDailyHabit(DailyHabitDTO data) {
-    System.out.println(String.format("\n\n%s\n\n", data.getUsuario_CPF()));
+  public DailyHabit createDailyHabit(DailyHabitDTO data)
+      throws EntityCouldNotBeCreatedException, EntityNotFoundException {
     Optional<CommonUser> user = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
     if (user.isPresent()) {
       DailyHabit newDailyHabit = new DailyHabit(data);
 
       newDailyHabit.setUsuario_CPF(user.get());
+      newDailyHabit.setCalculoPegadaCarbono(data.getCalculoPegadaCarbono());
+      newDailyHabit.setDescarteLixo(data.getDescarteLixo());
+      newDailyHabit.setAlimentacao(data.getAlimentacao());
+      newDailyHabit.setTransporte(data.getTransporte());
+      newDailyHabit.setUsoEnergia(data.getUsoEnergia());
 
       newDailyHabit = this.dailyHabitRepository.save(newDailyHabit);
-      return Optional.of(newDailyHabit);
+
+      Optional<DailyHabit> isSaved = this.dailyHabitRepository.findById(newDailyHabit.getId());
+
+      if (isSaved.isEmpty()) {
+        throw new EntityCouldNotBeCreatedException(
+            "O hábito diário não pode ser criado por causa de algum erro interno");
+      }
+
+      return newDailyHabit;
 
     } else {
-      return null;
+      throw new EntityNotFoundException("O usuário referido em Daily Habit não foi encontrado");
     }
 
   }

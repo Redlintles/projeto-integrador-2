@@ -29,13 +29,10 @@ public class DailyHabitController {
 
   @GetMapping("/{id}")
   public ResponseEntity<DailyHabit> findDailyHabit(@PathVariable Long id) {
-    Optional<DailyHabit> result = this.dailyHabitService.findById(id);
+    DailyHabit result = this.dailyHabitService.findById(id);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 
   @PostMapping

@@ -53,8 +53,15 @@ public class DailyHabitService {
 
   }
 
-  public Optional<DailyHabit> findById(Long id) {
-    return this.dailyHabitRepository.findById(id);
+  public DailyHabit findById(Long id) throws EntityNotFoundException {
+
+    Optional<DailyHabit> toFind = this.dailyHabitRepository.findById(id);
+
+    if (toFind.isPresent()) {
+      return toFind.get();
+    } else {
+      throw new EntityNotFoundException("O hábito diário não fora encontrada");
+    }
   }
 
   public Optional<HashMap<String, DailyHabit>> updateDailyHabit(Long id, DailyHabitDTO data) {

@@ -26,13 +26,10 @@ public class ImpactPanelController {
 
   @GetMapping("/{id}")
   public ResponseEntity<ImpactPanel> findImpactPanelById(@PathVariable Long id) {
-    Optional<ImpactPanel> register = this.impactPanelService.findById(id);
+    ImpactPanel register = this.impactPanelService.findById(id);
 
-    if (register.isPresent()) {
-      return ResponseEntity.ok(register.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(register);
+
   }
 
   @PatchMapping("/{id}")

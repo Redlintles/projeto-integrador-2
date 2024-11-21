@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.ImpactPanelRepository;
 
 @Service
@@ -32,8 +33,16 @@ public class ImpactPanelService {
     return newPanel;
   }
 
-  public Optional<ImpactPanel> findById(Long id) {
-    return this.impactPanelRepository.findById(id);
+  public ImpactPanel findById(Long id) throws EntityNotFoundException {
+
+    Optional<ImpactPanel> entity = this.impactPanelRepository.findById(id);
+
+    if (entity.isPresent()) {
+      return entity.get();
+    } else {
+      throw new EntityNotFoundException("Entidade Não pode ser encontrada");
+    }
+
   }
 
   public Optional<HashMap<String, ImpactPanel>> updateImpactPanel(Long id, ImpactPanelDTO data) {

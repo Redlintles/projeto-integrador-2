@@ -14,6 +14,7 @@ import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
 import com.fatec.cotia.projeto2.dsm2024.errors.UserNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
@@ -36,7 +37,8 @@ public class CommonUserService {
   }
 
   public Optional<HashMap<String, Object>> loginUser(String email, String password)
-      throws UserNotFoundException, TokenAlreadyExistsException, EntityCouldNotBeCreatedException {
+      throws UserNotFoundException, TokenAlreadyExistsException, EntityCouldNotBeCreatedException,
+      InvalidInputDataException {
     Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
     if (optionalUser.isEmpty()) {
       throw new UserNotFoundException("Usuário Não encontrado");
@@ -68,9 +70,9 @@ public class CommonUserService {
         throw new EntityCouldNotBeCreatedException("Token Could Not be saved by a unknown reason");
       }
 
+    } else {
+      throw new InvalidInputDataException("Usuário ou senha Inválidos");
     }
-
-    return null;
 
   }
 

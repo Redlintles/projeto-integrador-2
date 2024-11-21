@@ -60,6 +60,7 @@ public class CommonUserService {
     if (existingToken.isPresent()) {
       throw new TokenAlreadyExistsException("Já existe um token em vigor para o usuário especificado!");
     }
+
     if (user.getSenha().equals(password)) {
       Token newToken = new Token();
       newToken.setCreatedAt(LocalDateTime.now());

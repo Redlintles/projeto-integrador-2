@@ -33,35 +33,24 @@ public class CommonUserController {
   @GetMapping("/{id}")
   public ResponseEntity<CommonUser> findUser(@PathVariable Long id) {
 
-    Optional<CommonUser> user = this.commonUserService.findById(id);
-    if (user.isPresent()) {
-      return ResponseEntity.ok(user.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    CommonUser user = this.commonUserService.findById(id);
+    return ResponseEntity.ok(user);
   }
 
   @PostMapping("/login")
   public ResponseEntity<HashMap<String, Object>> loginUser(@RequestBody LoginRequest data) {
-    Optional<HashMap<String, Object>> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
+    HashMap<String, Object> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
-    if (newToken.isPresent()) {
-      return ResponseEntity.ok(newToken.get());
-    } else {
-      return ResponseEntity.badRequest().build();
-    }
+    return ResponseEntity.ok(newToken);
   }
 
   @PostMapping
   public ResponseEntity<HashMap<String, Object>> createUser(
       @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
-    Optional<HashMap<String, Object>> newUser = this.commonUserService.createUser(data);
+    HashMap<String, Object> newUser = this.commonUserService.createUser(data);
 
-    if (newUser.isPresent()) {
-      return ResponseEntity.status(HttpStatus.CREATED).body(newUser.get());
-    } else {
-      return ResponseEntity.badRequest().build();
-    }
+    return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+
   }
 
   @PatchMapping("/{id}")
@@ -69,7 +58,6 @@ public class CommonUserController {
       @Validated(UpdateGroupInterface.class) @RequestBody CommonUserDTO data) {
     Optional<HashMap<String, CommonUser>> result = this.commonUserService.updateUser(id, data);
 
-    System.out.println(String.format("\n\n%s\n\n", result.get().get("New").getId()));
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());
     } else {
@@ -79,14 +67,9 @@ public class CommonUserController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<CommonUser> deleteUser(@PathVariable Long id) {
+    CommonUser result = this.commonUserService.deleteUserById(id);
 
-    Optional<CommonUser> result = this.commonUserService.deleteUserById(id);
-
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
 
   }
 }

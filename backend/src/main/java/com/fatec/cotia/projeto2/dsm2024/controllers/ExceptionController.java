@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
-import com.fatec.cotia.projeto2.dsm2024.errors.UserNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.responses.ErrorResponse;
 
 @ControllerAdvice
 public class ExceptionController {
 
-  @ExceptionHandler(UserNotFoundException.class)
-  public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex) {
+  @ExceptionHandler(EntityNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleUserNotFound(EntityNotFoundException ex) {
     ErrorResponse response = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
   }

@@ -14,9 +14,9 @@ import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.entities.Token;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.errors.InvalidInputDataException;
 import com.fatec.cotia.projeto2.dsm2024.errors.TokenAlreadyExistsException;
-import com.fatec.cotia.projeto2.dsm2024.errors.UserNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.TokenRepository;
 
@@ -32,16 +32,23 @@ public class CommonUserService {
   @Autowired
   private CommonUserRepository commonUserRepository;
 
-  public Optional<CommonUser> findById(Long id) {
-    return this.commonUserRepository.findById(id);
+  public CommonUser findById(Long id) throws EntityNotFoundException {
+    Optional<CommonUser> user = this.commonUserRepository.findById(id);
+
+    if (user.isPresent()) {
+      return user.get();
+    } else {
+      throw new EntityNotFoundException(String.format("O usuário %d não foi encontrado", id));
+    }
+
   }
 
-  public Optional<HashMap<String, Object>> loginUser(String email, String password)
-      throws UserNotFoundException, TokenAlreadyExistsException, EntityCouldNotBeCreatedException,
+  public HashMap<String, Object> loginUser(String email, String password)
+      throws EntityNotFoundException, TokenAlreadyExistsException, EntityCouldNotBeCreatedException,
       InvalidInputDataException {
     Optional<CommonUser> optionalUser = this.commonUserRepository.findByEmail(email);
     if (optionalUser.isEmpty()) {
-      throw new UserNotFoundException("Usuário Não encontrado");
+      throw new EntityNotFoundException("Usuário Não encontrado");
     }
 
     CommonUser user = optionalUser.get();
@@ -65,7 +72,7 @@ public class CommonUserService {
         HashMap<String, Object> returnValue = new HashMap<>();
         returnValue.put("user", user);
         returnValue.put("token", savedToken);
-        return Optional.of(returnValue);
+        return returnValue;
       } else {
         throw new EntityCouldNotBeCreatedException("Token Could Not be saved by a unknown reason");
       }
@@ -76,7 +83,7 @@ public class CommonUserService {
 
   }
 
-  public Optional<HashMap<String, Object>> createUser(CommonUserDTO data) {
+  public HashMap<String, Object> createUser(CommonUserDTO data) throws EntityCouldNotBeCreatedException {
 
     ImpactPanelDTO newImpactPanel = new ImpactPanelDTO();
 
@@ -86,7 +93,8 @@ public class CommonUserService {
     Optional<ImpactPanel> result = this.impactPanelService.createImpactPanel(newImpactPanel);
 
     if (result.isEmpty()) {
-      return null;
+      throw new EntityCouldNotBeCreatedException(
+          "O painel de impacto referente ao novo usuário não pode ser criado propriamente");
     }
 
     CommonUser newUser = new CommonUser();
@@ -103,6 +111,12 @@ public class CommonUserService {
 
     CommonUser savedUser = commonUserRepository.save(newUser);
 
+    Optional<CommonUser> foundUser = this.commonUserRepository.findByCpf(data.getCpf());
+
+    if (foundUser.isEmpty()) {
+      throw new EntityCouldNotBeCreatedException("O Novo usuário não pode ser criado");
+    }
+
     Token newAccountToken = new Token();
 
     newAccountToken.setCpf(savedUser.getCpf());
@@ -111,28 +125,30 @@ public class CommonUserService {
 
     Token savedToken = this.tokenRepository.save(newAccountToken);
 
+    Optional<Token> foundToken = this.tokenRepository.findByCpf(savedUser.getCpf());
+
     HashMap<String, Object> returnValue = new HashMap<>();
 
-    if (savedToken != null) {
+    if (foundToken.isPresent()) {
       returnValue.put("User", savedUser);
       returnValue.put("Token", savedToken);
-      return Optional.of(returnValue);
+      return returnValue;
     } else {
-      return null;
+      throw new EntityCouldNotBeCreatedException("O Token de sessão referente ao novo usuário não pode ser criado");
     }
 
   }
 
-  public Optional<CommonUser> deleteUserById(Long id) {
+  public CommonUser deleteUserById(Long id) throws EntityNotFoundException {
     Optional<CommonUser> toDelete = this.commonUserRepository.findById(id);
 
     if (toDelete.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("O Usuário não pode ser encontrado, talvez ele já tenha sido excluído!");
     } else {
       this.impactPanelService
           .deleteById(toDelete.get().getIdPainelDeImpacto().getId());
       this.commonUserRepository.deleteById(id);
-      return toDelete;
+      return toDelete.get();
     }
   }
 
@@ -142,7 +158,7 @@ public class CommonUserService {
     Optional<CommonUser> old = this.commonUserRepository.findById(id);
 
     if (old.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("O Usuário a ser atualizado não foi encontrado");
     }
     CommonUser existingUser = old.get();
 
@@ -182,6 +198,13 @@ public class CommonUserService {
     }
 
     CommonUser user = this.commonUserRepository.save(existingUser);
+
+    Optional<CommonUser> foundUser = this.commonUserRepository.findByCpf(data.getCpf());
+
+    if (foundUser.isEmpty()) {
+      // EntityCouldNotBeUpdated
+      throw new EntityCouldNotBeCreatedException("Ocorreu um erro na atualização");
+    }
 
     list.put("New", user);
 

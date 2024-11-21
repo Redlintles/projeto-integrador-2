@@ -11,6 +11,7 @@ import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeUpdatedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.DailyHabitRepository;
@@ -65,7 +66,8 @@ public class DailyHabitService {
     }
   }
 
-  public HashMap<String, DailyHabit> updateDailyHabit(Long id, DailyHabitDTO data) {
+  public HashMap<String, DailyHabit> updateDailyHabit(Long id, DailyHabitDTO data)
+      throws EntityNotFoundException, EntityCouldNotBeUpdatedException {
     Optional<DailyHabit> toUpdate = this.dailyHabitRepository.findById(id);
 
     if (toUpdate.isEmpty()) {

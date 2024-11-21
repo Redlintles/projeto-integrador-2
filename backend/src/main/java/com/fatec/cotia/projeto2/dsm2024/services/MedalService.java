@@ -83,11 +83,11 @@ public class MedalService {
     }
   }
 
-  public Optional<HashMap<String, Medal>> updateMedal(Long id, MedalDTO data) {
+  public HashMap<String, Medal> updateMedal(Long id, MedalDTO data) throws EntityNotFoundException {
     Optional<Medal> toUpdate = this.medalRepository.findById(id);
 
     if (toUpdate.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("A medalha a ser atualizada não foi encontrada");
     }
 
     HashMap<String, Medal> result = new HashMap<>();
@@ -109,7 +109,7 @@ public class MedalService {
       if (user.isPresent()) {
         copy.setUsuario_CPF(user.get());
       } else {
-        return null;
+        throw new EntityNotFoundException("O usuário especificado não foi encontrado no sistema");
       }
 
     }
@@ -120,6 +120,6 @@ public class MedalService {
     Medal updatedMedal = this.medalRepository.save(copy);
     result.put("New", updatedMedal);
 
-    return Optional.of(result);
+    return result;
   }
 }

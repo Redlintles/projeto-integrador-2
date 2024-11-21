@@ -48,13 +48,10 @@ public class SuggestionController {
   @PatchMapping("/{id}")
   public ResponseEntity<HashMap<String, Suggestion>> updateSuggestion(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody SuggestionDTO data) {
-    Optional<HashMap<String, Suggestion>> updatedSuggestion = this.suggestionService.updateSuggestion(id, data);
+    HashMap<String, Suggestion> updatedSuggestion = this.suggestionService.updateSuggestion(id, data);
 
-    if (updatedSuggestion.isPresent()) {
-      return ResponseEntity.ok(updatedSuggestion.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(updatedSuggestion);
+
   }
 
   @DeleteMapping("/{id}")

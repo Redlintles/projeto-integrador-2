@@ -58,12 +58,12 @@ public class SuggestionService {
     }
   }
 
-  public Optional<HashMap<String, Suggestion>> updateSuggestion(Long id, SuggestionDTO data) {
+  public HashMap<String, Suggestion> updateSuggestion(Long id, SuggestionDTO data) throws EntityNotFoundException {
 
     Optional<Suggestion> toUpdate = this.suggestionRepository.findById(id);
 
     if (toUpdate.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("A sugestão a ser atualizada não foi encontrada");
     }
 
     HashMap<String, Suggestion> returnValue = new HashMap<>();
@@ -80,7 +80,7 @@ public class SuggestionService {
       Optional<CommonUser> newUser = this.commonUserRepository.findByCpf(data.getUsuario_CPF());
 
       if (newUser.isEmpty()) {
-        return null;
+        throw new EntityNotFoundException("O usuário especificado não foi encontrado no sistema");
       }
       copy.setUsuario_CPF(newUser.get());
     }
@@ -89,7 +89,7 @@ public class SuggestionService {
 
     returnValue.put("New", updatedSuggestion);
 
-    return Optional.of(returnValue);
+    return returnValue;
 
   }
 

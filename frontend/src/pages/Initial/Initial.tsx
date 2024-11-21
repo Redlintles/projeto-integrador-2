@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AsideLoggedIn from "../../components/AsideLoggedIn/AsideLoggedIn";
 import styles from "./Initial.module.css";
 import home1 from "../../assets/home-1.png";
 import home2 from "../../assets/home-2.png";
 import home3 from "../../assets/home-3.png";
+import { useContext } from "react";
+import { userContext } from "../../contexts/UserContext";
 
 export default function Initial() {
+  const { user } = useContext(userContext);
+  const navigate = useNavigate();
+
+  if (!user.user) {
+    navigate("/");
+  }
   return (
     <section className={styles["initial"]}>
-      <AsideLoggedIn fullName="João Paulo" />
+      <AsideLoggedIn fullName={user.user?.nome || ""} />
       <div className={styles["initial-main"]}>
         <div
           className={`${styles["initial-main__info"]} ${styles["initial-main__info--suggestion"]}`}

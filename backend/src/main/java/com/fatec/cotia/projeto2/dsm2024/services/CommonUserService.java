@@ -92,12 +92,7 @@ public class CommonUserService {
     newImpactPanel.setImpactoColetivo("Nulo");
     newImpactPanel.setImpactoIndividual("Nulo");
 
-    Optional<ImpactPanel> result = this.impactPanelService.createImpactPanel(newImpactPanel);
-
-    if (result.isEmpty()) {
-      throw new EntityCouldNotBeCreatedException(
-          "O painel de impacto referente ao novo usuário não pode ser criado propriamente");
-    }
+    ImpactPanel result = this.impactPanelService.createImpactPanel(newImpactPanel);
 
     CommonUser newUser = new CommonUser();
 
@@ -105,7 +100,7 @@ public class CommonUserService {
     newUser.setEmail(data.getEmail());
     newUser.setEndereco(data.getEndereco());
     newUser.setHabitosDiarios(data.getHabitosDiarios());
-    newUser.setIdPainelDeImpacto(result.get());
+    newUser.setIdPainelDeImpacto(result);
     newUser.setMedalhas(data.getMedalhas());
     newUser.setNome(data.getNome());
     newUser.setSenha(data.getSenha());

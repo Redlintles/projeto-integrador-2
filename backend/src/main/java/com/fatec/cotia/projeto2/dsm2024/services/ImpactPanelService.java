@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.ImpactPanelRepository;
 
 @Service
@@ -15,15 +16,20 @@ public class ImpactPanelService {
   @Autowired
   private ImpactPanelRepository impactPanelRepository;
 
-  public Optional<ImpactPanel> createImpactPanel(ImpactPanelDTO data) {
+  public ImpactPanel createImpactPanel(ImpactPanelDTO data) throws EntityCouldNotBeCreatedException {
     ImpactPanel newPanel = new ImpactPanel();
 
     newPanel.setImpactoColetivo(data.getImpactoColetivo());
     newPanel.setImpactoIndividual(data.getImpactoIndividual());
-
     newPanel = this.impactPanelRepository.save(newPanel);
 
-    return Optional.of(newPanel);
+    Optional<ImpactPanel> isSaved = this.impactPanelRepository.findById(newPanel.getId());
+
+    if (isSaved.isEmpty()) {
+      throw new EntityCouldNotBeCreatedException("Entidade não pode ser criada");
+    }
+
+    return newPanel;
   }
 
   public Optional<ImpactPanel> findById(Long id) {

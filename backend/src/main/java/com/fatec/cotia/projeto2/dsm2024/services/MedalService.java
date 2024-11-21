@@ -11,6 +11,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.MedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeCreatedException;
+import com.fatec.cotia.projeto2.dsm2024.errors.EntityCouldNotBeDeletedException;
 import com.fatec.cotia.projeto2.dsm2024.errors.EntityNotFoundException;
 import com.fatec.cotia.projeto2.dsm2024.repositories.CommonUserRepository;
 import com.fatec.cotia.projeto2.dsm2024.repositories.MedalRepository;
@@ -63,14 +64,22 @@ public class MedalService {
     }
   }
 
-  public Optional<Medal> deleteById(Long id) {
+  public Optional<Medal> deleteById(Long id) throws EntityNotFoundException, EntityCouldNotBeCreatedException {
     Optional<Medal> toDelete = this.medalRepository.findById(id);
 
     if (toDelete.isEmpty()) {
-      return null;
+      throw new EntityNotFoundException("Medalha não foi encontrada");
     } else {
       this.medalRepository.deleteById(id);
-      return toDelete;
+
+      Optional<Medal> isDeleted = this.medalRepository.findById(id);
+
+      if (isDeleted.isEmpty()) {
+
+        return toDelete;
+      } else {
+        throw new EntityCouldNotBeDeletedException("A medalha não pode ser deletada");
+      }
     }
   }
 

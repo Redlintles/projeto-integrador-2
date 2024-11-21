@@ -45,13 +45,10 @@ public class MedalController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Medal> deleteMedalById(@PathVariable Long id) {
-    Optional<Medal> result = this.medalService.deleteById(id);
+    Medal result = this.medalService.deleteById(id);
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
-    } else {
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok(result);
+
   }
 
   @PatchMapping("/{id}")

@@ -18,6 +18,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.DailyHabitDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.DailyHabit;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.DailyHabitService;
 
 @RestController
@@ -27,37 +28,47 @@ public class DailyHabitController {
   private DailyHabitService dailyHabitService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<DailyHabit> findDailyHabit(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<DailyHabit>> findDailyHabit(@PathVariable Long id) {
     DailyHabit result = this.dailyHabitService.findById(id);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<DailyHabit> response = new StandardResponse<>(result, "Hábito encontrado com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PostMapping
-  public ResponseEntity<DailyHabit> createDailyHabit(
+  public ResponseEntity<StandardResponse<DailyHabit>> createDailyHabit(
       @Validated(CreationGroupInterface.class) @RequestBody DailyHabitDTO data) {
 
     DailyHabit result = this.dailyHabitService.createDailyHabit(data);
-    return ResponseEntity.ok(result);
+
+    StandardResponse<DailyHabit> response = new StandardResponse<>(result, "Hábito criado com sucesso");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<DailyHabit> deleteById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<DailyHabit>> deleteById(@PathVariable Long id) {
     DailyHabit result = this.dailyHabitService.deleteById(id);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<DailyHabit> response = new StandardResponse<>(result, "Hábito deletado com sucesso");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<HashMap<String, DailyHabit>> updateDailyHabit(@PathVariable Long id,
+  public ResponseEntity<StandardResponse<HashMap<String, DailyHabit>>> updateDailyHabit(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody DailyHabitDTO data) {
 
     HashMap<String, DailyHabit> result = this.dailyHabitService.updateDailyHabit(id, data);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<HashMap<String, DailyHabit>> response = new StandardResponse<>(result,
+        "Hábito atualizado com sucesso");
+
+    return ResponseEntity.ok(response);
 
   }
 }

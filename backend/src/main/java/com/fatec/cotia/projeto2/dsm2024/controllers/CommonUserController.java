@@ -93,7 +93,7 @@ public class CommonUserController {
   public ResponseEntity<StandardResponse<CommonUser>> deleteUser(@PathVariable Long id) {
     CommonUser result = this.commonUserService.deleteUserById(id);
 
-    StandardResponse<CommonUser> response = new StandardResponse<CommonUser>(result, "Usuário excluído com sucesso!");
+    StandardResponse<CommonUser> response = new StandardResponse<>(result, "Usuário excluído com sucesso!");
 
     return ResponseEntity.ok(response);
 

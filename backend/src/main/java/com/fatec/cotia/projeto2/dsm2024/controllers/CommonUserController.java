@@ -22,6 +22,7 @@ import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.requests.LoginRequest;
+import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.CommonUserService;
 
 @RestController
@@ -32,14 +33,17 @@ public class CommonUserController {
   private CommonUserService commonUserService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<CommonUser> findUser(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<CommonUser>> findUser(@PathVariable Long id) {
 
     CommonUser user = this.commonUserService.findById(id);
-    return ResponseEntity.ok(user);
+
+    StandardResponse<CommonUser> response = new StandardResponse<>(user, "Usuário encontrado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/login")
-  public ResponseEntity<HashMap<String, Object>> loginUser(@RequestBody LoginRequest data) {
+  public ResponseEntity<StandardResponse<HashMap<String, Object>>> loginUser(@RequestBody LoginRequest data) {
     HashMap<String, Object> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
     ResponseCookie cookie = ResponseCookie.from("user", newToken.get("token").toString()).httpOnly(true).path("/")
@@ -49,11 +53,14 @@ public class CommonUserController {
 
     headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
 
-    return ResponseEntity.ok().headers(headers).body(newToken);
+    StandardResponse<HashMap<String, Object>> response = new StandardResponse<>(newToken,
+        "Usuário logado com sucesso!");
+
+    return ResponseEntity.ok().headers(headers).body(response);
   }
 
   @PostMapping
-  public ResponseEntity<HashMap<String, Object>> createUser(
+  public ResponseEntity<StandardResponse<HashMap<String, Object>>> createUser(
       @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
     HashMap<String, Object> newUser = this.commonUserService.createUser(data);
 
@@ -64,24 +71,31 @@ public class CommonUserController {
 
     headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
 
-    return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(newUser);
+    StandardResponse<HashMap<String, Object>> response = new StandardResponse<>(newUser,
+        "Usuário criado com sucesso!");
+
+    return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(response);
 
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<HashMap<String, CommonUser>> updateUser(@PathVariable Long id,
+  public ResponseEntity<StandardResponse<HashMap<String, CommonUser>>> updateUser(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody CommonUserDTO data) {
     HashMap<String, CommonUser> result = this.commonUserService.updateUser(id, data);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<HashMap<String, CommonUser>> response = new StandardResponse<>(result,
+        "Usuário atualizado com sucesso!");
+    return ResponseEntity.ok(response);
 
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<CommonUser> deleteUser(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<CommonUser>> deleteUser(@PathVariable Long id) {
     CommonUser result = this.commonUserService.deleteUserById(id);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<CommonUser> response = new StandardResponse<CommonUser>(result, "Usuário excluído com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 }

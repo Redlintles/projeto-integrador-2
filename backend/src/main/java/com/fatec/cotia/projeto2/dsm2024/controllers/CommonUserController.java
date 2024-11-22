@@ -3,7 +3,9 @@ package com.fatec.cotia.projeto2.dsm2024.controllers;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,7 +42,14 @@ public class CommonUserController {
   public ResponseEntity<HashMap<String, Object>> loginUser(@RequestBody LoginRequest data) {
     HashMap<String, Object> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
-    return ResponseEntity.ok(newToken);
+    ResponseCookie cookie = ResponseCookie.from("user", newToken.get("token").toString()).httpOnly(true).path("/")
+        .maxAge(60 * 60).build();
+
+    HttpHeaders headers = new HttpHeaders();
+
+    headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
+
+    return ResponseEntity.ok().headers(headers).body(newToken);
   }
 
   @PostMapping
@@ -48,7 +57,14 @@ public class CommonUserController {
       @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
     HashMap<String, Object> newUser = this.commonUserService.createUser(data);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    ResponseCookie cookie = ResponseCookie.from("user", newUser.get("token").toString()).httpOnly(true).path("/")
+        .maxAge(60 * 60).build();
+
+    HttpHeaders headers = new HttpHeaders();
+
+    headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
+
+    return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(newUser);
 
   }
 

@@ -128,8 +128,8 @@ public class CommonUserService {
     HashMap<String, Object> returnValue = new HashMap<>();
 
     if (foundToken.isPresent()) {
-      returnValue.put("User", savedUser);
-      returnValue.put("Token", savedToken);
+      returnValue.put("user", savedUser);
+      returnValue.put("token", savedToken);
       return returnValue;
     } else {
       throw new EntityCouldNotBeCreatedException("O Token de sessão referente ao novo usuário não pode ser criado");

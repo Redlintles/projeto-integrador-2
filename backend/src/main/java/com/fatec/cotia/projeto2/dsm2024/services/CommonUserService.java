@@ -52,13 +52,24 @@ public class CommonUserService {
     if (optionalUser.isEmpty()) {
       throw new EntityNotFoundException("Usuário Não encontrado");
     }
+    HashMap<String, Object> returnValue = new HashMap<>();
 
     CommonUser user = optionalUser.get();
 
     Optional<Token> existingToken = this.tokenRepository.findByCpf(user.getCpf());
 
     if (existingToken.isPresent()) {
-      throw new TokenAlreadyExistsException("Já existe um token em vigor para o usuário especificado!");
+
+      Token updatedToken = new Token(existingToken.get());
+
+      updatedToken.setCreatedAt(LocalDateTime.now());
+
+      updatedToken = this.tokenRepository.save(updatedToken);
+
+      returnValue.put("user", user);
+      returnValue.put("token", updatedToken.getToken());
+
+      return returnValue;
     }
 
     if (user.getSenha().equals(password)) {
@@ -72,7 +83,6 @@ public class CommonUserService {
       Optional<Token> foundToken = this.tokenRepository.findByCpf(user.getCpf());
 
       if (foundToken.isPresent()) {
-        HashMap<String, Object> returnValue = new HashMap<>();
         returnValue.put("user", user);
         returnValue.put("token", savedToken);
         return returnValue;

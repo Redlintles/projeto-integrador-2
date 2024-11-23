@@ -35,10 +35,10 @@ export default function Login() {
       })
       .then((res) => {
         console.log(res);
-        if (res.token) {
+        if (res.data.token) {
           setUser({
-            token: res.token,
-            user: res.user,
+            token: res.data.token,
+            user: res.data.user,
           });
           navigate("/initial");
         } else {

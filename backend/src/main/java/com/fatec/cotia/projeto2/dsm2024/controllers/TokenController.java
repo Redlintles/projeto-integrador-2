@@ -17,7 +17,7 @@ public class TokenController {
   @Autowired
   private TokenService tokenService;
 
-  @GetMapping("/valid/{token}")
+  @GetMapping("/validByToken/{token}")
   public ResponseEntity<StandardResponse<Boolean>> isValid(@PathVariable String token) {
 
     Boolean isValid = this.tokenService.isValidToken(token);
@@ -27,7 +27,7 @@ public class TokenController {
 
   }
 
-  @GetMapping("/user/{cpf}")
+  @GetMapping("/validByCpf/{cpf}")
   public ResponseEntity<StandardResponse<Boolean>> isValidByCpf(@PathVariable String cpf) {
 
     Boolean isValid = this.tokenService.isValidByCpf(cpf);

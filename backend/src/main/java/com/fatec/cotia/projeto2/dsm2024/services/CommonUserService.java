@@ -60,7 +60,7 @@ public class CommonUserService {
 
     if (existingToken.isPresent()) {
 
-      Token updatedToken = new Token(existingToken.get());
+      Token updatedToken = existingToken.get();
 
       updatedToken.setCreatedAt(LocalDateTime.now());
 

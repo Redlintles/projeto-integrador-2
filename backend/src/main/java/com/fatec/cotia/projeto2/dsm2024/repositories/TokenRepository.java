@@ -17,4 +17,6 @@ public interface TokenRepository extends JpaRepository<Token, Long> {
   public Optional<Token> findByToken(String Token);
 
   public boolean existsByToken(String token);
+
+  public boolean existsByCpf(String cpf);
 }

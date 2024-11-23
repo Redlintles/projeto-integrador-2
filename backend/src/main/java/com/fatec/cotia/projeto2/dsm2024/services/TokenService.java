@@ -23,4 +23,8 @@ public class TokenService {
   public boolean isValidToken(String token) {
     return this.tokenRepository.existsByToken(token);
   }
+
+  public boolean isValidByCpf(String cpf) {
+    return this.tokenRepository.existsByCpf(cpf);
+  }
 }

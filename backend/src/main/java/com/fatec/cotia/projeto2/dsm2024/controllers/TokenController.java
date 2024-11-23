@@ -25,4 +25,15 @@ public class TokenController {
     return ResponseEntity.ok(response);
 
   }
+
+  @GetMapping("/user/{cpf}")
+  public ResponseEntity<StandardResponse<Boolean>> isValidByCpf(@PathVariable String cpf) {
+
+    Boolean isValid = this.tokenService.isValidByCpf(cpf);
+    StandardResponse<Boolean> response = new StandardResponse<>(isValid, "Token verificado com sucesso");
+
+    return ResponseEntity.ok(response);
+
+  }
+
 }

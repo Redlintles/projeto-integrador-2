@@ -18,6 +18,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.SuggestionDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Suggestion;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.SuggestionService;
 
 @RestController
@@ -28,36 +29,43 @@ public class SuggestionController {
   private SuggestionService suggestionService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<Suggestion> findOneById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<Suggestion>> findOneById(@PathVariable Long id) {
     Suggestion obj = this.suggestionService.findSuggestionById(id);
 
-    return ResponseEntity.ok(obj);
+    StandardResponse<Suggestion> response = new StandardResponse<>(obj, "Sugestão encontrada com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PostMapping
-  public ResponseEntity<Suggestion> createSuggestion(
+  public ResponseEntity<StandardResponse<Suggestion>> createSuggestion(
       @Validated(CreationGroupInterface.class) @RequestBody SuggestionDTO data) {
     Suggestion newSuggestion = this.suggestionService.createSuggestion(data);
 
-    return ResponseEntity.ok(newSuggestion);
+    StandardResponse<Suggestion> response = new StandardResponse<Suggestion>(newSuggestion,
+        "Sugestão criada com sucesso!");
+    return ResponseEntity.ok(response);
 
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<HashMap<String, Suggestion>> updateSuggestion(@PathVariable Long id,
+  public ResponseEntity<StandardResponse<HashMap<String, Suggestion>>> updateSuggestion(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody SuggestionDTO data) {
     HashMap<String, Suggestion> updatedSuggestion = this.suggestionService.updateSuggestion(id, data);
 
-    return ResponseEntity.ok(updatedSuggestion);
+    StandardResponse<HashMap<String, Suggestion>> response = new StandardResponse<>(updatedSuggestion,
+        "Sugestão atualizada com sucesso!");
+    return ResponseEntity.ok(response);
 
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Suggestion> deleteSuggestionById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<Suggestion>> deleteSuggestionById(@PathVariable Long id) {
     Suggestion deletedSuggestion = this.suggestionService.deleteSuggestionById(id);
 
-    return ResponseEntity.ok(deletedSuggestion);
+    StandardResponse<Suggestion> response = new StandardResponse<>(deletedSuggestion, "Sugestão deletada com sucesso!");
+    return ResponseEntity.ok(response);
 
   }
 

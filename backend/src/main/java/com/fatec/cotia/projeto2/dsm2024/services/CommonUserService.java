@@ -84,7 +84,7 @@ public class CommonUserService {
 
       if (foundToken.isPresent()) {
         returnValue.put("user", user);
-        returnValue.put("token", savedToken);
+        returnValue.put("token", savedToken.getToken());
         return returnValue;
       } else {
         throw new EntityCouldNotBeCreatedException("Token Could Not be saved by a unknown reason");

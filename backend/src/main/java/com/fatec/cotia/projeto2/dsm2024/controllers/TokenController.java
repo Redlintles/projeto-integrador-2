@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fatec.cotia.projeto2.dsm2024.entities.CommonUser;
 import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.TokenService;
 
@@ -34,6 +35,15 @@ public class TokenController {
 
     return ResponseEntity.ok(response);
 
+  }
+
+  @GetMapping("/userByToken/{token}")
+  public ResponseEntity<StandardResponse<CommonUser>> getUserByToken(@PathVariable String token) {
+    CommonUser user = this.tokenService.findUserByToken(token);
+
+    StandardResponse<CommonUser> response = new StandardResponse<>(user, "Usuário encontrado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 
 }

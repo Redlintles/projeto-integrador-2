@@ -1,17 +1,35 @@
 import styles from "./Home.module.css";
 import greenActionLogo from "../../assets/greenactionlogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import homeReason1 from "../../assets/paginainicial-1.png";
 import homeReason2 from "../../assets/paginainicial-2.png";
 
 import webDevImg from "../../assets/Web Development.png";
 import chartImg from "../../assets/Bar Chart.png";
 import prizeImg from "../../assets/Prize.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "../../contexts/UserContext";
+import { ApiResponse } from "../../types/ApiResponse";
 
 export default function Home() {
-  const { user } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const url: string = `/api/token/validByToken/${user.token}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data: ApiResponse) => {
+        console.log(url);
+        console.log(data);
+        if (data.data) {
+          navigate("/initial");
+        } else {
+          setUser({ user: null, token: null });
+        }
+      });
+  }, []);
+
   console.log(user);
   return (
     <section className={styles["home"]}>

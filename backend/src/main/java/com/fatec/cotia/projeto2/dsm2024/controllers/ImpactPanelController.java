@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fatec.cotia.projeto2.dsm2024.dtos.ImpactPanelDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.ImpactPanel;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.ImpactPanelService;
 
 @RestController
@@ -24,20 +25,25 @@ public class ImpactPanelController {
   private ImpactPanelService impactPanelService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<ImpactPanel> findImpactPanelById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<ImpactPanel>> findImpactPanelById(@PathVariable Long id) {
     ImpactPanel register = this.impactPanelService.findById(id);
 
-    return ResponseEntity.ok(register);
+    StandardResponse<ImpactPanel> response = new StandardResponse<>(register, "ImpactPanel criado com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<HashMap<String, ImpactPanel>> updateImpactPanelById(@PathVariable Long id,
+  public ResponseEntity<StandardResponse<HashMap<String, ImpactPanel>>> updateImpactPanelById(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody ImpactPanelDTO data) {
 
     HashMap<String, ImpactPanel> result = this.impactPanelService.updateImpactPanel(id, data);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<HashMap<String, ImpactPanel>> response = new StandardResponse<HashMap<String, ImpactPanel>>(result,
+        "ImpactPanel atualizado com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 }

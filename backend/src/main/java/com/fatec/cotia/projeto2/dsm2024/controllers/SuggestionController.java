@@ -43,7 +43,7 @@ public class SuggestionController {
       @Validated(CreationGroupInterface.class) @RequestBody SuggestionDTO data) {
     Suggestion newSuggestion = this.suggestionService.createSuggestion(data);
 
-    StandardResponse<Suggestion> response = new StandardResponse<Suggestion>(newSuggestion,
+    StandardResponse<Suggestion> response = new StandardResponse<>(newSuggestion,
         "Sugestão criada com sucesso!");
     return ResponseEntity.ok(response);
 

@@ -40,7 +40,7 @@ public class ImpactPanelController {
 
     HashMap<String, ImpactPanel> result = this.impactPanelService.updateImpactPanel(id, data);
 
-    StandardResponse<HashMap<String, ImpactPanel>> response = new StandardResponse<HashMap<String, ImpactPanel>>(result,
+    StandardResponse<HashMap<String, ImpactPanel>> response = new StandardResponse<>(result,
         "ImpactPanel atualizado com sucesso!");
 
     return ResponseEntity.ok(response);

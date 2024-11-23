@@ -18,6 +18,7 @@ import com.fatec.cotia.projeto2.dsm2024.dtos.MedalDTO;
 import com.fatec.cotia.projeto2.dsm2024.entities.Medal;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.CreationGroupInterface;
 import com.fatec.cotia.projeto2.dsm2024.interfaces.UpdateGroupInterface;
+import com.fatec.cotia.projeto2.dsm2024.responses.StandardResponse;
 import com.fatec.cotia.projeto2.dsm2024.services.MedalService;
 
 @RestController
@@ -27,35 +28,45 @@ public class MedalController {
   private MedalService medalService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<Medal> findMedalById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<Medal>> findMedalById(@PathVariable Long id) {
     Medal result = this.medalService.findById(id);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<Medal> response = new StandardResponse<>(result, "Medalha encontrada com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PostMapping
-  public ResponseEntity<Medal> createMedal(@Validated(CreationGroupInterface.class) @RequestBody MedalDTO data) {
+  public ResponseEntity<StandardResponse<Medal>> createMedal(
+      @Validated(CreationGroupInterface.class) @RequestBody MedalDTO data) {
     Medal result = this.medalService.createMedal(data);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<Medal> response = new StandardResponse<>(result, "Medalha criada com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Medal> deleteMedalById(@PathVariable Long id) {
+  public ResponseEntity<StandardResponse<Medal>> deleteMedalById(@PathVariable Long id) {
     Medal result = this.medalService.deleteById(id);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<Medal> response = new StandardResponse<>(result, "Medalha excluída com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<HashMap<String, Medal>> updateMedal(@PathVariable Long id,
+  public ResponseEntity<StandardResponse<HashMap<String, Medal>>> updateMedal(@PathVariable Long id,
       @Validated(UpdateGroupInterface.class) @RequestBody MedalDTO data) {
     HashMap<String, Medal> result = this.medalService.updateMedal(id, data);
 
-    return ResponseEntity.ok(result);
+    StandardResponse<HashMap<String, Medal>> response = new StandardResponse<>(result,
+        "Medalha atualizada com sucesso!");
+
+    return ResponseEntity.ok(response);
 
   }
 }

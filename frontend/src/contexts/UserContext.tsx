@@ -1,23 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-
-interface ImpactPanel {
-  id: number;
-  impactoIndividual: string;
-  impactoColetivo: string;
-}
-
-interface User {
-  id: number;
-  cpf: string;
-  nome: string;
-  email: string;
-  senha: string;
-  habitosDiarios: number;
-  pegadaCarbono: number;
-  medalhas: number;
-  endereco: string;
-  idPainelDeImpacto: ImpactPanel;
-}
+import { User } from "../types/User";
 
 interface UserContext {
   user: User | null;

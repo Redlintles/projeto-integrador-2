@@ -6,9 +6,34 @@ import Login from "./pages/Login/Login";
 import Initial from "./pages/Initial/Initial";
 import Suggestion from "./pages/Suggestion/Suggestion";
 import Ranking from "./pages/Ranking/Ranking";
-import { UserContextProvider } from "./contexts/UserContext";
-
+import { userContext, UserContextProvider } from "./contexts/UserContext";
+import { useContext, useEffect } from "react";
+import Cookies from "js-cookie";
+import { ApiResponse } from "./types/ApiResponse";
+import { User } from "./types/User";
 function App() {
+  const { user, setUser } = useContext(userContext);
+
+  useEffect(() => {
+    const cookie = Cookies.get("user");
+
+    if (cookie && user.user === null) {
+      fetch(`/api/token/userByToken/${cookie}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data: ApiResponse) => {
+          if (data.data) {
+            const newUser: User = data.data as User;
+            setUser({
+              user: newUser,
+              token: cookie,
+            });
+          }
+        });
+    }
+  }, []);
+
   return (
     <>
       <UserContextProvider>

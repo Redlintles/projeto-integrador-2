@@ -46,7 +46,8 @@ public class CommonUserController {
   public ResponseEntity<StandardResponse<HashMap<String, Object>>> loginUser(@RequestBody LoginRequest data) {
     HashMap<String, Object> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
-    ResponseCookie cookie = ResponseCookie.from("user", newToken.get("token").toString()).httpOnly(true).path("/")
+    ResponseCookie cookie = ResponseCookie.from("user", newToken.get("token").toString()).httpOnly(false).path("/")
+        .domain("frontend")
         .maxAge(60 * 60).build();
 
     HttpHeaders headers = new HttpHeaders();
@@ -64,7 +65,8 @@ public class CommonUserController {
       @Validated(CreationGroupInterface.class) @RequestBody CommonUserDTO data) {
     HashMap<String, Object> newUser = this.commonUserService.createUser(data);
 
-    ResponseCookie cookie = ResponseCookie.from("user", newUser.get("token").toString()).httpOnly(true).path("/")
+    ResponseCookie cookie = ResponseCookie.from("user", newUser.get("token").toString()).httpOnly(false).path("/")
+        .domain("frontend")
         .maxAge(60 * 60).build();
 
     HttpHeaders headers = new HttpHeaders();

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
@@ -6,13 +6,15 @@ import Login from "./pages/Login/Login";
 import Initial from "./pages/Initial/Initial";
 import Suggestion from "./pages/Suggestion/Suggestion";
 import Ranking from "./pages/Ranking/Ranking";
-import { userContext, UserContextProvider } from "./contexts/UserContext";
+import { userContext } from "./contexts/UserContext";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { ApiResponse } from "./types/ApiResponse";
 import { User } from "./types/User";
 function App() {
   const { user, setUser } = useContext(userContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cookie = Cookies.get("user");
@@ -29,6 +31,7 @@ function App() {
               user: newUser,
               token: cookie,
             });
+            navigate("/initial");
           }
         });
     }
@@ -36,18 +39,14 @@ function App() {
 
   return (
     <>
-      <UserContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/initial" element={<Initial />}></Route>
-            <Route path="/suggestion" element={<Suggestion />}></Route>
-            <Route path="/ranking" element={<Ranking />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </UserContextProvider>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/initial" element={<Initial />}></Route>
+        <Route path="/suggestion" element={<Suggestion />}></Route>
+        <Route path="/ranking" element={<Ranking />}></Route>
+      </Routes>
     </>
   );
 }

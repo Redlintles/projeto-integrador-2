@@ -47,7 +47,6 @@ public class CommonUserController {
     HashMap<String, Object> newToken = this.commonUserService.loginUser(data.getEmail(), data.getPassword());
 
     ResponseCookie cookie = ResponseCookie.from("user", newToken.get("token").toString()).httpOnly(false).path("/")
-        .domain("frontend")
         .maxAge(60 * 60).build();
 
     HttpHeaders headers = new HttpHeaders();
@@ -66,7 +65,6 @@ public class CommonUserController {
     HashMap<String, Object> newUser = this.commonUserService.createUser(data);
 
     ResponseCookie cookie = ResponseCookie.from("user", newUser.get("token").toString()).httpOnly(false).path("/")
-        .domain("frontend")
         .maxAge(60 * 60).build();
 
     HttpHeaders headers = new HttpHeaders();

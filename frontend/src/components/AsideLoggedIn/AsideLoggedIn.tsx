@@ -6,6 +6,8 @@ import { RxExit } from "react-icons/rx";
 import styles from "./AsideLoggedIn.module.css";
 import { useContext } from "react";
 import { userContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 interface AsideLoggedInProps {
   fullName: string;
 }
@@ -19,8 +21,15 @@ export default function AsideLoggedIn({ fullName }: AsideLoggedInProps) {
 
   const { setUser } = useContext(userContext);
 
+  const navigate = useNavigate();
+
   function logout() {
     setUser({ user: null, token: null });
+
+    Cookies.remove("user", {
+      path: "/",
+    });
+    navigate("/");
   }
   return (
     <aside className={styles["logged-in"]}>
